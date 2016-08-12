@@ -1,6 +1,29 @@
 Ionic App Base
 =====================
 
+# Instruction to Run
+
+For starting Browser View
+```bash
+$ ionic serve
+```
+
+For starting Browser View with iOS and Android
+```bash
+$ ionic serve --lab
+```
+
+For starting iOS View
+```bash
+$ ionic emulate ios
+```
+
+For starting Android View
+```bash
+$ ionic emulate android
+```
+
+
 A starting project for Ionic that optionally supports using custom SCSS.
 
 ## Using this project
