@@ -59,14 +59,33 @@ angular.module('main', ['ionic', 'ngCordova'])
     }
   })
 
-  .state('tab.group-logged-off', {
-    url: '/group-logged-off',
+  .state('tab.group-logged-out', {
+    url: '/group-logged-out',
     views: {
-      'tab-group-logged-off': {
+      'tab-group-logged-out': {
         templateUrl: 'js/group/loggedOut/group.loggedOut.html',
         controller: 'GroupLoggedOutCtrl'
       }
     }
+  })
+  .state('tab.group-logged-in', {
+    url: '/group-logged-in',
+    views: {
+      'tab-group-logged-in': {
+        templateUrl: 'js/group/loggedIn/group.loggedIn.html',
+        controller: 'GroupLoggedInCtrl'
+      }
+    }
+  })
+  .state('create-group', {
+    url: '/create-group',
+    templateUrl: 'js/group/createGroup/createGroup.html',
+    controller: 'CreateGroupCtrl'
+  })
+  .state('join-group', {
+    url: '/join-group',
+    templateUrl: 'js/group/joinGroup/joinGroup.html',
+    controller: 'JoinGroupCtrl'
   });
 
   // .state('tab.dash', {

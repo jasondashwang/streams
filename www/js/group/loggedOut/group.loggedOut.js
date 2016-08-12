@@ -1,8 +1,9 @@
 'use strict';
 
-angular.module('main').controller('GroupLoggedOutCtrl', function ($scope) {
-  $scope.goToState = function (state) {
-    $state.go(state);
-  };
+angular.module('main').controller('GroupLoggedOutCtrl', function ($rootScope, $location, $scope) {
+  if($rootScope.loggedIn){
+    $scope.goToState('tab.group-logged-in');
+  }
+
 });
 
