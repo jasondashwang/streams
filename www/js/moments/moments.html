@@ -1,0 +1,9 @@
+<ion-view title="Moments" on-swipe-right="goToState('camera')">
+  <ion-content has-header="true" padding="false" class="moments">
+    <div class="moments-nav">
+      <h3>My Moments</h3>
+    </div>
+    <moment ng-repeat="moment in moments" model="moment"></moment>
+  </ion-content>
+
+</ion-view>
