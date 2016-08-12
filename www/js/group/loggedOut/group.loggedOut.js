@@ -7,5 +7,6 @@ angular.module('main').controller('GroupLoggedOutCtrl', function ($scope, $locat
   $scope.goLeft = function () {
   	$location.url('/tab/camera')
   }
+
 });
 

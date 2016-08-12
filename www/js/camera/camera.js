@@ -1,9 +1,10 @@
 'use strict';
 
-angular.module('main').controller('CameraCtrl', function ($rootScope, $scope, $location, $cordovaCamera) {
+angular.module('main').controller('CameraCtrl', function ($rootScope, $scope, $state, $cordovaCamera) {
+  $rootScope.loggedIn = false;
   $scope.greeting = 'Camera View';
-  $scope.goToState = function (state) {
-    $state.go(state);
+  $scope.changeStatus = function () {
+    $rootScope.loggedIn = !($rootScope.loggedIn);
   };
 
 	$scope.takeImage = function() {

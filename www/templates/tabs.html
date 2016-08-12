@@ -6,8 +6,10 @@ navigation history that also transitions its views in and out.
 <ion-tabs class="tabs-icon-top tabs-color-active-positive">
 
 <!-- Group Tab -->
-  <ion-tab title="My Group" icon-off="ion-ios-people-outline" icon-on="ion-ios-people" href="#/tab/group-logged-off">
-    <ion-nav-view name="tab-group-logged-off"></ion-nav-view>
+  <ion-tab title="My Group" icon-off="ion-ios-people-outline" icon-on="ion-ios-people" ng-click="goToGroup()">
+    <ion-nav-view name="tab-group">
+
+    </ion-nav-view>
   </ion-tab>
   <!-- Camera Tab -->
   <ion-tab title="Camera" icon-off="ion-ios-camera-outline" icon-on="ion-ios-camera" href="#/tab/camera">

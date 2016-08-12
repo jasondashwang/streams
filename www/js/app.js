@@ -39,7 +39,13 @@ angular.module('main', [
     .state('tab', {
     url: '/tab',
     abstract: true,
-    templateUrl: 'templates/tabs.html'
+    templateUrl: 'templates/tabs.html',
+    controller: function($scope, $state, $rootScope){
+      $scope.goToGroup = function(){
+        if($rootScope.loggedIn) $state.go('tab.group-logged-in');
+        else $state.go('tab.group-logged-out');
+      };
+    }
   })
 
   // Each tab has its own nav history stack:
@@ -62,13 +68,42 @@ angular.module('main', [
       }
     }
   })
-
-  .state('tab.group-logged-off', {
-    url: '/group-logged-off',
+  .state('tab.group-logged-out', {
+    url: '/group-logged-out',
     views: {
-      'tab-group-logged-off': {
+      'tab-group': {
         templateUrl: 'js/group/loggedOut/group.loggedOut.html',
         controller: 'GroupLoggedOutCtrl'
+      }
+    }
+
+  })
+  .state('tab.group-logged-in', {
+    url: '/group-logged-in',
+    views: {
+      'tab-group': {
+        templateUrl: 'js/group/loggedIn/group.loggedIn.html',
+        controller: 'GroupLoggedInCtrl'
+      }
+    }
+
+  })
+  .state('tab.create-group', {
+    url: '/create-group',
+    views: {
+      'tab-group': {
+        templateUrl: 'js/group/createGroup/createGroup.html',
+        controller: 'CreateGroupCtrl'
+      }
+    }
+
+  })
+  .state('tab.join-group', {
+    url: '/join-group',
+    views: {
+      'tab-group': {
+        templateUrl: 'js/group/joinGroup/joinGroup.html',
+        controller: 'JoinGroupCtrl'
       }
     }
   });
