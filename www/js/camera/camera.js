@@ -2,10 +2,14 @@
 
 angular.module('main').controller('CameraCtrl', function ($rootScope, $scope, $state, $cordovaCamera) {
   $rootScope.loggedIn = false;
-  $scope.greeting = 'Camera View';
   $scope.changeStatus = function () {
     $rootScope.loggedIn = !($rootScope.loggedIn);
   };
+
+  $scope.goRight = function () {
+  	if ($rootScope.loggedIn) $state.go('tab.group-logged-in')
+  		else $state.go("tab.group-logged-out")
+  }
 
 	$scope.takeImage = function() {
 	    var options = {
@@ -27,6 +31,9 @@ angular.module('main').controller('CameraCtrl', function ($rootScope, $scope, $s
 	    });
 	}
 
-	// $scope.takeImage();
+$scope.takeImage();
+
+
+	
 });
 
