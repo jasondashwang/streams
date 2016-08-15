@@ -9846,3 +9846,6 @@ a.button {
     display: block;
     margin: 0 auto;
     margin-top: 1em; }
+
+.group-logged-in {
+  text-align: center; }

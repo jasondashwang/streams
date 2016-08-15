@@ -6,9 +6,8 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 angular.module('main', [
-  'ionic', 
-  'ngCordova',
-
+  'ionic',
+  'ngCordova'
   ])
 
 .run(function($ionicPlatform) {
@@ -84,6 +83,16 @@ angular.module('main', [
       'tab-group': {
         templateUrl: 'js/group/loggedIn/group.loggedIn.html',
         controller: 'GroupLoggedInCtrl'
+      }
+    }
+
+  })
+  .state('tab.group-members', {
+    url: '/group-members',
+    views: {
+      'tab-group': {
+        templateUrl: 'js/group/members/group.members.html',
+        controller: 'GroupMembersCtrl'
       }
     }
 
