@@ -7,21 +7,19 @@
       </alert>
 
       <div class="list">
-
         <label class="item item-input item-floating-label">
           <span class="input-label">Email</span>
-          <input type="text" ng-model="userInfo.email" class="item item-input form-control" placeholder="Your Email" required>
+          <input type="email" ng-model="userInfo.email" class="item item-input form-control" placeholder="Your Email" required>
         </label>
         <label class="item item-input item-floating-label">
           <span class="input-label">Password</span>
-          <input type="text" ng-model="userInfo.password" class="item item-input form-control" placeholder="Your Password" required>
+          <input type="password" ng-model="userInfo.password" class="item item-input form-control" placeholder="Your Password" required>
         </label>
       </div>
 
       <button ng-disabled="loginForm.$invalid" type="submit" class="button button-positive" id="submitbtn">Login</button>
     </form>
-
+    <h6 ui-sref="tab.signup" class="pointer">Create an Account</h6>
 
   </ion-content>
-
 </ion-view>

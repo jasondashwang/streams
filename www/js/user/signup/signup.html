@@ -1,0 +1,25 @@
+<ion-view title="Signup">
+  <ion-content has-header="true" padding="true">
+    <h3>Sign Up</h3>
+    <form name="signupForm" ng-submit="signUp(userInfo)">
+      <alert type="danger" ng-show="error">
+          {{ error }}
+      </alert>
+
+      <div class="list">
+        <label class="item item-input item-floating-label">
+          <span class="input-label">Email</span>
+          <input type="email" ng-model="userInfo.email" class="item item-input form-control" placeholder="Your Email" required>
+        </label>
+        <label class="item item-input item-floating-label">
+          <span class="input-label">Password</span>
+          <input type="password" ng-model="userInfo.password" class="item item-input form-control" placeholder="Your Password" ng-minlength="6" required>
+        </label>
+      </div>
+
+      <button ng-disabled="signupForm.$invalid" type="submit" class="button button-positive" id="submitbtn">Signup</button>
+    </form>
+    <h6 ui-sref="tab.login" class="pointer">Already have an account? Login</h6>
+
+  </ion-content>
+</ion-view>
