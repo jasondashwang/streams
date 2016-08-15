@@ -6,10 +6,9 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 angular.module('main', [
-  'ionic'
-  'ngCordova'
-  'ngCordova'
-
+  'ionic',
+  'ngCordova',
+  'ionic-timepicker'
   ])
 
 .run(function($ionicPlatform, $rootScope) {
@@ -32,7 +31,16 @@ angular.module('main', [
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, ionicTimePickerProvider) {
+
+  var timePickerObj = {
+      inputTime: (((new Date()).getHours() * 60 * 60) + ((new Date()).getMinutes() * 60)),
+      format: 12,
+      step: 15,
+      setLabel: 'Set',
+      closeLabel: 'Close'
+    };
+  ionicTimePickerProvider.configTimePicker(timePickerObj);
 
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
@@ -50,26 +58,6 @@ angular.module('main', [
         if($rootScope.loggedIn) $state.go('tab.group-logged-in');
         else $state.go('tab.group-logged-out');
       };
-      $scope.takeImage = function() {
-          var options = {
-              quality: 80,
-              destinationType: Camera.DestinationType.DATA_URL,
-              sourceType: Camera.PictureSourceType.CAMERA,
-              allowEdit: true,
-              encodingType: Camera.EncodingType.JPEG,
-              targetWidth: 250,
-              targetHeight: 250,
-              popoverOptions: CameraPopoverOptions,
-              saveToPhotoAlbum: false
-          };
-          console.log("in")
-          $cordovaCamera.getPicture(options).then(function(imageData) {
-              $scope.srcImage = "data:image/jpeg;base64," + imageData;
-          }, function(err) {
-              // error
-          });
-      }
-
     }
 
   })
