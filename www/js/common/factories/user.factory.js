@@ -3,7 +3,10 @@ angular.module('main')
   const UserFactory = {};
 
   UserFactory.createUser = function(userDetails) {
-    return firebase.auth().createUserWithEmailAndPassword(userDetails.email, userDetails.password);
+    return firebase.auth().createUserWithEmailAndPassword(userDetails.email, userDetails.password)
+    .then(res => {
+      console.log('this is the response', res);
+    });
   };
 
   UserFactory.login = function(userDetails) {

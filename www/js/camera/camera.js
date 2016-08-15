@@ -30,9 +30,5 @@ angular.module('main').controller('CameraCtrl', function ($rootScope, $scope, $s
 	        // error
 	    });
 	};
-
-
-
-
 });
 
