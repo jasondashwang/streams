@@ -106,8 +106,18 @@ angular.module('main', [
         controller: 'JoinGroupCtrl'
       }
     }
-  });
+  })
+  .state('tab.map', {
+    url: '/map',
+    views : {
+      'tab-moments' : {
+        templateUrl: 'js/map/map.html',
+        controller: 'MapCtrl'
+      }
+    }
 
+  });
+ 
   // .state('tab.dash', {
   //   url: '/dash',
   //   views: {
