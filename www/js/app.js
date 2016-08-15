@@ -11,7 +11,7 @@ angular.module('main', [
 
   ])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $rootScope) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -24,6 +24,10 @@ angular.module('main', [
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+    $rootScope.deviceInformation = ionic.Platform.device();
+    $rootScope.deviceUUID = ionic.Platform.device().uuid;
+    console.log('the id?', $rootScope.deviceUUID);
+    console.log('should be some info', $rootScope.deviceInformation);
   });
 })
 
