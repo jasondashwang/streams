@@ -1,7 +1,6 @@
 'use strict';
 
-angular.module('main')
-.controller('CreateGroupCtrl', function ($scope, GroupFactory, $state, $log, ionicTimePicker) {
+angular.module('main').controller('CreateGroupCtrl', function ($scope, $state, $log, ionicTimePicker) {
 
   var ipObj1 = {
     callback: function (val) {      //Mandatory
@@ -11,9 +10,9 @@ angular.module('main')
         var selectedTime = new Date(val * 1000);
         console.log('Selected epoch is : ', val, 'and the time is ', selectedTime.getUTCHours(), 'H :', selectedTime.getUTCMinutes(), 'M');
         $scope.group.expirationTime = selectedTime;
-        GroupFactory.createGroup(groupInfo)
-        .then(() => $state.go('camera'))
-        .catch($log.error);
+        // GroupFactory.createGroup(groupInfo)
+        // .then(() => $state.go('camera'))
+        // .catch($log.error);
       }
     },
     inputTime: 50400,   //Optional
