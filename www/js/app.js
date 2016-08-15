@@ -6,11 +6,13 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 angular.module('main', [
-  'ionic',
+  'ionic'
   'ngCordova'
+  'ngCordova'
+
   ])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $rootScope) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -23,6 +25,10 @@ angular.module('main', [
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+    $rootScope.deviceInformation = ionic.Platform.device();
+    $rootScope.deviceUUID = ionic.Platform.device().uuid;
+    console.log('the id?', $rootScope.deviceUUID);
+    console.log('should be some info', $rootScope.deviceInformation);
   });
 })
 
@@ -39,12 +45,33 @@ angular.module('main', [
     url: '/tab',
     abstract: true,
     templateUrl: 'templates/tabs.html',
-    controller: function($scope, $state, $rootScope){
+    controller: function($scope, $state, $rootScope, $cordovaCamera){
       $scope.goToGroup = function(){
         if($rootScope.loggedIn) $state.go('tab.group-logged-in');
         else $state.go('tab.group-logged-out');
       };
+      $scope.takeImage = function() {
+          var options = {
+              quality: 80,
+              destinationType: Camera.DestinationType.DATA_URL,
+              sourceType: Camera.PictureSourceType.CAMERA,
+              allowEdit: true,
+              encodingType: Camera.EncodingType.JPEG,
+              targetWidth: 250,
+              targetHeight: 250,
+              popoverOptions: CameraPopoverOptions,
+              saveToPhotoAlbum: false
+          };
+          console.log("in")
+          $cordovaCamera.getPicture(options).then(function(imageData) {
+              $scope.srcImage = "data:image/jpeg;base64," + imageData;
+          }, function(err) {
+              // error
+          });
+      }
+
     }
+
   })
 
   // Each tab has its own nav history stack:
@@ -126,7 +153,7 @@ angular.module('main', [
     }
 
   });
- 
+
   // .state('tab.dash', {
   //   url: '/dash',
   //   views: {
@@ -167,6 +194,6 @@ angular.module('main', [
   // });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/camera');
+  $urlRouterProvider.otherwise('/tab/moments');
 
 });
