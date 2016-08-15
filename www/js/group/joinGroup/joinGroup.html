@@ -1,6 +1,18 @@
 <ion-view title="Join Group">
-  <ion-content has-header="true" padding="true">
-    <h3>Join new group!</h3>
+  <ion-content has-header="true" padding="false" class="join-group-div">
+    <div class="qr-scanner-div">
+      <h3>This is where QR scanner will go!</h3>
+    </div>
+    <hr>
+    <div class="code-input-div">
+      <form ng-submit="joinGroup(groupCode)">
+        <label class="item item-input">
+          <span class="input-label">Enter Group Code:</span>
+          <input type="text" ng-model="groupCode">
+        </label>
+        <button type="submit" class="button button-positive">Submit</button>
+      </form>
+    </div>
   </ion-content>
 
 </ion-view>

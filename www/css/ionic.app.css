@@ -9818,15 +9818,6 @@ a.button {
 .moments h3, .moments h4 {
   color: white; }
 
-.moments .moments-nav {
-  text-align: center;
-  background-color: #4682B4;
-  padding: .5em;
-  height: 3em;
-  -webkit-box-shadow: 0px 4px 5px 1px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 0px 4px 5px 1px rgba(0, 0, 0, 0.75);
-  box-shadow: 0px 4px 5px 1px rgba(0, 0, 0, 0.75); }
-
 .moments moment .moment-div {
   border-bottom: 2px solid #c0c5ce;
   height: 12em;
@@ -9841,7 +9832,27 @@ a.button {
   .group-logged-out .button.button-large {
     display: block;
     width: 100%;
-    height: 125px;
+    height: 100px;
     margin-top: 2em;
     padding: 1em;
     border-radius: 5px; }
+
+.join-group-div div {
+  height: 50%; }
+
+.join-group-div .code-input-div {
+  padding: 3em; }
+  .join-group-div .code-input-div .button {
+    display: block;
+    margin: 0 auto;
+    margin-top: 1em; }
+
+.group-logged-in {
+  text-align: center; }
+
+.scroll {
+  height: 100%; }
+
+#map {
+  width: 100%;
+  height: 100%; }

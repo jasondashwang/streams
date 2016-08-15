@@ -1,6 +1,27 @@
 <ion-view title="Create Group">
   <ion-content has-header="true" padding="true">
     <h3>Create new group!</h3>
+    <form name="groupForm" ng-submit="createGroup(group)">
+      <alert type="danger" ng-show="error">
+          {{ error }}
+      </alert>
+
+      <div class="list">
+
+        <label class="item item-input item-floating-label">
+          <span class="input-label">Group Name</span>
+          <input type="text" ng-model="group.name" class="item item-input form-control" id="groupName" placeholder="Group Name" required>
+        </label>
+        <label class="item item-input item-floating-label">
+          <span class="input-label">Display Name</span>
+          <input type="text" ng-model="group.displayName" class="item item-input form-control" id="displayName" placeholder="Display Name" required>
+        </label>
+      </div>
+
+      <button ng-disabled="groupForm.$invalid" type="submit" class="button button-positive" id="submitbtn">Create Group</button>
+    </form>
+
+
   </ion-content>
 
 </ion-view>
