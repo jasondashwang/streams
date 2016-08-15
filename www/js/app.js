@@ -8,7 +8,7 @@
 angular.module('main', [
   'ionic',
   'ngCordova',
-
+  'firebase'
   ])
 
 .run(function($ionicPlatform) {
