@@ -3,6 +3,7 @@
   "app_id": "",
   "gulpStartupTasks": [
     "sass",
+    "buildJSProduction",
     "watch"
   ],
   "watchPatterns": [
