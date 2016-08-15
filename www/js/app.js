@@ -61,6 +61,15 @@ angular.module('main', [
     }
 
   })
+  .state('tab.login', {
+    url: '/login',
+    views: {
+      'tab-login': {
+        templateUrl: 'js/login/login.html',
+        controller: 'LoginCtrl'
+      }
+    }
+  })
 
   // Each tab has its own nav history stack:
   .state('tab.camera', {

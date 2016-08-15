@@ -1,0 +1,27 @@
+<ion-view title="Login">
+  <ion-content has-header="true" padding="true">
+    <h3>Login</h3>
+    <form name="loginForm" ng-submit="login(userInfo)">
+      <alert type="danger" ng-show="error">
+          {{ error }}
+      </alert>
+
+      <div class="list">
+
+        <label class="item item-input item-floating-label">
+          <span class="input-label">Email</span>
+          <input type="text" ng-model="userInfo.email" class="item item-input form-control" placeholder="Your Email" required>
+        </label>
+        <label class="item item-input item-floating-label">
+          <span class="input-label">Password</span>
+          <input type="text" ng-model="userInfo.password" class="item item-input form-control" placeholder="Your Password" required>
+        </label>
+      </div>
+
+      <button ng-disabled="loginForm.$invalid" type="submit" class="button button-positive" id="submitbtn">Login</button>
+    </form>
+
+
+  </ion-content>
+
+</ion-view>
