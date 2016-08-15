@@ -8,7 +8,8 @@
 angular.module('main', [
   'ionic',
   'ngCordova',
-
+  'ngTouch',
+  'ngAnimate'
   ])
 
 .run(function($ionicPlatform, $rootScope) {
@@ -44,12 +45,33 @@ angular.module('main', [
     url: '/tab',
     abstract: true,
     templateUrl: 'templates/tabs.html',
-    controller: function($scope, $state, $rootScope){
+    controller: function($scope, $state, $rootScope, $cordovaCamera){
       $scope.goToGroup = function(){
         if($rootScope.loggedIn) $state.go('tab.group-logged-in');
         else $state.go('tab.group-logged-out');
       };
+      $scope.takeImage = function() {
+          var options = {
+              quality: 80,
+              destinationType: Camera.DestinationType.DATA_URL,
+              sourceType: Camera.PictureSourceType.CAMERA,
+              allowEdit: true,
+              encodingType: Camera.EncodingType.JPEG,
+              targetWidth: 250,
+              targetHeight: 250,
+              popoverOptions: CameraPopoverOptions,
+              saveToPhotoAlbum: false
+          };
+          console.log("in")
+          $cordovaCamera.getPicture(options).then(function(imageData) {
+              $scope.srcImage = "data:image/jpeg;base64," + imageData;
+          }, function(err) {
+              // error
+          });
+      }
+
     }
+
   })
 
   // Each tab has its own nav history stack:
@@ -152,6 +174,6 @@ angular.module('main', [
   // });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/camera');
+  $urlRouterProvider.otherwise('/tab/moments');
 
 });
