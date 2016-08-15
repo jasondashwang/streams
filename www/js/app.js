@@ -8,6 +8,7 @@
 angular.module('main', [
   'ionic',
   'ngCordova',
+  'firebase',
   'ionic-timepicker'
   ])
 
@@ -18,7 +19,6 @@ angular.module('main', [
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
       cordova.plugins.Keyboard.disableScroll(true);
-
     }
     if (window.StatusBar) {
       // org.apache.cordova.statusbar required
@@ -53,7 +53,16 @@ angular.module('main', [
     url: '/tab',
     abstract: true,
     templateUrl: 'templates/tabs.html',
-    controller: function($scope, $state, $rootScope, $cordovaCamera){
+    controller: function($scope, $state, $rootScope, $cordovaCamera, $firebase) {
+
+      // firebase.auth().onAuthStateChanged(function(user) {
+      //   if (user) {
+      //     // User is signed in.
+      //   } else {
+      //     // No user is signed in.
+      //   }
+      // });
+
       $scope.goToGroup = function(){
         if($rootScope.loggedIn) $state.go('tab.group-logged-in');
         else $state.go('tab.group-logged-out');
@@ -65,12 +74,20 @@ angular.module('main', [
     url: '/login',
     views: {
       'tab-login': {
-        templateUrl: 'js/login/login.html',
+        templateUrl: 'js/user/login/login.html',
         controller: 'LoginCtrl'
       }
     }
   })
-
+  .state('tab.signup', {
+    url: '/signup',
+    views: {
+      'tab-login': {
+        templateUrl: 'js/user/signup/signup.html',
+        controller: 'SignupCtrl'
+      }
+    }
+  })
   // Each tab has its own nav history stack:
   .state('tab.camera', {
     url: '/camera',
