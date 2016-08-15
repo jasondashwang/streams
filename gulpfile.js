@@ -14,7 +14,7 @@ var paths = {
   js: ['./www/js/**/*.js']
 };
 
-gulp.task('default', ['sass', 'buildJSProduction']);
+gulp.task('default', ['sass']);
 
 gulp.task('sass', function(done) {
   gulp.src('./scss/ionic.app.scss')
@@ -29,16 +29,8 @@ gulp.task('sass', function(done) {
     .on('end', done);
 });
 
-gulp.task('buildJSProduction', function() {
-  return gulp.src(['./www/js/app.js', './www/js/**/*.js'])
-    .pipe(concat('main.js'))
-    .pipe(ngAnnotate())
-    .pipe(gulp.dest('./www/js/'));
-});
-
 gulp.task('watch', function() {
   gulp.watch(paths.sass, ['sass']);
-  gulp.watch(paths.js, ['buildJSProduction']);
 });
 
 gulp.task('install', ['git-check'], function() {

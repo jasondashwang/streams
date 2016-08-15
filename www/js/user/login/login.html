@@ -2,15 +2,8 @@
   <ion-content has-header="true" padding="true">
     <h3>Login</h3>
     <form name="loginForm" ng-submit="login(userInfo)">
-      <alert type="danger" ng-show="error">
-          {{ error }}
-      </alert>
 
       <div class="list">
-        <label class="item item-input item-floating-label">
-          <span class="input-label">Name</span>
-          <input type="email" ng-model="userInfo.email" class="item item-input form-control" placeholder="Your Email" required>
-        </label>
         <label class="item item-input item-floating-label">
           <span class="input-label">Email</span>
           <input type="email" ng-model="userInfo.email" class="item item-input form-control" placeholder="Your Email" required>
@@ -22,6 +15,9 @@
       </div>
 
       <button ng-disabled="loginForm.$invalid" type="submit" class="button button-positive" id="submitbtn">Login</button>
+
+      <p ng-if="error">Error: <strong>{{ error }}</strong></p>
+
     </form>
     <h6 ui-sref="tab.signup" class="pointer">Create an Account</h6>
 

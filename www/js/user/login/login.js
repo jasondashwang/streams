@@ -1,12 +1,14 @@
 'use strict';
 
 angular.module('main')
-.controller('LoginCtrl', function ($scope, $state, $log, Auth) {
+.controller('LoginCtrl', function ($scope, $state, $log, UserFactory) {
 
   $scope.login = function(userInfo) {
+    $scope.error = null;
+
     UserFactory.login(userInfo)
     .then(() => $state.go('tab.camera'))
-    .catch($log.error);
+    .catch(err => $scope.error = err);
   };
 
 });
