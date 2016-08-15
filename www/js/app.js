@@ -8,10 +8,14 @@
 angular.module('main', [
   'ionic',
   'ngCordova',
+<<<<<<< HEAD
   'firebase'
+=======
+  'ionic-timepicker'
+>>>>>>> master
   ])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $rootScope) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -23,10 +27,23 @@ angular.module('main', [
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+    $rootScope.deviceInformation = ionic.Platform.device();
+    $rootScope.deviceUUID = ionic.Platform.device().uuid;
+    console.log('the id?', $rootScope.deviceUUID);
+    console.log('should be some info', $rootScope.deviceInformation);
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, ionicTimePickerProvider) {
+
+  var timePickerObj = {
+      inputTime: (((new Date()).getHours() * 60 * 60) + ((new Date()).getMinutes() * 60)),
+      format: 12,
+      step: 15,
+      setLabel: 'Set',
+      closeLabel: 'Close'
+    };
+  ionicTimePickerProvider.configTimePicker(timePickerObj);
 
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
@@ -39,11 +56,21 @@ angular.module('main', [
     url: '/tab',
     abstract: true,
     templateUrl: 'templates/tabs.html',
-    controller: function($scope, $state, $rootScope, $firebase){
+    controller: function($scope, $state, $rootScope, $cordovaCamera, $firebase){
       $scope.goToGroup = function(){
         if($rootScope.loggedIn) $state.go('tab.group-logged-in');
         else $state.go('tab.group-logged-out');
       };
+    }
+
+  })
+  .state('tab.login', {
+    url: '/login',
+    views: {
+      'tab-login': {
+        templateUrl: 'js/login/login.html',
+        controller: 'LoginCtrl'
+      }
     }
   })
 
@@ -87,6 +114,16 @@ angular.module('main', [
     }
 
   })
+  .state('tab.group-members', {
+    url: '/group-members',
+    views: {
+      'tab-group': {
+        templateUrl: 'js/group/members/group.members.html',
+        controller: 'GroupMembersCtrl'
+      }
+    }
+
+  })
   .state('tab.create-group', {
     url: '/create-group',
     views: {
@@ -105,6 +142,16 @@ angular.module('main', [
         controller: 'JoinGroupCtrl'
       }
     }
+  })
+  .state('tab.map', {
+    url: '/map',
+    views : {
+      'tab-moments' : {
+        templateUrl: 'js/map/map.html',
+        controller: 'MapCtrl'
+      }
+    }
+
   });
 
   // .state('tab.dash', {
@@ -147,6 +194,6 @@ angular.module('main', [
   // });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/camera');
+  $urlRouterProvider.otherwise('/tab/moments');
 
 });

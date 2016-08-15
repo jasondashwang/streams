@@ -2,9 +2,13 @@
 
 angular.module('main').controller('CameraCtrl', function ($rootScope, $scope, $state, $cordovaCamera) {
   $rootScope.loggedIn = false;
-  $scope.greeting = 'Camera View';
   $scope.changeStatus = function () {
     $rootScope.loggedIn = !($rootScope.loggedIn);
+  };
+
+  $scope.goRight = function () {
+  	if ($rootScope.loggedIn) $state.go('tab.group-logged-in');
+  		else $state.go("tab.group-logged-out");
   };
 
 	$scope.takeImage = function() {
@@ -19,14 +23,16 @@ angular.module('main').controller('CameraCtrl', function ($rootScope, $scope, $s
 	        popoverOptions: CameraPopoverOptions,
 	        saveToPhotoAlbum: false
 	    };
-	     
+
 	    $cordovaCamera.getPicture(options).then(function(imageData) {
 	        $scope.srcImage = "data:image/jpeg;base64," + imageData;
 	    }, function(err) {
 	        // error
 	    });
-	}
+	};
 
-	// $scope.takeImage();
+
+
+
 });
 

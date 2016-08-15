@@ -5,16 +5,23 @@
       <alert type="danger" ng-show="error">
           {{ error }}
       </alert>
-      <div class="form-group">
-          <label for="groupName">Group Name</label>
-          <input type="text" ng-model="group.name" class="item item-input form-control" id="groupName" placeholder="Pick a Group Name" required>
+
+      <div class="list">
+
+        <label class="item item-input item-floating-label">
+          <span class="input-label">Group Name</span>
+          <input type="text" ng-model="group.name" class="item item-input form-control" id="groupName" placeholder="Group Name" required>
+        </label>
+        <label class="item item-input item-floating-label">
+          <span class="input-label">Display Name</span>
+          <input type="text" ng-model="group.displayName" class="item item-input form-control" id="displayName" placeholder="Display Name" required>
+        </label>
       </div>
-      <div class="form-group">
-          <label for="displayName">Your Display Name</label>
-          <input type="text" ng-model="group.displayName" class="item item-input form-control" id="displayName" placeholder="Choose Your Display Name" required>
-      </div>
-      <button ng-disabled="groupForm.$invalid" type="submit" class="btn btn-default" id="submitbtn">Create Group</button>
+
+      <button ng-disabled="groupForm.$invalid" type="submit" class="button button-positive" id="submitbtn">Create Group</button>
     </form>
+
+
   </ion-content>
 
 </ion-view>
