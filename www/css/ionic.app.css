@@ -9837,7 +9837,6 @@ a.button {
     padding: 1em;
     border-radius: 5px; }
 
-<<<<<<< HEAD
 .join-group-div div {
   height: 50%; }
 
@@ -9850,11 +9849,10 @@ a.button {
 
 .group-logged-in {
   text-align: center; }
-=======
+
 .scroll {
   height: 100%; }
 
 #map {
   width: 100%;
   height: 100%; }
->>>>>>> moreCamera
