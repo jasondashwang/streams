@@ -1,12 +1,20 @@
-<ion-view title="Signup">
-  <ion-content has-header="true" padding="true">
-    <h3>Sign Up</h3>
+<ion-view title="Sign up">
+  <ion-content has-header="true" padding="true" class="signup-div">
+    <h3>Join your friends today</h3>
     <form name="signupForm" ng-submit="signUp(userInfo)">
       <alert type="danger" ng-show="error">
           {{ error }}
       </alert>
 
       <div class="list">
+        <label class="item item-input item-floating-label">
+          <span class="input-label">Name</span>
+          <input type="text" ng-model="userInfo.name" class="item item-input form-control" placeholder="Your Name" required>
+        </label>
+         <label class="item item-input item-floating-label">
+          <span class="input-label">Phone Number</span>
+          <input type="text" ng-model="userInfo.phone" class="item item-input form-control" placeholder="Your Phone Number" required>
+        </label>
         <label class="item item-input item-floating-label">
           <span class="input-label">Email</span>
           <input type="email" ng-model="userInfo.email" class="item item-input form-control" placeholder="Your Email" required>
@@ -17,9 +25,9 @@
         </label>
       </div>
 
-      <button ng-disabled="signupForm.$invalid" type="submit" class="button button-positive" id="submitbtn">Signup</button>
+      <button ng-disabled="signupForm.$invalid" type="submit" class="button button-positive" id="submitbtn">Sign up</button>
     </form>
-    <h6 ui-sref="tab.login" class="pointer">Already have an account? Login</h6>
+    <h5 ui-sref="tab.login" class="pointer">Already have an account? Login</h5>
 
   </ion-content>
 </ion-view>

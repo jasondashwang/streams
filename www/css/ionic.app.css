@@ -9847,7 +9847,10 @@ a.button {
     margin: 0 auto;
     margin-top: 1em; }
 
-.group-logged-in {
+.login-div h2 {
+  margin: 1em; }
+
+.group-logged-in, .login-div, .signup-div {
   text-align: center; }
 
 .scroll {
