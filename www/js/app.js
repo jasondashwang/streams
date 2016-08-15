@@ -18,7 +18,6 @@ angular.module('main', [
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
       cordova.plugins.Keyboard.disableScroll(true);
-
     }
     if (window.StatusBar) {
       // org.apache.cordova.statusbar required
@@ -40,7 +39,7 @@ angular.module('main', [
     url: '/tab',
     abstract: true,
     templateUrl: 'templates/tabs.html',
-    controller: function($scope, $state, $rootScope){
+    controller: function($scope, $state, $rootScope, $firebase){
       $scope.goToGroup = function(){
         if($rootScope.loggedIn) $state.go('tab.group-logged-in');
         else $state.go('tab.group-logged-out');
