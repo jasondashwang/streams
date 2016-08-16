@@ -2,9 +2,6 @@
   <ion-content has-header="true" padding="true" class="signup-div">
     <h3>Join your friends today</h3>
     <form name="signupForm" ng-submit="signUp(userInfo)">
-      <alert type="danger" ng-show="error">
-          {{ error }}
-      </alert>
 
       <div class="list">
         <label class="item item-input item-floating-label">
@@ -25,7 +22,10 @@
         </label>
       </div>
 
-      <button ng-disabled="signupForm.$invalid" type="submit" class="button button-positive" id="submitbtn">Sign up</button>
+      <button ng-disabled="signupForm.$invalid" type="submit" class="button button-positive" id="submitbtn">Signup</button>
+
+      <p ng-if="error">Error: <strong>{{ error }}</strong></p>
+
     </form>
     <h5 ui-sref="tab.login" class="pointer">Already have an account? Login</h5>
 
