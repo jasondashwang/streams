@@ -6,12 +6,13 @@ angular.module('main')
   $scope.login = function(userInfo) {
       $scope.error = null;
       Auth.$signInWithEmailAndPassword(userInfo.email, userInfo.password)
-          .then(function(user) {
+        .then(function(user) {
               $state.go('tab.camera');
               console.log('Logged in as:', user.uid);
-          }).catch(function(err) {
+          })
+        .catch(function(err) {
               console.log('Authentication failed:', err);
-          });
+        });
   };
 
 });
