@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('main').controller('CreateGroupCtrl', function ($scope, $state, $log, ionicTimePicker) {
+angular.module('main').controller('CreateGroupCtrl', function ($scope, $state, $log, ionicTimePicker, GroupFactory) {
 
   var ipObj1 = {
     callback: function (val) {      //Mandatory
@@ -22,10 +22,14 @@ angular.module('main').controller('CreateGroupCtrl', function ($scope, $state, $
   };
 
 
-  $scope.createGroup = function(groupInfo) {
-    ionicTimePicker.openTimePicker(ipObj1);
-
-
+  $scope.createGroup = function(groupDetails) {
+    // ionicTimePicker.openTimePicker(ipObj1);
+    GroupFactory.createGroup(groupDetails)
+      .then(() => $state.go('tab.camera'))
+      .catch(err => {
+        $scope.error = err;
+        console.log(`Error: ${err}`);
+      });
   };
 
 });

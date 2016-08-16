@@ -11,6 +11,9 @@ angular.module('main').controller('CameraCtrl', function ($rootScope, $scope, $s
   		else $state.go("tab.group-logged-out");
   };
 
+  $scope.demoImage = '../../img/ben.png';
+  console.log($scope.demoImage);
+
 	$scope.takeImage = function() {
 	    var options = {
 	        quality: 80,

@@ -1,16 +1,15 @@
 angular.module('main')
-.factory('UserFactory', function($firebase) {
+.factory('UserFactory', function() {
   const UserFactory = {};
 
-  UserFactory.createUser = function(userDetails) {
-    return firebase.auth().createUserWithEmailAndPassword(userDetails.email, userDetails.password)
-    .then(res => {
-      console.log('this is the response', res);
-    });
-  };
+  const ref = firebase.database().ref("users");
 
-  UserFactory.login = function(userDetails) {
-    return firebase.auth().signInWithEmailAndPassword(userDetails.email, userDetails.password);
+  UserFactory.addUser = function(userId, name, email, phone) {
+    firebase.database().ref('users/' + userId).set({
+      name: name,
+      email: email,
+      phone: phone
+    });
   };
 
   return UserFactory;
