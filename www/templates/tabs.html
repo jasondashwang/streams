@@ -6,23 +6,23 @@ navigation history that also transitions its views in and out.
 <ion-tabs class="tabs-icon-top tabs-color-active-positive" animation="slide-left-right">
 
 <!-- Group Tab -->
-  <ion-tab title="Login" icon-off="ion-ios-person-outline" icon-on="ion-ios-person" ui-sref="tab.login">
+  <ion-tab hidden="{{ isLoggedIn() }}" title="Login" icon-off="ion-ios-person-outline" icon-on="ion-ios-person" ui-sref="tab.login">
     <ion-nav-view name="tab-login">
 
     </ion-nav-view>
   </ion-tab>
-  <ion-tab title="My Group" icon-off="ion-ios-people-outline" icon-on="ion-ios-people" ng-click="goToGroup()">
+  <ion-tab hidden="{{!( isLoggedIn() )}}" title="My Group" icon-off="ion-ios-people-outline" icon-on="ion-ios-people" ng-click="goToGroup()">
     <ion-nav-view name="tab-group">
 
     </ion-nav-view>
   </ion-tab>
   <!-- Camera Tab -->
-  <ion-tab title="Camera" icon-off="ion-ios-camera-outline" icon-on="ion-ios-camera" ui-sref="tab.camera">
+  <ion-tab hidden="{{!( isLoggedIn() )}}" title="Camera" icon-off="ion-ios-camera-outline" icon-on="ion-ios-camera" ui-sref="tab.camera">
     <ion-nav-view name="tab-camera"></ion-nav-view>
   </ion-tab>
 
   <!-- Moments Tab -->
-  <ion-tab title="Moments" icon-off="ion-ios-heart-outline" icon-on="ion-ios-heart" ui-sref="tab.moments">
+  <ion-tab hidden="{{!( isLoggedIn() )}}" title="Moments" icon-off="ion-ios-heart-outline" icon-on="ion-ios-heart" ui-sref="tab.moments">
     <ion-nav-view name="tab-moments"></ion-nav-view>
   </ion-tab>
 
