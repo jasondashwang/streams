@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('main').controller('CameraCtrl', function ($rootScope, $scope, $state, $cordovaCamera) {
+angular.module('main').controller('CameraCtrl', function ($rootScope, $scope, $state, $cordovaCamera, GroupFactory) {
   $rootScope.loggedIn = false;
   $scope.changeStatus = function () {
     $rootScope.loggedIn = !($rootScope.loggedIn);
@@ -11,8 +11,14 @@ angular.module('main').controller('CameraCtrl', function ($rootScope, $scope, $s
   		else $state.go("tab.group-logged-out");
   };
 
-  $scope.demoImage = '../../img/ben.png';
-  console.log($scope.demoImage);
+  $scope.demoImage = 'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSnfpzoD-_HTIGH37ncMqaYiqjOI4MrXSPSTCyAHbJdSsc6O9vP';
+
+  $scope.saveImage = function() {
+      GroupFactory.uploadImage($scope.demoImage)
+      .then($state.go('tab.camera'))
+      .catch(err => console.error(err));
+  };
+
 
 	$scope.takeImage = function() {
 	    var options = {
