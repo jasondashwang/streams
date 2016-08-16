@@ -1,6 +1,6 @@
 <ion-view title="Login">
-  <ion-content has-header="true" padding="true">
-    <h3>Login</h3>
+  <ion-content has-header="true" padding="true" class="login-div">
+    <h2>Welcome to Timeline</h2>
     <form name="loginForm" ng-submit="login(userInfo)">
 
       <div class="list">
@@ -19,7 +19,7 @@
       <p ng-if="error">Error: <strong>{{ error }}</strong></p>
 
     </form>
-    <h6 ui-sref="tab.signup" class="pointer">Create an Account</h6>
+    <h5 ui-sref="tab.signup" class="pointer">Create an Account</h5>
 
   </ion-content>
 </ion-view>
