@@ -74,3 +74,4 @@ Error: Error code 65 for command: xcodebuild with args: -xcconfig,/Users/slamfyr
 - Delete all directories and files in the ```plugins``` directory. 
 - ```sudo chmod 777 /Users/slamfyre175/.config/configstore/insight-cordova.json```
 - ```ionic build ios```
+- ```ionic platform rm ios```
