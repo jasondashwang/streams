@@ -10,7 +10,7 @@ angular.module('main')
   GroupFactory.uploadImage = function(image) {
     console.log(image);
     console.log('hopefully this is defined', Upload);
-    const file = Upload.urlToBlob(image);
+    const file = Upload.dataUrltoBlob(image, 'somePicName');
     console.log('file defined', file);
 
     const uploadPic = storageRef.child('pictures/' + file.name).put(file);
@@ -35,7 +35,7 @@ angular.module('main')
         owner: $rootScope.userId
       });
     });
-  }
+  };
 
   GroupFactory.createGroup = function (groupDetails) {
     const groupPostData = {

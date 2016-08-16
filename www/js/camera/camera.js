@@ -15,10 +15,9 @@ angular.module('main').controller('CameraCtrl', function ($rootScope, $scope, $s
 
   $scope.saveImage = function() {
       GroupFactory.uploadImage($scope.demoImage)
-      .then($state.go('tab.camera'))
+      .then(() => $state.go('tab.camera'))
       .catch(err => console.error(err));
   };
-
 
 	$scope.takeImage = function() {
 	    var options = {
@@ -37,6 +36,7 @@ angular.module('main').controller('CameraCtrl', function ($rootScope, $scope, $s
 	        $scope.srcImage = "data:image/jpeg;base64," + imageData;
 	    }, function(err) {
 	        // error
+          console.error(err);
 	    });
 	};
 });
