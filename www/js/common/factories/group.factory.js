@@ -10,11 +10,12 @@ angular.module('main')
   GroupFactory.createGroup = function (groupDetails) {
     const groupPostData = {
       name: groupDetails.name,
-      members: {
-        userId: user.uid,
-        color: 'blue'
-      }
+      members: {},
+      active: true,
+      groupCode: Math.floor(Math.random() * (101))
     };
+
+    groupPostData.members[user.uid] = {color: "blue"}
 
     // get a new key for the group
     const newGroupKey = ref.child('groups').push().key;
@@ -26,5 +27,10 @@ angular.module('main')
     return firebase.database().ref().update(updates);
   };
 
+  GroupFactory.addMember = function (groupCode) {
+    var groupRef = ref.child('groups/' + groupCode + '/members/' + user.uid);
+    return groupRef.update({color: 'green'})
+
+  }
   return GroupFactory;
 });
