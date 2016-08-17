@@ -1,9 +1,9 @@
 angular.module('main')
-.factory('GroupFactory', function ($q) {
+.factory('GroupFactory', function ($q, $rootScope) {
 
   const GroupFactory = {};
 
-  const user = firebase.auth().currentUser;
+  // const user = $rootScope.profile;
   const ref = firebase.database().ref();
 
   
@@ -15,48 +15,33 @@ angular.module('main')
       groupCode: Math.floor(Math.random() * (101))
     };
 
-    groupPostData.members[user.uid] = {color: "blue"}
-
     // get a new key for the group
     const newGroupKey = ref.child('groups').push().key;
-
+    $rootScope.profile.activeCode = newGroupKey;
+    groupPostData.members[$rootScope.profile.uid] = $rootScope.profile;
     const updates = {};
     updates[`/groups/${newGroupKey}`] = groupPostData;
-    updates[`/users/${user.uid}`] = {isLeader: true, currentGroup: newGroupKey};
+    $rootScope.profile.isLeader = true;
+    updates[`/users/${$rootScope.profile.uid}`] = $rootScope.profile;
 
     return firebase.database().ref().update(updates);
   };
 
   GroupFactory.addMember = function (groupCode) {
-    var groupRef = ref.child('groups/' + groupCode + '/members/' + user.uid);
-    return groupRef.update({color: 'green'})
-
-  }
+    var groupRef = ref.child('groups/' + groupCode + '/members/' + $rootScope.profile.uid);
+    $rootScope.profile.activeCode = groupCode;
+    return groupRef.update($rootScope.profile)
+  };
 
   GroupFactory.fetchCurrentGroup = function () {
-
-    var codeRef = ref.child('users/' + user.uid + '/currentGroup');
-    var groupCode = $q.defer();
-    codeRef.on('value', function(snapshot){
-      groupCode.resolve(snapshot.val());
-
-    }, function (errorObject) {
-      groupCode.reject(errorObject.code);
-      console.log("The read failed: " + errorObject.code);
-    });
-    
-    var userGroupRef = $q.defer();
-    groupCode.promise
-    .then(function(groupId){
-      ref.child('groups/' + groupId).on('value', function(snapshot){
+  var userGroupRef = $q.defer();
+  ref.child('groups/' + $rootScope.profile.activeCode).on('value', function(snapshot){
         userGroupRef.resolve(snapshot.val());
       }, function(errorObject){
         userGroupRef.reject(errorObject.code);
       })
-    })
-
     return userGroupRef.promise
-  }
+  };
 
   return GroupFactory;
 });

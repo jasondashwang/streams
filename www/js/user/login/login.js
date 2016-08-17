@@ -18,6 +18,7 @@ angular.module('main')
         .then(function(user){
           $rootScope.profile = user;
           $rootScope.profile.uid = uid;
+          console.log($rootScope.profile)
           $state.go('tab.camera');
         })
         .catch(function(err) {
