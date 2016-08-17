@@ -2,7 +2,7 @@
 
 angular.module('main').controller('MomentsCtrl', function ($rootScope, $scope, $state, GroupFactory) {
 
-  if(!($rootScope.loggedIn)){
+  if(!($rootScope.loggedIn) && !($rootScope.profile.activeCode)){
     $rootScope.loggedIn = false;
     $state.go('tab.login');
   } else {
@@ -24,6 +24,6 @@ angular.module('main').controller('MomentsCtrl', function ($rootScope, $scope, $
     })
   }
 
-  
+
 });
 
