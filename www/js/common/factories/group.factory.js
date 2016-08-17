@@ -2,6 +2,11 @@ angular.module('main')
 .factory('GroupFactory', function ($q, $rootScope) {
 
   const GroupFactory = {};
+  const alphanumeric_unique = function () {
+      return Math.random().toString(36).split('').filter( function(value, index, self) {
+          return self.indexOf(value) === index;
+      }).join('').substr(2,6);
+  };
 
   // const user = $rootScope.profile;
   const ref = firebase.database().ref();
@@ -9,14 +14,19 @@ angular.module('main')
   GroupFactory.createGroup = function (groupDetails) {
 
     // get a new key for the group
+<<<<<<< HEAD
     const newGroupKey = ref.child('groups').push().key;
+=======
+    const newGroupKey = alphanumeric_unique();
+    // const newGroupKey = ref.child('groups').push().key;
+>>>>>>> ffb2a2b69353e5497b6dc73d4468c929ca9dbaf9
 
     const groupPostData = {
       name: groupDetails.name,
       members: {},
       active: true,
-      groupCode: $rootScope.profile.email,
-      media: {}
+      media: {},
+      leaderId: $rootScope.profile.uid
     };
 
     $rootScope.profile.activeCode = newGroupKey;
@@ -47,7 +57,11 @@ angular.module('main')
 
   GroupFactory.fetchMedia = function () {
     var mediaObjects = $q.defer();
+<<<<<<< HEAD
     console.log('The profile ', $rootScope.profile);
+=======
+    console.log('The profile ', $rootScope.profile)
+>>>>>>> ffb2a2b69353e5497b6dc73d4468c929ca9dbaf9
     ref.child('groups/' + $rootScope.profile.activeCode + '/media').on('value', function(snapshot){
       mediaObjects.resolve(snapshot.val());
     }, function(errorObject){
