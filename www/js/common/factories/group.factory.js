@@ -1,12 +1,12 @@
 angular.module('main')
-.factory('GroupFactory', function () {
+.factory('GroupFactory', function ($q) {
 
   const GroupFactory = {};
 
   const user = firebase.auth().currentUser;
-
   const ref = firebase.database().ref();
 
+  
   GroupFactory.createGroup = function (groupDetails) {
     const groupPostData = {
       name: groupDetails.name,
@@ -22,7 +22,7 @@ angular.module('main')
 
     const updates = {};
     updates[`/groups/${newGroupKey}`] = groupPostData;
-    updates[`/users/${user.uid}`] = {isLeader: true, currentGroup: groupDetails.name};
+    updates[`/users/${user.uid}`] = {isLeader: true, currentGroup: newGroupKey};
 
     return firebase.database().ref().update(updates);
   };
@@ -32,5 +32,31 @@ angular.module('main')
     return groupRef.update({color: 'green'})
 
   }
+
+  GroupFactory.fetchCurrentGroup = function () {
+
+    var codeRef = ref.child('users/' + user.uid + '/currentGroup');
+    var groupCode = $q.defer();
+    codeRef.on('value', function(snapshot){
+      groupCode.resolve(snapshot.val());
+
+    }, function (errorObject) {
+      groupCode.reject(errorObject.code);
+      console.log("The read failed: " + errorObject.code);
+    });
+    
+    var userGroupRef = $q.defer();
+    groupCode.promise
+    .then(function(groupId){
+      ref.child('groups/' + groupId).on('value', function(snapshot){
+        userGroupRef.resolve(snapshot.val());
+      }, function(errorObject){
+        userGroupRef.reject(errorObject.code);
+      })
+    })
+
+    return userGroupRef.promise
+  }
+
   return GroupFactory;
 });

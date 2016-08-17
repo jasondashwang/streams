@@ -125,6 +125,14 @@ angular.module('main', [
         templateUrl: 'js/group/loggedIn/group.loggedIn.html',
         controller: 'GroupLoggedInCtrl'
       }
+    },
+    resolve: {
+      currentGroup: function(GroupFactory) {
+        return GroupFactory.fetchCurrentGroup()
+        .then(function(group){
+          return group;
+        })
+      }
     }
 
   })
