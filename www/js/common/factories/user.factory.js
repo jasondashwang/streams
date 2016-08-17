@@ -28,3 +28,9 @@ angular.module('main')
 
   return UserFactory;
 });
+
+angular.module('main').factory('FirebaseProfile', function($q, $rootScope, $firebaseObject){
+  return function (uid){
+    return $firebaseObject(firebase.database().ref('users').child(uid));
+  };
+});

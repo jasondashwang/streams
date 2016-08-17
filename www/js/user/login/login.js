@@ -16,11 +16,9 @@ angular.module('main')
           return UserFactory.getUser(userId);
         })
         .then(function(user){
-          console.log(user);
           $rootScope.profile = user;
           $rootScope.profile.uid = uid;
-          console.log($rootScope.profile)
-          $state.go('tab.camera');
+          $state.go('tab.profile');
         })
         .catch(function(err) {
               console.log('Authentication failed:', err);

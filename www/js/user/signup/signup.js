@@ -25,7 +25,7 @@ angular.module('main')
       .then(function(user){
         $rootScope.profile = user;
         $rootScope.profile.uid = uid;
-        $state.go('tab.camera');
+        $state.go('tab.profile');
       })
       .catch(function(error) {
           $scope.error = error;
