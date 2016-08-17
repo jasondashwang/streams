@@ -21,7 +21,6 @@ angular.module('main').controller('CreateGroupCtrl', function ($rootScope, $scop
     setLabel: 'Set2'    //Optional
   };
 
-
   $scope.createGroup = function(groupDetails) {
     // ionicTimePicker.openTimePicker(ipObj1);
     GroupFactory.createGroup(groupDetails)

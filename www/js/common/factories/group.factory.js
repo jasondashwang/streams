@@ -10,10 +10,10 @@ angular.module('main').factory('GroupFactory', function ($q, $rootScope, $fireba
   // const user = $rootScope.profile;
   const ref = firebase.database().ref();
 
-
   GroupFactory.createGroup = function (groupDetails) {
 
     // get a new key for the group
+
     const newGroupKey = alphanumeric_unique();
     // const newGroupKey = ref.child('groups').push().key;
 
@@ -51,7 +51,7 @@ angular.module('main').factory('GroupFactory', function ($q, $rootScope, $fireba
           userGroupRef.reject(errorObject.code);
         });
       return userGroupRef.promise;
-    };
+  };
 
   GroupFactory.fetchMedia = function () {
     var mediaObjects = $q.defer();
@@ -59,7 +59,7 @@ angular.module('main').factory('GroupFactory', function ($q, $rootScope, $fireba
       mediaObjects.resolve(snapshot.val());
     }, function(errorObject){
       mediaObjects.reject(errorObject.code);
-    })
+    });
     return mediaObjects.promise;
   };
 
