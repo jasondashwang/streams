@@ -9,7 +9,8 @@ angular.module('main', [
   'ionic',
   'ngCordova',
   'firebase',
-  'ionic-timepicker'
+  'ionic-timepicker',
+  'ngFileUpload'
   ])
 
 .run(function($ionicPlatform, $rootScope) {
@@ -24,8 +25,6 @@ angular.module('main', [
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
-    $rootScope.deviceInformation = ionic.Platform.device();
-    $rootScope.deviceUUID = ionic.Platform.device().uuid;
   });
 })
 

@@ -24,6 +24,9 @@
     <!-- AngularFire -->
     <script src="https://cdn.firebase.com/libs/angularfire/2.0.1/angularfire.min.js"></script>
 
+    <!-- Angular File Upload -->
+    <script src="lib/ng-file-upload/ng-file-upload.min.js"></script>
+    <script src="lib/ng-file-upload/ng-file-upload-shim.min.js"></script>
 
     <!-- your app's js -->
     <script src="js/app.js"></script>
@@ -31,6 +34,7 @@
     <script src="js/common/factories/group.factory.js"></script>
     <script src="js/common/factories/user.factory.js"></script>
     <script src="js/common/factories/auth.factory.js"></script>
+    <script src="js/common/factories/camera.factory.js"></script>
     <script src="js/common/directives/drag.directive.js"></script>
     <script src="js/user/login/login.js"></script>
     <script src="js/user/signup/signup.js"></script>
@@ -70,6 +74,7 @@
       };
       firebase.initializeApp(config);
       var storage = firebase.storage();
+      var storageRef = storage.ref();
     </script>
   </body>
 </html>

@@ -6,7 +6,7 @@ angular.module('main')
   // const user = $rootScope.profile;
   const ref = firebase.database().ref();
 
-  
+
   GroupFactory.createGroup = function (groupDetails) {
     const groupPostData = {
       name: groupDetails.name,
