@@ -97,6 +97,15 @@ angular.module('main', [
       }
     }
   })
+  .state('tab.settings', {
+    url: '/settings',
+    views: {
+      'tab-profile': {
+        templateUrl: 'js/profile/settings/settings.html',
+        controller: 'SettingsCtrl'
+      }
+    }
+  })
   // Each tab has its own nav history stack:
   .state('tab.camera', {
     url: '/camera',

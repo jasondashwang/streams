@@ -1,0 +1,26 @@
+<ion-view title="My Settings">
+  <ion-content has-header="true" padding="false" class="profile-div">
+    <img src="http://cdn03.cdn.justjared.com/wp-content/uploads/headlines/2015/08/emily-ratajkowski-harpers-bazaar-guest-edit.jpg">
+    <ul class="list">
+      <li class="item item-icon-left">
+        <i class="icon ion-person"></i>
+        {{ profile.name }}
+      </li>
+      <li class="item item-icon-left">
+        <i class="icon ion-email"></i>
+        {{ profile.email }}
+      </li>
+      <li class="item item-icon-left">
+        <i class="icon ion-ios-telephone"></i>
+        {{ profile.phone }}
+      </li>
+      <a ng-show="$rootScope.groupLoggedIn" class="item item-icon-left item-icon-right" ui-sref="tab.group-logged-in">
+        <i class="icon ion-android-contacts"></i>
+        {{ profile.group.name }}
+        <i class="icon ion-arrow-right-c"></i>
+      </a>
+    </ul>
+
+    <button ng-click="logOut()" class="button button-block button-assertive">Log Out</button>
+  </ion-content>
+</ion-view>
