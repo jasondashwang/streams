@@ -26,10 +26,6 @@ angular.module('main')
     return firebase.database().ref().update(updates);
   };
 
-  GroupFactory.hello = function() {
-    console.log('hello');
-  };
-
   GroupFactory.addMember = function (groupCode) {
     var groupRef = ref.child('groups/' + groupCode + '/members/' + user.uid);
     return groupRef.update({color: 'green'});
