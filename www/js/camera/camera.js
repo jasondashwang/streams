@@ -14,6 +14,10 @@ angular.module('main').controller('CameraCtrl', function ($rootScope, $scope, $s
   $scope.demoImage = '../../img/ben.png';
   console.log($scope.demoImage);
 
+  $scope.saveImage = function() {
+    console.log('hello');
+  };
+
 	$scope.takeImage = function() {
 	    var options = {
 	        quality: 80,
