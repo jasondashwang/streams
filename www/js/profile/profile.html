@@ -10,6 +10,10 @@
         <i class="icon ion-email"></i>
         {{ profile.email }}
       </li>
+      <li class="item item-icon-left">
+        <i class="icon ion-ios-telephone"></i>
+        {{ profile.phone }}
+      </li>
       <a ng-show="$rootScope.groupLoggedIn" class="item item-icon-left item-icon-right" ui-sref="tab.group-logged-in">
         <i class="icon ion-android-contacts"></i>
         {{ profile.group.name }}
