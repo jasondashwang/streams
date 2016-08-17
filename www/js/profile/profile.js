@@ -1,7 +1,12 @@
 'use strict';
 
 angular.module('main').controller('ProfileCtrl', function ($scope, $state, $rootScope) {
-  $scope.profile = $rootScope.profile;
+  if(!($rootScope.loggedIn)){
+    $rootScope.loggedIn = false;
+    $state.go('tab.login');
+  } else {
+ 	 $scope.profile = $rootScope.profile;
+  }
 
   $scope.logOut = function(){
     $rootScope.loggedIn = false;
