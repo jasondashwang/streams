@@ -8,20 +8,22 @@ angular.module('main')
 
 
   GroupFactory.createGroup = function (groupDetails) {
+
+    // get a new key for the group
+    const newGroupKey = ref.child('activeGroups').push().key;
+
     const groupPostData = {
       name: groupDetails.name,
       members: {},
       active: true,
-      groupCode: Math.floor(Math.random() * (101)),
+      groupCode: $rootScope.profile.email,
       media: {}
     };
 
-    // get a new key for the group
-    const newGroupKey = ref.child('groups').push().key;
     $rootScope.profile.activeCode = newGroupKey;
     groupPostData.members[$rootScope.profile.uid] = $rootScope.profile;
     const updates = {};
-    updates[`/groups/${newGroupKey}`] = groupPostData;
+    updates[`/activeGroups/${newGroupKey}`] = groupPostData;
     $rootScope.profile.isLeader = true;
     updates[`/users/${$rootScope.profile.uid}`] = $rootScope.profile;
 
@@ -29,25 +31,25 @@ angular.module('main')
   };
 
   GroupFactory.addMember = function (groupCode) {
-    var groupRef = ref.child('groups/' + groupCode + '/members/' + $rootScope.profile.uid);
+    var groupRef = ref.child('activeGroups/' + groupCode + '/members/' + $rootScope.profile.uid);
     $rootScope.profile.activeCode = groupCode;
-    return groupRef.update($rootScope.profile)
+    return groupRef.update($rootScope.profile);
   };
 
   GroupFactory.fetchCurrentGroup = function () {
     var userGroupRef = $q.defer();
-    ref.child('groups/' + $rootScope.profile.activeCode).on('value', function(snapshot){
+    ref.child('activeGroups/' + $rootScope.profile.activeCode).on('value', function(snapshot){
           userGroupRef.resolve(snapshot.val());
         }, function(errorObject){
           userGroupRef.reject(errorObject.code);
-        })
+        });
       return userGroupRef.promise;
     };
 
   GroupFactory.fetchMedia = function () {
     var mediaObjects = $q.defer();
     console.log('The profile ', $rootScope.profile)
-    ref.child('groups/' + $rootScope.profile.activeCode + '/media').on('value', function(snapshot){
+    ref.child('activeGroups/' + $rootScope.profile.activeCode + '/media').on('value', function(snapshot){
       mediaObjects.resolve(snapshot.val());
     }, function(errorObject){
       mediaObjects.reject(errorObject.code);
