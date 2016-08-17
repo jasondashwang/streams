@@ -12,7 +12,8 @@ angular.module('main')
       name: groupDetails.name,
       members: {},
       active: true,
-      groupCode: Math.floor(Math.random() * (101))
+      groupCode: Math.floor(Math.random() * (101)),
+      media: {}
     };
 
     // get a new key for the group
@@ -34,13 +35,24 @@ angular.module('main')
   };
 
   GroupFactory.fetchCurrentGroup = function () {
-  var userGroupRef = $q.defer();
-  ref.child('groups/' + $rootScope.profile.activeCode).on('value', function(snapshot){
-        userGroupRef.resolve(snapshot.val());
-      }, function(errorObject){
-        userGroupRef.reject(errorObject.code);
-      })
-    return userGroupRef.promise
+    var userGroupRef = $q.defer();
+    ref.child('groups/' + $rootScope.profile.activeCode).on('value', function(snapshot){
+          userGroupRef.resolve(snapshot.val());
+        }, function(errorObject){
+          userGroupRef.reject(errorObject.code);
+        })
+      return userGroupRef.promise;
+    };
+
+  GroupFactory.fetchMedia = function () {
+    var mediaObjects = $q.defer();
+    console.log('The profile ', $rootScope.profile)
+    ref.child('groups/' + $rootScope.profile.activeCode + '/media').on('value', function(snapshot){
+      mediaObjects.resolve(snapshot.val());
+    }, function(errorObject){
+      mediaObjects.reject(errorObject.code);
+    })
+    return mediaObjects.promise;
   };
 
   return GroupFactory;

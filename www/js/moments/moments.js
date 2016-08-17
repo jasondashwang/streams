@@ -1,22 +1,28 @@
 'use strict';
 
-angular.module('main').controller('MomentsCtrl', function ($rootScope, $scope, $state) {
+angular.module('main').controller('MomentsCtrl', function ($rootScope, $scope, $state, GroupFactory) {
 
-  if(!($rootScope.loggedIn)){
-    $rootScope.loggedIn = false;
-    $state.go('tab.login');
-  }
+  if ($scope.profile.activeCode) {
+      $scope.greeting = 'Moments View';
+      $scope.goToState = function (state) {
+        $state.go(state);
+      };
 
-  $scope.greeting = 'Moments View';
-  $scope.goToState = function (state) {
-    $state.go(state);
-  };
-  $scope.moments = [{
-    date: 'May 19th, 2016'
-  },{
-    date: 'May 31th, 2016'
-  },{
-    date: 'May 123, 2016'
-  }];
+      GroupFactory.fetchMedia()
+        .then(function(mediaObjects){
+          $scope.mediaObjects = mediaObjects;
+        })
+      }
+
+    $scope.refresh = function () {
+      GroupFactory.fetchMedia()
+      .then(function(mediaObjects){
+        $scope.mediaObjects = mediaObjects;
+      })
+  }  
+
+  
+
+
 });
 
