@@ -26,11 +26,12 @@ angular.module('main').controller('CreateGroupCtrl', function ($scope, $state, $
     // ionicTimePicker.openTimePicker(ipObj1);
 
     GroupFactory.createGroup(groupDetails)
-      .then(() => $state.go('tab.group-logged-in'))
-      .catch(err => {
-        $scope.error = err;
-        console.log(`Error: ${err}`);
-      });
+    .then(function(){
+      $state.go('tab.group-logged-in');
+    })
+    .catch(function(err){
+      console.log(err);
+    });
   };
 
 });
