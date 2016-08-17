@@ -14,11 +14,16 @@ angular.module('main').controller('MomentsCtrl', function ($rootScope, $scope, $
     GroupFactory.fetchMedia()
     .then(function(mediaObjects){
       $scope.mediaObjects = mediaObjects;
-      console.log($scope.mediaObjects)
     })
   }
 
+  $scope.refresh = function () {
+    GroupFactory.fetchMedia()
+    .then(function(mediaObjects){
+      $scope.mediaObjects = mediaObjects;
+    })
+  }
 
-
+  
 });
 
