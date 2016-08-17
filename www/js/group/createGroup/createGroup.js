@@ -24,8 +24,9 @@ angular.module('main').controller('CreateGroupCtrl', function ($scope, $state, $
 
   $scope.createGroup = function(groupDetails) {
     // ionicTimePicker.openTimePicker(ipObj1);
+
     GroupFactory.createGroup(groupDetails)
-      .then(() => $state.go('tab.camera'))
+      .then(() => $state.go('tab.group-logged-in'))
       .catch(err => {
         $scope.error = err;
         console.log(`Error: ${err}`);

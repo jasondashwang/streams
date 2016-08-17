@@ -2,10 +2,10 @@
   <ion-content has-header="true" padding="true" class="group-members">
     <div class="list">
 
-        <div class="item item-thumbnail-left">
+        <div class="item item-thumbnail-left" ng-repeat="member in members">
           <img src="http://res.cloudinary.com/hrscywv4p/image/upload/c_fill,f_auto,g_faces:center,h_200,q_90,w_200/v1/30605/Gritty_Pretty_Miranda_Kerr_3_s1h1wf.jpg">
-          <h2>Miranda Kerr</h2>
-          <p>Joined: 8:42PM</p>
+          <h2>{{ member.name }}</h2>
+          <p>{{ member.color }}</p>
           <p>12 Submissions</p>
         </div>
 
