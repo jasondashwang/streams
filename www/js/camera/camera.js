@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('main').controller('CameraCtrl', function ($rootScope, $scope, $state, CameraFactory, $cordovaCamera) {
+angular.module('main').controller('CameraCtrl', function ($rootScope, $scope, $state, $cordovaCamera) {
 
   $scope.changeStatus = function () {
     $rootScope.groupLoggedIn = !($rootScope.groupLoggedIn);
