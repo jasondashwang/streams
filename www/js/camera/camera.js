@@ -1,16 +1,9 @@
 'use strict';
 
-angular.module('main').controller('CameraCtrl', function ($rootScope, $scope, $state, $cordovaCamera) {
+angular.module('main').controller('CameraCtrl', function ($rootScope, $scope, $state, CameraFactory, $cordovaCamera) {
 
   $scope.changeStatus = function () {
     $rootScope.groupLoggedIn = !($rootScope.groupLoggedIn);
-  };
-
-  $scope.demoImage = '../../img/ben.png';
-  console.log($scope.demoImage);
-
-  $scope.saveImage = function() {
-    console.log('hello');
   };
 
 	$scope.takeImage = function() {
@@ -28,8 +21,9 @@ angular.module('main').controller('CameraCtrl', function ($rootScope, $scope, $s
 
 	    $cordovaCamera.getPicture(options).then(function(imageData) {
 	        $scope.srcImage = "data:image/jpeg;base64," + imageData;
+          CameraFactory.uploadImage($scope.srcImage);
 	    }, function(err) {
-	        // error
+	        console.error('Camera Error', err);
 	    });
 	};
 });
