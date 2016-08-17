@@ -4,12 +4,13 @@ angular.module('main')
 
   const ref = firebase.database().ref();
 
-  UserFactory.addUser = function(userId, name, email, phone) {
+  UserFactory.addUser = function(userId, name, email, phone, photoUrl) {
 
     ref.child('users/' + userId).set({
       name: name,
       email: email,
-      phone: phone
+      phone: phone,
+      photoUrl: photoUrl
     });
   };
 
