@@ -50,7 +50,7 @@ angular.module('main', [
     url: '/tab',
     abstract: true,
     templateUrl: 'templates/tabs.html',
-    controller: function($scope, $state, $rootScope, $cordovaCamera, $firebase) {
+    controller: function ($scope, $state, $rootScope, $cordovaCamera, $firebase) {
 
       // firebase.auth().onAuthStateChanged(function(user) {
       //   if (user) {
@@ -59,9 +59,12 @@ angular.module('main', [
       //     // No user is signed in.
       //   }
       // });
+      $scope.isLoggedIn = function(){
+        return $rootScope.loggedIn;
+      };
 
       $scope.goToGroup = function(){
-        if($rootScope.loggedIn) $state.go('tab.group-logged-in');
+        if($rootScope.groupLoggedIn) $state.go('tab.group-logged-in');
         else $state.go('tab.group-logged-out');
       };
     }
@@ -82,6 +85,15 @@ angular.module('main', [
       'tab-login': {
         templateUrl: 'js/user/signup/signup.html',
         controller: 'SignupCtrl'
+      }
+    }
+  })
+  .state('tab.profile', {
+    url: '/profile',
+    views: {
+      'tab-profile': {
+        templateUrl: 'js/profile/profile.html',
+        controller: 'ProfileCtrl'
       }
     }
   })
@@ -121,6 +133,14 @@ angular.module('main', [
       'tab-group': {
         templateUrl: 'js/group/loggedIn/group.loggedIn.html',
         controller: 'GroupLoggedInCtrl'
+      }
+    },
+    resolve: {
+      currentGroup: function(GroupFactory) {
+        return GroupFactory.fetchCurrentGroup()
+        .then(function(group){
+          return group;
+        })
       }
     }
 
