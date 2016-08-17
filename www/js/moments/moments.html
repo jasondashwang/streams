@@ -1,6 +1,9 @@
 <ion-view title="Moments" on-swipe-right="goToState('camera')">
   <ion-content has-header="true" padding="false" class="moments">
-    <moment ng-repeat="moment in moments" model="moment"></moment>
+    <!-- <moment ng-repeat="moment in moments" model="moment"></moment> -->
+    <div ng-repeat="mediaObj in mediaObjects">
+    	<img src ="{{mediaObj.mediaUrl}}">
+    </div>
   </ion-content>
 
 </ion-view>

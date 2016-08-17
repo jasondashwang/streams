@@ -21,8 +21,12 @@ angular.module('main')
       }, function() {
         // Upload completed successfully, now we can get the download URL
         var downloadURL = uploadPic.snapshot.downloadURL;
-        // $scope.result = downloadURL;
-        // firebase.database().ref().child('groups/' + $rootScope.SOMEGROUPID).child('photoUrl').set(downloadURL);
+        var mediaObj = {
+          mediaUrl: downloadURL,
+          memberId: $rootScope.profile.uid
+        }
+        //stores a reference to the download URL in the group's db
+        ref.child('groups/' + $rootScope.profile.activeCode + '/media/' + Date.now()).set(mediaObj);
     });
   };
 
