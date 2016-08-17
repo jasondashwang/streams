@@ -1,14 +1,9 @@
 'use strict';
 
 angular.module('main').controller('CameraCtrl', function ($rootScope, $scope, $state, $cordovaCamera) {
-  $rootScope.loggedIn = false;
-  $scope.changeStatus = function () {
-    $rootScope.loggedIn = !($rootScope.loggedIn);
-  };
 
-  $scope.goRight = function () {
-  	if ($rootScope.loggedIn) $state.go('tab.group-logged-in');
-  		else $state.go("tab.group-logged-out");
+  $scope.changeStatus = function () {
+    $rootScope.groupLoggedIn = !($rootScope.groupLoggedIn);
   };
 
   $scope.demoImage = '../../img/ben.png';
