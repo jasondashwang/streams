@@ -3,7 +3,7 @@
 angular.module('main').controller('GroupLoggedInCtrl',['$scope', '$state', 'GroupFactory', '$log', '$rootScope', function ($scope, $state, GroupFactory, $log, $rootScope) {
 	GroupFactory.fetchCurrentGroup()
 	.then(function(group){
-    $scope.profile.group = group;
+    $rootScope.profile.group = group;
 	});
 
   $scope.leaveGroup = function(){
