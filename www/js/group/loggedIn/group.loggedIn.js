@@ -10,9 +10,7 @@ angular.module('main').controller('GroupLoggedInCtrl',['$scope', '$state', 'Grou
     if($rootScope.profile.isLeader) alert('You are leader! Transfer to someone else!');
     else {
       GroupFactory.leaveGroup()
-      .then(function(){
-        $state.go('tab.profile');
-      });
+      $state.go('tab.profile');
     }
   };
 
