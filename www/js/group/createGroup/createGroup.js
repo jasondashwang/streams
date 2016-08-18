@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('main').controller('CreateGroupCtrl', function ($scope, $state, $log, ionicTimePicker, GroupFactory) {
+angular.module('main').controller('CreateGroupCtrl', ['$rootScope', '$scope', '$state', '$log', 'ionicTimePicker', 'GroupFactory', function ($rootScope, $scope, $state, $log, ionicTimePicker, GroupFactory) {
 
   var ipObj1 = {
     callback: function (val) {      //Mandatory
@@ -21,10 +21,8 @@ angular.module('main').controller('CreateGroupCtrl', function ($scope, $state, $
     setLabel: 'Set2'    //Optional
   };
 
-
   $scope.createGroup = function(groupDetails) {
     // ionicTimePicker.openTimePicker(ipObj1);
-
     GroupFactory.createGroup(groupDetails)
     .then(function(){
       $state.go('tab.group-logged-in');
@@ -34,5 +32,5 @@ angular.module('main').controller('CreateGroupCtrl', function ($scope, $state, $
     });
   };
 
-});
+}]);
 

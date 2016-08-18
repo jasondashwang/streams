@@ -11,7 +11,7 @@ angular.module('main').controller('MomentsCtrl', function ($rootScope, $scope, $
       GroupFactory.fetchMedia()
         .then(function(mediaObjects){
           $scope.mediaObjects = mediaObjects;
-        })
+        });
       }
 
     $scope.refresh = function () {
@@ -77,8 +77,6 @@ angular.module('main').controller('MomentsCtrl', function ($rootScope, $scope, $
       });
     }
   }  
-
-  
 
 
 });

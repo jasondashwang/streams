@@ -1,15 +1,15 @@
 'use strict';
 
-angular.module('main')
-.controller('SignupCtrl', function ($scope, $state, $log, Auth, UserFactory, $rootScope) {
+angular.module('main').controller('SignupCtrl', ['$scope', '$state', '$log', 'Auth', 'UserFactory', '$rootScope', function ($scope, $state, $log, Auth, UserFactory, $rootScope) {
 
   $scope.signUp = function(userInfo) {
     var uid;
     $scope.error = null;
+    userInfo.photoUrl = "http://www.rogerbrayrestoration.com/wp-content/uploads/2014/08/Blank-Profile.jpg";
     Auth.$createUserWithEmailAndPassword(userInfo.email, userInfo.password)
       .then(function(userData) {
         uid = userData.uid;
-        UserFactory.addUser(userData.uid, userInfo.name, userInfo.email, userInfo.phone);
+        UserFactory.addUser(userData.uid, userInfo.name, userInfo.email, userInfo.phone, userInfo.photoUrl);
       })
       .then(function() {
         Auth.$signInWithEmailAndPassword(
@@ -24,7 +24,7 @@ angular.module('main')
       .then(function(user){
         $rootScope.profile = user;
         $rootScope.profile.uid = uid;
-        $state.go('tab.camera');
+        $state.go('tab.profile');
       })
       .catch(function(error) {
           $scope.error = error;
@@ -32,5 +32,5 @@ angular.module('main')
       });
 
   };
-});
+}]);
 

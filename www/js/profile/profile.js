@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('main').controller('ProfileCtrl', function ($scope, $state, $rootScope) {
+angular.module('main').controller('ProfileCtrl', ['$scope', '$state', '$rootScope', function ($scope, $state, $rootScope) {
   if(!($rootScope.loggedIn)){
     $rootScope.loggedIn = false;
     $state.go('tab.login');
@@ -14,5 +14,6 @@ angular.module('main').controller('ProfileCtrl', function ($scope, $state, $root
     $rootScope.profile = undefined;
     $state.go('tab.login');
   };
-});
+
+}]);
 
