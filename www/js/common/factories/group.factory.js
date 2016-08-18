@@ -1,6 +1,4 @@
-'use strict';
-
-angular.module('main').factory('GroupFactory', ['$q', '$rootScope', function ($q, $rootScope) {
+angular.module('main').factory('GroupFactory', ['$q', '$rootScope', 'AuthService', '$firebaseObject', function ($q, $rootScope, AuthService, $firebaseObject) {
 
   var GroupFactory = {};
   var alphanumeric_unique = function () {
@@ -9,115 +7,52 @@ angular.module('main').factory('GroupFactory', ['$q', '$rootScope', function ($q
       }).join('').substr(2,6);
   };
 
-  // const user = $rootScope.profile;
   var ref = firebase.database().ref();
+
+  GroupFactory.fireBase = function(groupCode) {
+    var groupRef = ref.child('groups/' + groupCode);
+    return $firebaseObject(groupRef);
+  };
 
   GroupFactory.createGroup = function (groupDetails) {
 
-    // get a new key for the group
+    return AuthService.getLoggedInUser()
+      .then(function(user) {
+        var newGroupKey = alphanumeric_unique();
 
-    var newGroupKey = alphanumeric_unique();
-    // const newGroupKey = ref.child('groups').push().key;
+        var groupPostData = {
+          name: groupDetails.name,
+          members: {},
+          timeCreated: Date.now(),
+          mediaUrl: 'http://www.digital-photography-school.com/wp-content/uploads/2011/11/square-format-03.jpg'
+        };
 
-    var groupPostData = {
-      name: groupDetails.name,
-      members: {},
-      active: true,
-      media: {},
-      leaderId: $rootScope.profile.uid,
-      createTime: Date.now()
-    };
+        groupPostData.members[user.uid] = true;
 
+        var updates = {};
+        updates['/groups/' + newGroupKey] = groupPostData;
+        updates['/users/' + user.uid + '/groups/' + newGroupKey] = true;
 
-    $rootScope.profile.activeCode = newGroupKey;
-    groupPostData.members[$rootScope.profile.uid] = $rootScope.profile;
-    var updates = {};
-    updates['/groups/' + newGroupKey] = groupPostData;
-    $rootScope.profile.isLeader = true;
-    updates['/users/' + $rootScope.profile.uid] = $rootScope.profile;
-
-    return firebase.database().ref().update(updates);
+        return ref.update(updates);
+      });
   };
 
-  GroupFactory.addMember = function (groupCode) {
-    var returnValue = $q.defer();
-    ref.child('groups/' + groupCode + '/active').on('value', function(snapshot){
-      if(snapshot.val()){
-        ref.child('users/' + $rootScope.profile.uid + '/activeCode').set(groupCode);
-        var groupRef = ref.child('groups/' + groupCode + '/members/' + $rootScope.profile.uid);
-        $rootScope.profile.activeCode = groupCode;
+  GroupFactory.joinGroup = function (groupCode) {
+    return AuthService.getLoggedInUser()
+      .then(function(user) {
+        var updates = {};
+        updates['/groups/' + groupCode + '/members/' + user.uid] = false;
+        updates['/users/' + user.uid + '/groups/' + groupCode] = true;
 
-        returnValue.resolve(groupRef.update($rootScope.profile));
-      } else {
-        returnValue.reject('Inactive Group!');
-      }
-    }, function(err){
-      returnValue.reject(err);
-    });
-
-    return returnValue.promise;
+        return ref.update(updates);
+      });
   };
 
-  GroupFactory.fetchCurrentGroup = function () {
-    var userGroupRef = $q.defer();
-    ref.child('groups/' + $rootScope.profile.activeCode).on('value', function(snapshot){
-          userGroupRef.resolve(snapshot.val());
-        }, function(errorObject){
-          userGroupRef.reject(errorObject.code);
-        });
-      return userGroupRef.promise;
-  };
-
-  GroupFactory.fetchMedia = function () {
-    var mediaObjects = $q.defer();
-    ref.child('groups/' + $rootScope.profile.activeCode + '/media').on('value', function(snapshot){
-      mediaObjects.resolve(snapshot.val());
-    }, function(errorObject){
-      mediaObjects.reject(errorObject.code);
-    });
-    return mediaObjects.promise;
-  };
-
-  GroupFactory.leaveGroup = function() {
-    var currentActiveCode = $rootScope.profile.activeCode;
-    var updates = {};
-    updates['/pastGroups/' + $rootScope.profile.group.createTime] = currentActiveCode;
-    updates['/activeCode'] = null;
-
-    firebase.database().ref('/users/' + $rootScope.profile.uid).update(updates);
-
-    $rootScope.profile.activeCode = null;
-    $rootScope.profile.isLeader = false;
-    $rootScope.profile.group = null;
-    };
-
-  GroupFactory.endGroup = function() {
-
-    var currentActiveCode = $rootScope.profile.activeCode;
-
-    $rootScope.profile.activeCode = null;
-    $rootScope.profile.isLeader = false;
-    $rootScope.profile.group = null;
-
-    var userUpdates = {};
-    userUpdates['/isLeader'] = false;
-    userUpdates['/activeCode'] = null;
-    firebase.database().ref('/users/' + $rootScope.profile.uid).update(userUpdates);
-
-    var members = Object.keys($rootScope.profile.group.members);
-    for (var i = 0; i < members.length; i++) {
-      userUpdates = {};
-      userUpdates['/pastGroups/' + $rootScope.profile.group.createTime] = currentActiveCode;
-      userUpdates['/activeCode'] = null;
-      firebase.database().ref('/users/' + members[i]).update(userUpdates);
-    }
-
-    var groupUpdate = {};
-    groupUpdate['/active'] = false;
-    firebase.database().ref('/groups/' + currentActiveCode).update(groupUpdate);
-
-
+  GroupFactory.fetchCurrentGroup = function() {
+    var currGroupRef = ref.child('groups/' + $rootScope.profile.activeCode);
+    return $firebaseObject(currGroupRef);
   };
 
   return GroupFactory;
+
 }]);
