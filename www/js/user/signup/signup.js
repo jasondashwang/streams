@@ -1,7 +1,6 @@
 'use strict';
 
-angular.module('main')
-.controller('SignupCtrl', function ($scope, $state, $log, Auth, UserFactory, $rootScope) {
+angular.module('main').controller('SignupCtrl', ['$scope', '$state', '$log', 'Auth', 'UserFactory', '$rootScope', function ($scope, $state, $log, Auth, UserFactory, $rootScope) {
 
   $scope.signUp = function(userInfo) {
     var uid;
@@ -25,7 +24,7 @@ angular.module('main')
       .then(function(user){
         $rootScope.profile = user;
         $rootScope.profile.uid = uid;
-        $state.go('tab.camera');
+        $state.go('tab.profile');
       })
       .catch(function(error) {
           $scope.error = error;
@@ -33,5 +32,5 @@ angular.module('main')
       });
 
   };
-});
+}]);
 

@@ -1,5 +1,5 @@
 angular.module('main')
-.factory('UserFactory', function($q) {
+.factory('UserFactory', ['$q', function($q) {
   const UserFactory = {};
 
   const ref = firebase.database().ref();
@@ -27,4 +27,4 @@ angular.module('main')
   };
 
   return UserFactory;
-});
+}]);
