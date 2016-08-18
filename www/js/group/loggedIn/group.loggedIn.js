@@ -1,10 +1,9 @@
 'use strict';
 
-angular.module('main').controller('GroupLoggedInCtrl', function ($scope, $state, GroupFactory, $log, FirebaseGroup, $rootScope) {
+angular.module('main').controller('GroupLoggedInCtrl',['$scope', '$state', 'GroupFactory', '$log', '$rootScope', function ($scope, $state, GroupFactory, $log, $rootScope) {
 	GroupFactory.fetchCurrentGroup()
 	.then(function(group){
     $scope.profile.group = group;
-    FirebaseGroup($rootScope.profile.activeCode).$bindTo($rootScope, "profile.group");
 	});
 
   $scope.leaveGroup = function(){
@@ -21,5 +20,5 @@ angular.module('main').controller('GroupLoggedInCtrl', function ($scope, $state,
     GroupFactory.endGroup()
     $state.go('tab.profile');
   };
-});
+}]);
 

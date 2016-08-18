@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('main').controller('CreateGroupCtrl', function ($rootScope, $scope, $state, $log, ionicTimePicker, GroupFactory, FirebaseGroup) {
+angular.module('main').controller('CreateGroupCtrl', ['$rootScope', '$scope', '$state', '$log', 'ionicTimePicker', 'GroupFactory', function ($rootScope, $scope, $state, $log, ionicTimePicker, GroupFactory) {
 
   var ipObj1 = {
     callback: function (val) {      //Mandatory
@@ -25,10 +25,6 @@ angular.module('main').controller('CreateGroupCtrl', function ($rootScope, $scop
     // ionicTimePicker.openTimePicker(ipObj1);
     GroupFactory.createGroup(groupDetails)
     .then(function(){
-      return FirebaseGroup($rootScope.profile.activeCode).$bindTo($rootScope, "profile.group");
-
-    })
-    .then(function(){
       $state.go('tab.group-logged-in');
     })
     .catch(function(err){
@@ -36,5 +32,5 @@ angular.module('main').controller('CreateGroupCtrl', function ($rootScope, $scop
     });
   };
 
-});
+}]);
 

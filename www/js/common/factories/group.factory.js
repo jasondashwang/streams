@@ -1,23 +1,25 @@
-angular.module('main').factory('GroupFactory', function ($q, $rootScope, $firebaseObject) {
+'use strict';
 
-  const GroupFactory = {};
-  const alphanumeric_unique = function () {
+angular.module('main').factory('GroupFactory', ['$q', '$rootScope', function ($q, $rootScope) {
+
+  var GroupFactory = {};
+  var alphanumeric_unique = function () {
       return Math.random().toString(36).split('').filter( function(value, index, self) {
           return self.indexOf(value) === index;
       }).join('').substr(2,6);
   };
 
   // const user = $rootScope.profile;
-  const ref = firebase.database().ref();
+  var ref = firebase.database().ref();
 
   GroupFactory.createGroup = function (groupDetails) {
 
     // get a new key for the group
 
-    const newGroupKey = alphanumeric_unique();
+    var newGroupKey = alphanumeric_unique();
     // const newGroupKey = ref.child('groups').push().key;
 
-    const groupPostData = {
+    var groupPostData = {
       name: groupDetails.name,
       members: {},
       active: true,
@@ -29,18 +31,31 @@ angular.module('main').factory('GroupFactory', function ($q, $rootScope, $fireba
 
     $rootScope.profile.activeCode = newGroupKey;
     groupPostData.members[$rootScope.profile.uid] = $rootScope.profile;
-    const updates = {};
-    updates[`/groups/${newGroupKey}`] = groupPostData;
+    var updates = {};
+    updates['/groups/' + newGroupKey] = groupPostData;
     $rootScope.profile.isLeader = true;
-    updates[`/users/${$rootScope.profile.uid}`] = $rootScope.profile;
+    updates['/users/' + $rootScope.profile.uid] = $rootScope.profile;
 
     return firebase.database().ref().update(updates);
   };
 
   GroupFactory.addMember = function (groupCode) {
-    var groupRef = ref.child('groups/' + groupCode + '/members/' + $rootScope.profile.uid);
-    $rootScope.profile.activeCode = groupCode;
-    return groupRef.update($rootScope.profile);
+    var returnValue = $q.defer();
+    ref.child('groups/' + groupCode + '/active').on('value', function(snapshot){
+      if(snapshot.val()){
+        ref.child('users/' + $rootScope.profile.uid + '/activeCode').set(groupCode);
+        var groupRef = ref.child('groups/' + groupCode + '/members/' + $rootScope.profile.uid);
+        $rootScope.profile.activeCode = groupCode;
+
+        returnValue.resolve(groupRef.update($rootScope.profile));
+      } else {
+        returnValue.reject('Inactive Group!');
+      }
+    }, function(err){
+      returnValue.reject(err);
+    });
+
+    return returnValue.promise;
   };
 
   GroupFactory.fetchCurrentGroup = function () {
@@ -64,48 +79,42 @@ angular.module('main').factory('GroupFactory', function ($q, $rootScope, $fireba
   };
 
   GroupFactory.leaveGroup = function() {
-    let currentActiveCode = $rootScope.profile.activeCode;
-    let updates = {};
-    updates[`/pastGroups/${$rootScope.profile.group.createTime}`] = currentActiveCode;
+    var currentActiveCode = $rootScope.profile.activeCode;
+    var updates = {};
+    updates['/pastGroups/' + $rootScope.profile.group.createTime] = currentActiveCode;
+    updates['/activeCode'] = null;
 
-      firebase.database().ref('/users/' + $rootScope.profile.uid).update(updates);
+    firebase.database().ref('/users/' + $rootScope.profile.uid).update(updates);
 
-      $rootScope.profile.activeCode = null;
-      $rootScope.profile.isLeader = false;
+    $rootScope.profile.activeCode = null;
+    $rootScope.profile.isLeader = false;
     };
 
   GroupFactory.endGroup = function() {
 
-    let currentActiveCode = $rootScope.profile.activeCode;
+    var currentActiveCode = $rootScope.profile.activeCode;
 
     $rootScope.profile.activeCode = null;
     $rootScope.profile.isLeader = false;
 
-    let userUpdates = {};
+    var userUpdates = {};
     userUpdates['/isLeader'] = false;
     userUpdates['/activeCode'] = null;
-    firebase.database().ref(`/users/${$rootScope.profile.uid}`).update(userUpdates);
+    firebase.database().ref('/users/' + $rootScope.profile.uid).update(userUpdates);
 
-    let members = Object.keys($rootScope.profile.group.members);
-    for (let i = 0; i < members.length; i++) {
+    var members = Object.keys($rootScope.profile.group.members);
+    for (var i = 0; i < members.length; i++) {
       userUpdates = {};
-      userUpdates[`/pastGroups/${$rootScope.profile.group.createTime}`] = currentActiveCode;
+      userUpdates['/pastGroups/' + $rootScope.profile.group.createTime] = currentActiveCode;
       firebase.database().ref('/users/' + members[i]).update(userUpdates);
     }
 
-    let groupUpdate = {};
-    groupUpdate[`/active`] = false;
+    var groupUpdate = {};
+    groupUpdate['/active'] = false;
     firebase.database().ref('/groups/' + currentActiveCode).update(groupUpdate);
 
 
   };
 
   return GroupFactory;
-});
-
-
-angular.module('main').factory('FirebaseGroup', function($q, $rootScope, $firebaseObject){
-  return function (activeCode){
-    return $firebaseObject(firebase.database().ref('groups').child(activeCode));
-  };
-});
+}]);

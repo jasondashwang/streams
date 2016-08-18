@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('main')
-.controller('LoginCtrl', function ($scope, $state, $log, Auth, $rootScope, UserFactory) {
+.controller('LoginCtrl', ['$scope', '$state', '$log', 'Auth', '$rootScope', 'UserFactory', function ($scope, $state, $log, Auth, $rootScope, UserFactory) {
 
   $scope.login = function(userInfo) {
     var uid;
@@ -25,4 +25,4 @@ angular.module('main')
         });
   };
 
-});
+}]);

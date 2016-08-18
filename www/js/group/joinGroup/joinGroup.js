@@ -1,18 +1,14 @@
 'use strict';
 
-angular.module('main').controller('JoinGroupCtrl', function ($scope, $state, GroupFactory, FirebaseGroup) {
-	$scope.joinGroup = function (leaderEmail) {
-		GroupFactory.addMember(leaderEmail)
-    .then(function(){
-      return FirebaseGroup($rootScope.profile.activeCode).$bindTo($rootScope, "profile.group");
-
-    })
+angular.module('main').controller('JoinGroupCtrl', ['$scope', '$state', 'GroupFactory', function ($scope, $state, GroupFactory) {
+	$scope.joinGroup = function (activeCode) {
+		GroupFactory.addMember(activeCode)
     .then(function(){
       $state.go('tab.group-logged-in');
     })
     .catch(function(err){
-      console.log(err);
+      alert(err);
     });
 	};
-});
+}]);
 
