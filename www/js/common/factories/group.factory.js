@@ -88,6 +88,7 @@ angular.module('main').factory('GroupFactory', ['$q', '$rootScope', function ($q
 
     $rootScope.profile.activeCode = null;
     $rootScope.profile.isLeader = false;
+    $rootScope.profile.group = null;
     };
 
   GroupFactory.endGroup = function() {
@@ -96,6 +97,7 @@ angular.module('main').factory('GroupFactory', ['$q', '$rootScope', function ($q
 
     $rootScope.profile.activeCode = null;
     $rootScope.profile.isLeader = false;
+    $rootScope.profile.group = null;
 
     var userUpdates = {};
     userUpdates['/isLeader'] = false;
