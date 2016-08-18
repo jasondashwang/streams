@@ -106,6 +106,7 @@ angular.module('main').factory('GroupFactory', ['$q', '$rootScope', function ($q
     for (var i = 0; i < members.length; i++) {
       userUpdates = {};
       userUpdates['/pastGroups/' + $rootScope.profile.group.createTime] = currentActiveCode;
+      userUpdates['/activeCode'] = null;
       firebase.database().ref('/users/' + members[i]).update(userUpdates);
     }
 
