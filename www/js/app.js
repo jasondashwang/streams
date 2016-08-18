@@ -76,12 +76,7 @@ angular.module('main', [
     views: {
       'tab-profile': {
         templateUrl: 'js/profile/profile.html',
-        controller: 'ProfileCtrl',
-        resolve: {
-          profile: function(AuthService){
-            return AuthService.getLoggedInUser(true);
-          }
-        }
+        controller: 'ProfileCtrl'
       }
     }
   })
