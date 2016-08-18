@@ -5,7 +5,7 @@ angular.module('main').service('Session', function(){
 
   this.profile = null;
   this.uid = null;
-
+  
   this.create = function(uid, user){
     this.profile = user;
     this.uid = uid;
