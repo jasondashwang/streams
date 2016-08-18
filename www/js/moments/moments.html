@@ -1,9 +1,11 @@
 <ion-view title="Moments" on-swipe-right="goToState('camera')">
   <ion-content has-header="true" padding="false" class="moments">
-    <!-- <moment ng-repeat="moment in moments" model="moment"></moment> -->
     <button class="button button-positive" ng-click='refresh()'>Refresh</button>
     <div ng-repeat="mediaObj in mediaObjects">
-    	<img src ="{{mediaObj.mediaUrl}}">
+    	<img src ="{{mediaObj.mediaUrl}}" width='153' height='204' ng-if="mediaObj.mediaType == 'photo'">
+		<video width="320" height="240" controls ng-if="mediaObj.mediaType == 'video'">
+		  <source ng-src="{{mediaObj.mediaUrl | trusted}}">
+		</video>
     </div>
 
   </ion-content>
