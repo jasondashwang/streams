@@ -1,37 +1,66 @@
 'use strict';
 
-angular.module('main').controller('CameraCtrl', function ($rootScope, $scope, $state, CameraFactory, $cordovaCapture, $cordovaCamera, Upload) {
+angular.module('main').controller('CameraCtrl', function ($rootScope, $scope, $state, CameraFactory, $cordovaCapture, $cordovaCamera, Upload, $q) {
 
 	$scope.changeStatus = function () {
 		$rootScope.groupLoggedIn = !($rootScope.groupLoggedIn);
 	};
 
+	$scope.getLocation = function() {
+		var location = $q.defer()
+		CameraFactory.getLocation()
+			.then(function(res){
+				location.resolve(res)
+			})
+			.catch(function(err){
+				location.reject(err)
+			})
+		return location.promise;
+	}
+	$scope.getLocation();
+
+// add error handlers for capture methods
 	$scope.captureImage = function() {
 	    var options = {
 	      limit: 1
 	    };
-	    $cordovaCapture.captureImage(options).then(function(imageData) {
-		    console.log("Raw output", imageData[0]);
-			toDataUrl(imageData[0].fullPath, function(base64Img){
-				CameraFactory.uploadMedia(base64Img, "photo")
-			})
-	    });
+	    $scope.getLocation()
+	    	.then(function(position){
+	    		return position;
+	    	})
+	    	.then(function(position){
+			    $cordovaCapture.captureImage(options).then(function(imageData) {
+				    console.log("Raw output", imageData[0]);
+					toDataUrl(imageData[0].fullPath, function(base64Img){
+						CameraFactory.uploadMedia(base64Img, "photo", position)
+					})
+			    });
+	    	})
+	    	.catch(function(err){
+	    		console.error(err)
+	    	})
+
 
 	};
 
     $scope.captureVideo = function() {
-        var options = {
-        	limit: 1
-        };
-
-        $cordovaCapture.captureVideo(options).then(function(videoData) {
-			toDataUrl(videoData[0].fullPath, function(base64Img){
-				CameraFactory.uploadMedia(base64Img, "video")
-			})
-            // CameraFactory.uploadImage($scope.srcImage);
-        }, function(err) {
-            console.error('Camera Error', err);
-        });
+	    var options = {
+	      limit: 1
+	    };
+	    $scope.getLocation()
+	    	.then(function(position){
+	    		return position;
+	    	})
+	    	.then(function(position){
+			    $cordovaCapture.captureVideo(options).then(function(videoData) {
+					toDataUrl(videoData[0].fullPath, function(base64Img){
+						CameraFactory.uploadMedia(base64Img, "video", position)
+					})
+			    });
+	    	})
+	    	.catch(function(err){
+	    		console.error(err)
+	    	})
     };
 
 	function toDataUrl(url, callback) {
