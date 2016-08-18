@@ -18,19 +18,14 @@ navigation history that also transitions its views in and out.
     </ion-nav-view>
   </ion-tab>
 
-  <ion-tab hidden="{{!( isLoggedIn() )}}" title="My Group" icon-off="ion-ios-people-outline" icon-on="ion-ios-people" ng-click="goToGroup()">
-    <ion-nav-view name="tab-group">
-
-    </ion-nav-view>
-  </ion-tab>
   <!-- Camera Tab -->
   <ion-tab hidden="{{!( isLoggedIn() )}}" title="Camera" icon-off="ion-ios-camera-outline" icon-on="ion-ios-camera" ui-sref="tab.camera">
     <ion-nav-view name="tab-camera"></ion-nav-view>
   </ion-tab>
 
-  <!-- Moments Tab -->
-  <ion-tab hidden="{{!( isLoggedIn() )}}" title="Moments" icon-off="ion-ios-heart-outline" icon-on="ion-ios-heart" ui-sref="tab.moments">
-    <ion-nav-view name="tab-moments"></ion-nav-view>
+  <!-- Groups Tab -->
+  <ion-tab hidden="{{!( isLoggedIn() )}}" title="Groups" icon-off="ion-ios-heart-outline" icon-on="ion-ios-heart" ui-sref="tab.groups">
+    <ion-nav-view name="tab-group"></ion-nav-view>
   </ion-tab>
 
 

@@ -49,25 +49,8 @@ angular.module('main', [
     .state('tab', {
     url: '/tab',
     abstract: true,
-    templateUrl: 'templates/tabs.html',
-    controller: function ($scope, $state, $rootScope, $cordovaCamera, $firebase) {
-
-      // firebase.auth().onAuthStateChanged(function(user) {
-      //   if (user) {
-      //     // User is signed in.
-      //   } else {
-      //     // No user is signed in.
-      //   }
-      // });
-      $scope.isLoggedIn = function(){
-        return $rootScope.isLoggedIn;
-      };
-
-      $scope.goToGroup = function(){
-        if($rootScope.profile.activeCode) $state.go('tab.group-logged-in');
-        else $state.go('tab.group-logged-out');
-      };
-    }
+    templateUrl: 'js/tabs/tabs.html',
+    controller: 'TabsCtrl'
 
   })
   .state('tab.login', {
@@ -117,43 +100,43 @@ angular.module('main', [
     }
   })
 
-  .state('tab.moments', {
-    url: '/moments',
-    views: {
-      'tab-moments': {
-        templateUrl: 'js/moments/moments.html',
-        controller: 'MomentsCtrl'
-      }
-    }
-  })
-  .state('tab.group-logged-out', {
-    url: '/group-logged-out',
+  .state('tab.groups', {
+    url: '/groups',
     views: {
       'tab-group': {
-        templateUrl: 'js/group/loggedOut/group.loggedOut.html',
-        controller: 'GroupLoggedOutCtrl'
+        templateUrl: 'js/group/groupList/groupList.html',
+        controller: 'GroupListCtrl'
       }
     }
-
   })
-  .state('tab.group-logged-in', {
-    url: '/group-logged-in',
-    views: {
-      'tab-group': {
-        templateUrl: 'js/group/loggedIn/group.loggedIn.html',
-        controller: 'GroupLoggedInCtrl'
-      }
-    },
-    resolve: {
-      currentGroup: function(GroupFactory) {
-        return GroupFactory.fetchCurrentGroup()
-        .then(function(group){
-          return group;
-        })
-      }
-    }
+  // .state('tab.group-logged-out', {
+  //   url: '/group-logged-out',
+  //   views: {
+  //     'tab-group': {
+  //       templateUrl: 'js/group/loggedOut/group.loggedOut.html',
+  //       controller: 'GroupLoggedOutCtrl'
+  //     }
+  //   }
 
-  })
+  // })
+  // .state('tab.group-logged-in', {
+  //   url: '/group-logged-in',
+  //   views: {
+  //     'tab-group': {
+  //       templateUrl: 'js/group/loggedIn/group.loggedIn.html',
+  //       controller: 'GroupLoggedInCtrl'
+  //     }
+  //   },
+  //   resolve: {
+  //     currentGroup: function(GroupFactory) {
+  //       return GroupFactory.fetchCurrentGroup()
+  //       .then(function(group){
+  //         return group;
+  //       })
+  //     }
+  //   }
+
+  // })
   .state('tab.group-members', {
     url: '/group-members',
     views: {
