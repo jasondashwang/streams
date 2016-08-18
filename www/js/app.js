@@ -60,7 +60,7 @@ angular.module('main', [
       //   }
       // });
       $scope.isLoggedIn = function(){
-        return $rootScope.loggedIn;
+        return $rootScope.isLoggedIn;
       };
 
       $scope.goToGroup = function(){
@@ -195,6 +195,6 @@ angular.module('main', [
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/profile');
+  $urlRouterProvider.otherwise('/tab/login');
 
 });

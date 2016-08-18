@@ -1,19 +1,17 @@
 'use strict';
 
-angular.module('main').controller('ProfileCtrl', ['$scope', '$state', '$rootScope', function ($scope, $state, $rootScope) {
-  if(!($rootScope.loggedIn)){
-    $rootScope.loggedIn = false;
-    $state.go('tab.login');
-  } else {
- 	 $scope.profile = $rootScope.profile;
-  }
+angular.module('main').controller('ProfileCtrl', ['$scope', '$state', '$rootScope', 'AuthService', function ($scope, $state, $rootScope, AuthService) {
+    AuthService.getLoggedInUser()
+    .then(function(user){
+      $scope.profile = user;
+    })
+    .catch(function(err){
+      console.log(err);
+    });
 
-  $scope.logOut = function(){
-    $rootScope.loggedIn = false;
-    $rootScope.groupLoggedIn = false;
-    $rootScope.profile = undefined;
-    $state.go('tab.login');
-  };
-
+    $scope.logOut = function(){
+      AuthService.logout();
+      $state.go('tab.login');
+    };
 }]);
 

@@ -1,28 +1,21 @@
 'use strict';
 
 angular.module('main')
-.controller('LoginCtrl', ['$scope', '$state', '$log', 'Auth', '$rootScope', 'UserFactory', function ($scope, $state, $log, Auth, $rootScope, UserFactory) {
+.controller('LoginCtrl', ['$scope', '$state', '$log', 'AuthService', '$rootScope', function ($scope, $state, $log, AuthService, $rootScope) {
+
+  if($rootScope.isLoggedIn){
+    $state.go('tab.profile');
+  }
 
   $scope.login = function(userInfo) {
-    var uid;
-      $scope.error = null;
-      Auth.$signInWithEmailAndPassword(userInfo.email, userInfo.password)
-        .then(function(user) {
-            $rootScope.loggedIn = true;
-            uid = user.uid;
-            return user.uid;
-        })
-        .then(function(userId){
-          return UserFactory.getUser(userId);
-        })
-        .then(function(user){
-          $rootScope.profile = user;
-          $rootScope.profile.uid = uid;
-          $state.go('tab.profile');
-        })
-        .catch(function(err) {
-              console.log('Authentication failed:', err);
-        });
+    $scope.error = null;
+    AuthService.login(userInfo.email, userInfo.password)
+    .then(function(user){
+      $state.go('tab.profile');
+    })
+    .catch(function(err){
+      $scope.error = err;
+      console.log(err);
+    });
   };
-
 }]);
