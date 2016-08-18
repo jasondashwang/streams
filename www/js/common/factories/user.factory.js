@@ -1,15 +1,16 @@
 angular.module('main')
-.factory('UserFactory', function($q) {
+.factory('UserFactory', ['$q', function($q) {
   const UserFactory = {};
 
   const ref = firebase.database().ref();
 
-  UserFactory.addUser = function(userId, name, email, phone) {
+  UserFactory.addUser = function(userId, name, email, phone, photoUrl) {
 
     ref.child('users/' + userId).set({
       name: name,
       email: email,
-      phone: phone
+      phone: phone,
+      photoUrl: photoUrl
     });
   };
 
@@ -26,4 +27,4 @@ angular.module('main')
   };
 
   return UserFactory;
-});
+}]);
