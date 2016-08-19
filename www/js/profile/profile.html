@@ -2,23 +2,46 @@
   <ion-content has-header="true" padding="false" class="profile-div">
     <img src="{{ profile.photoUrl }}">
     <ul class="list">
+      <a class="item item-icon-left" ng-click="takeImage()">
+        <i class="icon ion-camera"></i>
+        Change Profile Picture
+      </a>
       <li class="item item-icon-left">
         <i class="icon ion-person"></i>
-        {{ profile.name }}
+        <form name="nameForm" >
+          <input type="text" name="profile-name" value="{{ profile.name }}" align="right" ng-model="newProfile.name" ng-blur="submit.name(nameForm)">
+          </input>
+        </form>
       </li>
-      <li class="item item-icon-left">
+      <li class="item item-icon-left item-icon-right">
         <i class="icon ion-email"></i>
-        {{ profile.email }}
+        <form name="emailForm" >
+          <input type="text" name="profile-email" value="{{ profile.email }}" align="right" ng-model="newProfile.email" ng-blur="submit.email(emailForm)">
+          </input>
+
+        </form>
+
       </li>
       <li class="item item-icon-left">
         <i class="icon ion-ios-telephone"></i>
-        {{ profile.phone }}
+        <form name="phoneForm" >
+          <input type="text" name="profile-phone" value="{{ profile.phone }}" align="right" ng-model="newProfile.phone" ng-blur="submit.phone(phoneForm)">
+          </input>
+        </form>
+
       </li>
-      <a ng-show="$rootScope.profile.activeCode" class="item item-icon-left item-icon-right" ui-sref="tab.group-logged-in">
-        <i class="icon ion-android-contacts"></i>
-        {{ profile.group.name }}
-        <i class="icon ion-arrow-right-c"></i>
+      <a class="item item-icon-left" ng-hide="passwordShown" ng-click=showPassword()>
+        <i class="icon ion-compose"></i>
+        Change Password
       </a>
+      <li ng-hide="!passwordShown" class="item item-icon-left item-icon-right">
+        <i class="icon ion-compose"></i>
+        <form name="passwordForm">
+          <input type="password" name="profile-password" placeholder="New Password" align="right" ng-model="newProfile.newPassword">
+          </input>
+          <i class="icon ion-checkmark" ng-click="submit.password(passwordForm)"></i>
+        </form>
+      </li>
       <a class="item item-icon-left" ui-sref="tab.settings">
         <i class="icon ion-gear-b"></i>
         Edit Account Settings

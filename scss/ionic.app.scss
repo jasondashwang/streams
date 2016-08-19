@@ -86,7 +86,15 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 }
 
 .profile-div {
-  text-align: center;
+  text-align: left;
+  input {
+    text-align: left;
+    width: 100%;
+
+  }
+  input:focus {
+    text-decoration: underline;
+  }
   img {
     display: block;
     margin: 0 auto;

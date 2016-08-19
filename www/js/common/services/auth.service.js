@@ -38,6 +38,34 @@ angular.module('main').service('AuthService', function($q, Session, $rootScope, 
     return !!Session.profile;
   };
 
+  this.changeEmail = function(newEmail){
+    var result = $q.defer();
+
+    firebase.auth().currentUser.updateEmail(newEmail)
+    .then(function(){
+      result.resolve('Success!');
+    })
+    .catch(function(err){
+      result.reject(err);
+    });
+
+    return result.promise;
+  };
+
+  this.changePassword = function(newPassword){
+    var result = $q.defer();
+
+    firebase.auth().currentUser.updatePassword(newPassword)
+    .then(function(){
+      result.resolve('Success!');
+    })
+    .catch(function(err){
+      result.reject(err);
+    });
+
+    return result.promise;
+  };
+
   this.getLoggedInUser = function(fromServer){
     // pass in true for fromServer, which is an optional parameter if you need a server ping for user
     if(this.isAuthenticated() && fromServer !== true){
@@ -48,15 +76,6 @@ angular.module('main').service('AuthService', function($q, Session, $rootScope, 
     var firebaseProfile = $firebaseObject(ref.child('users/' + Session.profile.uid))
     onSuccessfulLogin(firebaseProfile);
     return $q.when(firebaseProfile);
-
-
-    // ref.child('users/' + Session.profile.uid).on('value', function(snapshot){
-    //   user.resolve(onSuccessfulLogin(Session.profile.uid, snapshot.val()));
-    // }, function(err){
-    //   console.log(err);
-    // });
-
-    // return user.promise;
 
   };
 
