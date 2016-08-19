@@ -110,13 +110,19 @@ angular.module('main', [
     }
   })
   .state('tab.single-group', {
-    url: '/single-group',
+    url: '/single-group/:groupCode',
     views: {
       'tab-group': {
         templateUrl: 'js/group/singleGroup/singleGroup.html',
-        controller: 'SingleGroupCtrl'
+        controller: 'SingleGroupCtrl',
+        resolve: {
+          group: function ($stateParams, GroupFactory) {
+            return GroupFactory.fireBase($stateParams.groupCode)
+
+          }
+        }
       }
-    },
+    }
   })
     // .state('tab.group-logged-out', {
   //   url: '/group-logged-out',

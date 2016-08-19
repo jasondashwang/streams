@@ -20,12 +20,13 @@ angular.module('main').factory('GroupFactory', ['$q', '$rootScope', 'AuthService
     return AuthService.getLoggedInUser()
       .then(function(user) {
         var newGroupKey = alphanumeric_unique();
-
+        console.log(user)
         var groupPostData = {
           name: groupDetails.name,
           members: {},
           timeCreated: Date.now(),
-          mediaUrl: 'http://www.digital-photography-school.com/wp-content/uploads/2011/11/square-format-03.jpg'
+          mediaUrl: 'http://www.digital-photography-school.com/wp-content/uploads/2011/11/square-format-03.jpg',
+          groupCode: newGroupKey
         };
 
         groupPostData.members[user.uid] = true;

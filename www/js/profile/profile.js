@@ -5,15 +5,19 @@ angular.module('main').controller('ProfileCtrl', ['$scope', '$state', '$rootScop
     $scope.logOut = function(){
       AuthService.logout();
       $state.go('tab.login');
+      $scope.loggedIn = false;
     };
 
 
-
     $scope.$on("$ionicView.enter", function () {
-      AuthService.getLoggedInUser()
-      .then(function(user){
-        user.$bindTo($scope, 'profile');
-      });
+      if (!$scope.loggedIn) {
+        AuthService.getLoggedInUser()
+        .then(function(user){
+          user.$bindTo($scope, 'profile');
+          $scope.loggedIn = true;
+        });  
+      }
+     
     });
 }]);
 

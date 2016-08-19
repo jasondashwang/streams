@@ -5,8 +5,8 @@ angular.module('main').service('AuthService', function($q, Session, $rootScope, 
   var firebaseAuth = $firebaseAuth();
   var self = this;
 
-  function onSuccessfulLogin (uid, user) {
-    Session.create(uid, user);
+  function onSuccessfulLogin (user) {
+    Session.create(user);
     $rootScope.isLoggedIn = true;
     return user;
   }
@@ -17,7 +17,8 @@ angular.module('main').service('AuthService', function($q, Session, $rootScope, 
       name: name,
       email: email,
       phone: phone,
-      photoUrl: photoUrl
+      photoUrl: photoUrl,
+      uid: userId
     });
   }
 
@@ -47,7 +48,7 @@ angular.module('main').service('AuthService', function($q, Session, $rootScope, 
 
 
     var firebaseProfile = $firebaseObject(ref.child('users/' + Session.profile.uid))
-    onSuccessfulLogin(Session.profile.uid, firebaseProfile);
+    onSuccessfulLogin(firebaseProfile);
     return $q.when(firebaseProfile);
 
 
@@ -70,7 +71,7 @@ angular.module('main').service('AuthService', function($q, Session, $rootScope, 
     })
     .then(function (dbUser){
       var firebaseProfile = $firebaseObject(ref.child('users/' + uid));
-      return onSuccessfulLogin(uid, firebaseProfile);
+      return onSuccessfulLogin(firebaseProfile);
     });
   };
 

@@ -1,4 +1,4 @@
-<ion-view title="Group">
+<ion-view title="{{ group.name }}">
   <ion-content has-header="true" padding="true" class="group-logged-in">
 <!--     <h3>Group Name: {{ profile.group.name }}</h3>
     <h4>Group Code: {{ profile.activeCode }}</h4>
@@ -10,7 +10,7 @@
     </div>
     <button class="button button-assertive" ng-click="leaveGroup()">Leave Group</button>
     <button class="button button-assertive" ng-click="endGroup()">End Group</button> -->
-    <p>This is the group view</p>
+    <pre>{{ group | json }}</pre>
   </ion-content>
 
 </ion-view>

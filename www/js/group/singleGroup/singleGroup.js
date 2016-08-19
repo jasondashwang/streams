@@ -1,22 +1,6 @@
 'use strict';
 
-angular.module('main').controller('SingleGroupCtrl',['$scope', '$state', 'GroupFactory', '$log', '$rootScope', function ($scope, $state, GroupFactory, $log, $rootScope) {
-	// GroupFactory.fetchCurrentGroup()
-	// .then(function(group){
- //    $rootScope.profile.group = group;
-	// });
-
- //  $scope.leaveGroup = function(){
- //    if($rootScope.profile.isLeader) alert('You are leader! Transfer to someone else!');
- //    else {
- //      GroupFactory.leaveGroup();
- //      $state.go('tab.profile');
- //    }
- //  };
-
- //  $scope.endGroup = function(){
- //    GroupFactory.endGroup();
- //    $state.go('tab.profile');
- //  };
+angular.module('main').controller('SingleGroupCtrl',['$scope', '$state', 'GroupFactory', '$log', '$rootScope', 'group', function ($scope, $state, GroupFactory, $log, $rootScope, group) {
+	$scope.group = group;
 }]);
 

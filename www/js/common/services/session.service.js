@@ -5,9 +5,8 @@ angular.module('main').service('Session', function(){
 
   this.profile = null;
 
-  this.create = function(uid, user){
+  this.create = function(user){
     this.profile = user;
-    this.profile.uid = uid;
   };
 
   this.destroy = function(){
