@@ -122,12 +122,7 @@ angular.module('main', [
     views: {
       'tab-group': {
         templateUrl: 'js/group/singleGroup/singleGroup.html',
-        controller: 'SingleGroupCtrl',
-        resolve: {
-          group: function ($stateParams, GroupFactory) {
-            return GroupFactory.fireBase($stateParams.groupCode);
-          }
-        }
+        controller: 'SingleGroupCtrl'
       }
     }
   })
