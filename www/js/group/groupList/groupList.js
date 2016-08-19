@@ -1,28 +1,17 @@
-angular.module('main').controller('GroupListCtrl', function($scope, $ionicModal){
+angular.module('main').controller('GroupListCtrl', function($scope, GroupFactory){
 
-	$ionicModal.fromTemplateUrl('js/camera/cameraModal.html', {
-		scope: $scope,
-		animation: 'slide-in-up'
-	}).then(function(modal) {
-		$scope.modal = modal;
-	});
-	$scope.openModal = function() {
-		$scope.modal.show();
-	};
-	$scope.closeModal = function() {
-		$scope.modal.hide();
-	};
-	// Cleanup the modal when we're done with it!
-	$scope.$on('$destroy', function() {
-		$scope.modal.remove();
-	});
-	// Execute action on hide modal
-	$scope.$on('modal.hidden', function() {
-		// Execute action
-	});
-	// Execute action on remove modal
-	$scope.$on('modal.removed', function() {
-		// Execute action
-	});
+  $scope.$on("$ionicView.enter", function () {
+    GroupFactory.fetchCurrentGroups()
+      .then(function(groups) {
+      	$scope.groups = groups;
+      	console.log(groups)
+      })
+      .catch(function(err){
+      	console.error(err);
+      })
+  });
 
-})
+});
+
+
+

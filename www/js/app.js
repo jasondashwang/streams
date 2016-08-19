@@ -109,30 +109,27 @@ angular.module('main', [
       }
     }
   })
-  // .state('tab.group-logged-out', {
+  .state('tab.single-group', {
+    url: '/single-group/:groupCode',
+    views: {
+      'tab-group': {
+        templateUrl: 'js/group/singleGroup/singleGroup.html',
+        controller: 'SingleGroupCtrl',
+        resolve: {
+          group: function ($stateParams, GroupFactory) {
+            return GroupFactory.fireBase($stateParams.groupCode)
+
+          }
+        }
+      }
+    }
+  })
+    // .state('tab.group-logged-out', {
   //   url: '/group-logged-out',
   //   views: {
   //     'tab-group': {
   //       templateUrl: 'js/group/loggedOut/group.loggedOut.html',
   //       controller: 'GroupLoggedOutCtrl'
-  //     }
-  //   }
-
-  // })
-  // .state('tab.group-logged-in', {
-  //   url: '/group-logged-in',
-  //   views: {
-  //     'tab-group': {
-  //       templateUrl: 'js/group/loggedIn/group.loggedIn.html',
-  //       controller: 'GroupLoggedInCtrl'
-  //     }
-  //   },
-  //   resolve: {
-  //     currentGroup: function(GroupFactory) {
-  //       return GroupFactory.fetchCurrentGroup()
-  //       .then(function(group){
-  //         return group;
-  //       })
   //     }
   //   }
 

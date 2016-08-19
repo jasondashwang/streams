@@ -1,30 +1,12 @@
 'use strict';
 
-angular.module('main').service('Session', function(){
-  var self = this;
-
-  this.profile = null;
-  this.uid = null;
-
-  this.create = function(uid, user){
-    this.profile = user;
-    this.uid = uid;
-  };
-
-  this.destroy = function(){
-    this.profile = null;
-    this.uid = null;
-  };
-
-});
-
-angular.module('main').service('AuthService', function($q, Session, $rootScope, $firebaseAuth){
+angular.module('main').service('AuthService', function($q, Session, $rootScope, $firebaseAuth, $firebaseObject){
   var ref = firebase.database().ref();
   var firebaseAuth = $firebaseAuth();
   var self = this;
 
-  function onSuccessfulLogin (uid, user) {
-    Session.create(uid, user);
+  function onSuccessfulLogin (user) {
+    Session.create(user);
     $rootScope.isLoggedIn = true;
     return user;
   }
@@ -35,7 +17,8 @@ angular.module('main').service('AuthService', function($q, Session, $rootScope, 
       name: name,
       email: email,
       phone: phone,
-      photoUrl: photoUrl
+      photoUrl: photoUrl,
+      uid: userId
     });
   }
 
@@ -49,8 +32,7 @@ angular.module('main').service('AuthService', function($q, Session, $rootScope, 
     });
 
     return user.promise;
-  }
-
+  };
 
   this.isAuthenticated = function(){
     return !!Session.profile;
@@ -62,15 +44,19 @@ angular.module('main').service('AuthService', function($q, Session, $rootScope, 
       return $q.when(Session.profile);
     }
 
-    var user = $q.defer();
 
-    ref.child('users/' + Session.profile.uid).on('value', function(snapshot){
-      user.resolve(onSuccessfulLogin(Session.profile.uid, snapshot.val()));
-    }, function(err){
-      console.log(err);
-    });
+    var firebaseProfile = $firebaseObject(ref.child('users/' + Session.profile.uid))
+    onSuccessfulLogin(firebaseProfile);
+    return $q.when(firebaseProfile);
 
-    return user.promise;
+
+    // ref.child('users/' + Session.profile.uid).on('value', function(snapshot){
+    //   user.resolve(onSuccessfulLogin(Session.profile.uid, snapshot.val()));
+    // }, function(err){
+    //   console.log(err);
+    // });
+
+    // return user.promise;
 
   };
 
@@ -82,10 +68,8 @@ angular.module('main').service('AuthService', function($q, Session, $rootScope, 
       return self.getUser(authUser.uid);
     })
     .then(function (dbUser){
-      return onSuccessfulLogin(uid, dbUser);
-    })
-    .catch(function (err){
-      console.log(err);
+      var firebaseProfile = $firebaseObject(ref.child('users/' + uid));
+      return onSuccessfulLogin(firebaseProfile);
     });
   };
 
@@ -96,9 +80,6 @@ angular.module('main').service('AuthService', function($q, Session, $rootScope, 
     })
     .then(function (){
       return self.login(userInfo.email, userInfo.password);
-    })
-    .catch(function (err){
-      console.log(err);
     });
   };
 
