@@ -1,0 +1,18 @@
+<ion-view title="Moments">
+  <ion-content has-header="true" padding="false" class="moments">
+    <div ng-repeat="mediaObj in mediaObjects">
+      <img src ="{{mediaObj.mediaUrl}}" width='153' height='204' ng-if="mediaObj.mediaType == 'photo'">
+      <video width="320" height="240" controls ng-if="mediaObj.mediaType == 'video'">
+        <source ng-src="{{mediaObj.mediaUrl | trusted}}">
+      </video>
+    </div>
+  </ion-content>
+  <ion-footer-bar align-title="left" class="bar-assertive">
+    <div class="buttons">
+      <button class="button">Map</button>
+    </div>
+    <div class="buttons">
+      <button class="button" ui-sref="tab.single-group({groupCode: groupCode})">Settings</button>
+    </div>
+  </ion-footer-bar>
+</ion-view>

@@ -4,11 +4,10 @@
     <button class="button button-positive" ng-click='refresh()'>Refresh</button>
     <div ng-repeat="mediaObj in mediaObjects">
     	<img src ="{{mediaObj.mediaUrl}}" width='153' height='204' ng-if="mediaObj.mediaType == 'photo'">
-		<video width="320" height="240" controls ng-if="mediaObj.mediaType == 'video'">
-		  <source ng-src="{{mediaObj.mediaUrl | trusted}}">
-		</video>
+  		<video width="320" height="240" controls ng-if="mediaObj.mediaType == 'video'">
+  		  <source ng-src="{{mediaObj.mediaUrl | trusted}}">
+  		</video>
     </div>
     <button class="button button-positive" ng-click='showMap()'>Map View</button>
   </ion-content>
-
 </ion-view>

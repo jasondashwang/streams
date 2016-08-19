@@ -1,16 +1,7 @@
 <ion-view title="{{ group.name }}">
   <ion-content has-header="true" padding="true" class="group-logged-in">
-<!--     <h3>Group Name: {{ profile.group.name }}</h3>
-    <h4>Group Code: {{ profile.activeCode }}</h4>
-    <h3>QR Code</h3>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Wikipedia_mobile_en.svg/2000px-Wikipedia_mobile_en.svg.png" style="width: 75%; height=auto; display: block; margin: 0 auto;">
-
-    <div>
-      <a href="#/tab/group-members"><button class="button button-positive" type="button">Current Members</button></a>
-    </div>
+    <pre>{{ medias | json }}</pre>
     <button class="button button-assertive" ng-click="leaveGroup()">Leave Group</button>
-    <button class="button button-assertive" ng-click="endGroup()">End Group</button> -->
-    <pre>{{ group | json }}</pre>
+    <button class="button button-assertive" ng-click="endGroup()">End Group</button>
   </ion-content>
-
 </ion-view>

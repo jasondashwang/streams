@@ -44,7 +44,6 @@ angular.module('main', [
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
   $stateProvider
-
   // setup an abstract state for the tabs directive
     .state('tab', {
     url: '/tab',
@@ -109,6 +108,15 @@ angular.module('main', [
       }
     }
   })
+  .state('tab.groupFeed', {
+    url: '/groupFeed/:groupCode',
+    views: {
+      'tab-group': {
+        templateUrl: 'js/group/groupFeed/groupFeed.html',
+        controller: 'GroupFeedCtrl'
+      }
+    }
+  })
   .state('tab.single-group', {
     url: '/single-group/:groupCode',
     views: {
@@ -117,8 +125,7 @@ angular.module('main', [
         controller: 'SingleGroupCtrl',
         resolve: {
           group: function ($stateParams, GroupFactory) {
-            return GroupFactory.fireBase($stateParams.groupCode)
-
+            return GroupFactory.fireBase($stateParams.groupCode);
           }
         }
       }
