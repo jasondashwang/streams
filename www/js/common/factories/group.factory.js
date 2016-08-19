@@ -48,19 +48,31 @@ angular.module('main').factory('GroupFactory', ['$q', '$rootScope', 'AuthService
       });
   };
 
+  function returnGroup(groupId) {
+    var group = $q.defer()
+    ref.child('groups/' + groupId).on('value', function(snapshot){
+      group.resolve(snapshot.val())
+    }, function(err){
+      group.reject(err);
+    })
+    return group.promise;
+  }
+
   GroupFactory.fetchCurrentGroups = function() {
-    return AuthService.getLoggedInUser()
+    // two ajax calls (user + groups)
+    // make sure user is 3-way binded
+    return AuthService.getLoggedInUser(true)
       .then(function(user) {
-        return ref.child('users/' + user.uid + '/groups');
-      })
-      .then(function(groupKeys) {
         var arr = [];
-        for (var i = 0; i < groupKeys.length; i++) {
-          arr.push(ref.child('groups/' + groupKeys[i]));
+        for (var code in user.groups) {
+          var x = returnGroup(code);
+          arr.push(x);
         }
-        console.log(arr);
-        return $firebaseArray(arr);
-      });
+        return $q.all(arr)
+      })
+      .then(function(groups){
+        return groups;
+      })
   };
 
   GroupFactory.fetchCurGroupMembers = function(groupCode) {
