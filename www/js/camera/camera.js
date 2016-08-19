@@ -30,7 +30,7 @@ angular.module('main').controller('CameraCtrl', function ($rootScope, $scope, $s
 	    	.then(function(position){
 			    $cordovaCapture.captureImage(options).then(function(imageData) {
 					toDataUrl(imageData[0].fullPath, function(base64Img){
-						CameraFactory.uploadMedia(base64Img, "photo", position)
+						CameraFactory.storeMedia(base64Img, "photo", position)
 					})
 			    });
 	    	})
@@ -53,7 +53,7 @@ angular.module('main').controller('CameraCtrl', function ($rootScope, $scope, $s
 	    	.then(function(position){
 			    $cordovaCapture.captureVideo(options).then(function(videoData) {
 					toDataUrl(videoData[0].fullPath, function(base64Img){
-						CameraFactory.uploadMedia(base64Img, "video", position)
+						CameraFactory.storeMedia(base64Img, "video", position)
 					})
 			    });
 	    	})
