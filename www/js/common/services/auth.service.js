@@ -44,8 +44,6 @@ angular.module('main').service('AuthService', function($q, Session, $rootScope, 
       return $q.when(Session.profile);
     }
 
-    var user = $q.defer();
-
 
     var firebaseProfile = $firebaseObject(ref.child('users/' + Session.profile.uid))
     onSuccessfulLogin(firebaseProfile);

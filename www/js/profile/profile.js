@@ -1,11 +1,13 @@
 'use strict';
 
 angular.module('main').controller('ProfileCtrl', ['$scope', '$state', '$rootScope', 'AuthService', '$cordovaSQLite', function ($scope, $state, $rootScope, AuthService, $cordovaSQLite) {
-
+    var unbind, fireBaseObj;
     $scope.logOut = function(){
       AuthService.logout();
-      $state.go('tab.login');
+      $state.go('tab.login');      
       $scope.loggedIn = false;
+      if (unbind) unbind();
+      fireBaseObj.$destroy();
     };
 
 
@@ -13,9 +15,13 @@ angular.module('main').controller('ProfileCtrl', ['$scope', '$state', '$rootScop
       if (!$scope.loggedIn) {
         AuthService.getLoggedInUser()
         .then(function(user){
-          user.$bindTo($scope, 'profile');
+          fireBaseObj = user;
           $scope.loggedIn = true;
-        });  
+          return user.$bindTo($scope, 'profile')
+        })
+        .then(function(ub){
+          unbind = ub;
+        })
       }
      
     });
