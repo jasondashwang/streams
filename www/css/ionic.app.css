@@ -9864,7 +9864,8 @@ a.button {
   text-align: left; }
   .profile-div input {
     text-align: left;
-    width: 100%; }
+    width: 100%;
+    font-size: 16px; }
   .profile-div input:focus {
     text-decoration: underline; }
   .profile-div img {
