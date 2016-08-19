@@ -11,9 +11,8 @@ angular.module('main').controller('SingleGroupCtrl',['$scope', '$state', 'GroupF
   };
 
   $scope.endGroup = function(groupMembers) {
-    GroupFactory.leaveGroup(groupMembers, $stateParams.groupCode)
-      .then($state.go('tab.groups'))
-      .catch($log.error);
+    GroupFactory.endGroup(groupMembers, $stateParams.groupCode);
+    $state.go('tab.groups');
   };
 
 }]);

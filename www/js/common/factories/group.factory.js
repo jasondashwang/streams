@@ -90,13 +90,15 @@ angular.module('main').factory('GroupFactory', ['$q', '$rootScope', 'AuthService
   };
 
   GroupFactory.endGroup = function(groupMembers, groupCode) {
-    console.log(groupMembers);
+    var groupMems = Object.keys(groupMembers);
 
     // remove the group from each member
-    // groupMembers.map(function(currMember) {
-    //   ref.child('users/' + currMember)
-    // });
+    groupMems.map(function(member) {
+      ref.child('users/' + member + '/groups/' + groupCode).remove();
+    });
+
     // delete the group
+    ref.child('groups/' + groupCode).remove();
   };
 
   GroupFactory.fetchCurGroupMembers = function(groupCode) {
