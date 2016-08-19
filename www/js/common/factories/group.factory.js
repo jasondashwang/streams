@@ -79,15 +79,24 @@ angular.module('main').factory('GroupFactory', ['$q', '$rootScope', 'AuthService
     return $firebaseArray(ref.child('groupCollages/' + groupId).orderByChild("timeStamp"));
   };
 
-  GroupFactory.leaveGroup = function() {
-    // delete the group from the user
-
-
-    // delete the member from groups
+  GroupFactory.leaveGroup = function(groupCode) {
+    return AuthService.getLoggedInUser()
+      .then(function(user) {
+        // delete the group from the user
+        ref.child('users/' + user.uid + '/groups/' + groupCode).remove();
+        // delete the member from groups
+        ref.child('groups/' + groupCode + '/members/' + user.uid).remove();
+      });
   };
 
-  GroupFactory.endGroup = function() {
+  GroupFactory.endGroup = function(groupMembers, groupCode) {
+    console.log(groupMembers);
 
+    // remove the group from each member
+    // groupMembers.map(function(currMember) {
+    //   ref.child('users/' + currMember)
+    // });
+    // delete the group
   };
 
   GroupFactory.fetchCurGroupMembers = function(groupCode) {
