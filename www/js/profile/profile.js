@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('main').controller('ProfileCtrl', ['$scope', '$state', '$rootScope', 'AuthService', '$cordovaCamera', function ($scope, $state, $rootScope, AuthService, $cordovaCamera) {
+angular.module('main').controller('ProfileCtrl', ['$scope', '$state', '$rootScope', 'AuthService', '$cordovaCamera', 'CameraFactory', function ($scope, $state, $rootScope, AuthService, $cordovaCamera, CameraFactory) {
 
     $scope.passwordShown = false;
     $scope.showPassword = function(){
@@ -51,7 +51,6 @@ angular.module('main').controller('ProfileCtrl', ['$scope', '$state', '$rootScop
       }
     };
 
-
     var unbind, fireBaseObj;
 
     $scope.takeImage = function() {
@@ -69,7 +68,7 @@ angular.module('main').controller('ProfileCtrl', ['$scope', '$state', '$rootScop
 
         $cordovaCamera.getPicture(options).then(function(imageData) {
             $scope.profile.photoUrl = "data:image/jpeg;base64," + imageData;
-            CameraFactory.changeProfilePicture($scope.profile.photoUrl);
+            CameraFactory.changeProfilePicture($scope.profile.photoUrl, $scope.newProfile.uid);
         }, function(err) {
             console.error('Camera Error', err);
         });

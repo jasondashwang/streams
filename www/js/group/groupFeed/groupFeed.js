@@ -2,8 +2,7 @@
 
 angular.module('main').controller('GroupFeedCtrl',['$scope', '$stateParams', 'GroupFactory', 'MediaService', function ($scope, $stateParams, GroupFactory, MediaService) {
 
-  GroupFactory.fireBase($stateParams.groupCode)
-  	.$bindTo($scope, 'group');
+  GroupFactory.fireBase($stateParams.groupCode).$bindTo($scope, 'group');
 
   $scope.groupCode = $stateParams.groupCode;
 
