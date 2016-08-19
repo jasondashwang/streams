@@ -1,10 +1,10 @@
 'use strict';
 
-angular.module('main').controller('ProfileCtrl', ['$scope', '$state', '$rootScope', 'AuthService', '$cordovaSQLite', function ($scope, $state, $rootScope, AuthService, $cordovaSQLite) {
+angular.module('main').controller('ProfileCtrl', ['$scope', '$state', '$rootScope', 'AuthService', function ($scope, $state, $rootScope, AuthService) {
     var unbind, fireBaseObj;
     $scope.logOut = function(){
       AuthService.logout();
-      $state.go('tab.login');      
+      $state.go('tab.login');
       $scope.loggedIn = false;
       if (unbind) unbind();
       fireBaseObj.$destroy();
@@ -22,8 +22,11 @@ angular.module('main').controller('ProfileCtrl', ['$scope', '$state', '$rootScop
         .then(function(ub){
           unbind = ub;
         })
+        .catch(function(err){
+          console.log(err);
+        });
       }
-     
+
     });
 }]);
 
