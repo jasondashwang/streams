@@ -7,10 +7,12 @@ angular.module('main').controller('ProfileCtrl', ['$scope', '$state', '$rootScop
       $state.go('tab.login');
     };
 
+
+
     $scope.$on("$ionicView.enter", function () {
       AuthService.getLoggedInUser()
       .then(function(user){
-        $scope.profile = user;
+        user.$bindTo($scope, 'profile');
       });
     });
 }]);

@@ -3,11 +3,10 @@ angular.module('main').controller('GroupListCtrl', function($scope, GroupFactory
   $scope.$on("$ionicView.enter", function () {
     GroupFactory.fetchCurrentGroups()
       .then(function(groups) {
-      	console.log("in controller")
-      	console.log(groups)
+      	$scope.groups = groups;
       })
       .catch(function(err){
-
+        console.log(err);
       })
   });
 
