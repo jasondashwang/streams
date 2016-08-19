@@ -20,7 +20,6 @@ angular.module('main').factory('GroupFactory', ['$q', '$rootScope', 'AuthService
     return AuthService.getLoggedInUser()
       .then(function(user) {
         var newGroupKey = alphanumeric_unique();
-        console.log(user)
         var groupPostData = {
           name: groupDetails.name,
           members: {},
@@ -50,12 +49,12 @@ angular.module('main').factory('GroupFactory', ['$q', '$rootScope', 'AuthService
   };
 
   function returnGroup(groupId) {
-    var group = $q.defer()
+    var group = $q.defer();
     ref.child('groups/' + groupId).on('value', function(snapshot){
-      group.resolve(snapshot.val())
+      group.resolve(snapshot.val());
     }, function(err){
       group.reject(err);
-    })
+    });
     return group.promise;
   }
 
@@ -69,11 +68,37 @@ angular.module('main').factory('GroupFactory', ['$q', '$rootScope', 'AuthService
           var x = returnGroup(code);
           arr.push(x);
         }
-        return $q.all(arr)
+        return $q.all(arr);
       })
       .then(function(groups){
         return groups;
-      })
+      });
+  };
+
+  GroupFactory.fetchMedia = function (groupId) {
+    return $firebaseArray(ref.child('groupCollages/' + groupId).orderByChild("timeStamp"));
+  };
+
+  GroupFactory.leaveGroup = function(groupCode) {
+    return AuthService.getLoggedInUser()
+      .then(function(user) {
+        // delete the group from the user
+        ref.child('users/' + user.uid + '/groups/' + groupCode).remove();
+        // delete the member from groups
+        ref.child('groups/' + groupCode + '/members/' + user.uid).remove();
+      });
+  };
+
+  GroupFactory.endGroup = function(groupMembers, groupCode) {
+    var groupMems = Object.keys(groupMembers);
+
+    // remove the group from each member
+    groupMems.map(function(member) {
+      ref.child('users/' + member + '/groups/' + groupCode).remove();
+    });
+
+    // delete the group
+    ref.child('groups/' + groupCode).remove();
   };
 
   GroupFactory.fetchCurGroupMembers = function(groupCode) {
