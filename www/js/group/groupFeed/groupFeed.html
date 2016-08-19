@@ -1,4 +1,4 @@
-<ion-view title="Moments">
+<ion-view title="{{group.name}}">
   <ion-content has-header="true" padding="false" class="moments">
     <div ng-repeat="mediaObj in mediaObjects">
       <img src ="{{mediaObj.mediaUrl}}" width='153' height='204' ng-if="mediaObj.mediaType == 'photo'">

@@ -176,7 +176,7 @@ angular.module('main', [
   .state('tab.map', {
     url: '/map',
     views : {
-      'tab-moments' : {
+      'tab-group' : {
         templateUrl: 'js/map/map.html',
         controller: 'MapCtrl'
       }
