@@ -27,9 +27,9 @@ angular.module('main').controller("NavBarCtrl", function($scope, $rootScope, $io
 	$scope.createGroup = function(){
 		$scope.closeModal();
 		$state.go('tab.create-group');
-	}
+	};
 	$scope.joinGroup = function(){
 		$scope.closeModal();
 		$state.go('tab.join-group');
-	}
-})
+	};
+});

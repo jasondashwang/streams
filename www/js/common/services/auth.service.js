@@ -31,8 +31,7 @@ angular.module('main').service('AuthService', function($q, Session, $rootScope, 
     });
 
     return user.promise;
-  }
-
+  };
 
   this.isAuthenticated = function(){
     return !!Session.profile;
@@ -65,9 +64,6 @@ angular.module('main').service('AuthService', function($q, Session, $rootScope, 
     })
     .then(function (dbUser){
       return onSuccessfulLogin(uid, dbUser);
-    })
-    .catch(function (err){
-      console.log(err);
     });
   };
 
@@ -78,9 +74,6 @@ angular.module('main').service('AuthService', function($q, Session, $rootScope, 
     })
     .then(function (){
       return self.login(userInfo.email, userInfo.password);
-    })
-    .catch(function (err){
-      console.log(err);
     });
   };
 
