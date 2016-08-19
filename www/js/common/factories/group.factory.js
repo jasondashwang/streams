@@ -41,6 +41,20 @@ angular.module('main').factory('GroupFactory', ['$q', '$rootScope', 'AuthService
   GroupFactory.joinGroup = function (groupCode) {
     return AuthService.getLoggedInUser()
       .then(function(user) {
+        var groupCheck = $q.defer();
+        ref.child('groups/' + groupCode).on('value', function(snapshot){
+          if(snapshot.val()){
+            groupCheck.resolve('Success!');
+          } else {
+            groupCheck.reject('No group exists!');
+          }
+        }, function(err){
+          groupCheck.reject(err);
+        });
+
+        return groupCheck.promise;
+      })
+      .then(function(){
         var updates = {};
         updates['groups/' + groupCode + '/members/' + user.uid] = false;
         updates['users/' + user.uid + '/groups/' + groupCode] = true;
