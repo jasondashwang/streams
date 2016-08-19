@@ -62,10 +62,10 @@ angular.module('main')
 
   };
 
-  CameraFactory.changeGroupPicture = function(imageData, userId) {
+  CameraFactory.changeGroupPicture = function(imageData, groupCode) {
 
-    var file = Upload.dataUrltoBlob(imageData, userId);
-    var uploadPic = storageRef.child('profilePictures/' + file.name).put(file);
+    var file = Upload.dataUrltoBlob(imageData, groupCode);
+    var uploadPic = storageRef.child('groupProfilePictures/' + file.name).put(file);
 
     uploadPic.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
       function(snapshot) {
@@ -75,7 +75,7 @@ angular.module('main')
         // Upload completed successfully, now we can get the download URL
         var downloadURL = uploadPic.snapshot.downloadURL;
         //stores a reference to the download URL in the group's db
-        ref.child('users/' + userId + '/photoUrl').set(downloadURL);
+        ref.child('groups/' + groupCode + '/mediaUrl').set(downloadURL);
     });
   };
 

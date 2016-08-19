@@ -48,7 +48,7 @@ angular.module('main').controller('SingleGroupCtrl',['$scope', '$state', 'GroupF
     }
   };
 
-  $scope.takeImage = function() {
+  $scope.takeImage = function(groupCode) {
       var options = {
           quality: 80,
           destinationType: Camera.DestinationType.DATA_URL,
@@ -62,8 +62,8 @@ angular.module('main').controller('SingleGroupCtrl',['$scope', '$state', 'GroupF
       };
 
       $cordovaCamera.getPicture(options).then(function(imageData) {
-          $scope.profile.photoUrl = "data:image/jpeg;base64," + imageData;
-          CameraFactory.changeProfilePicture($scope.profile.photoUrl);
+          $scope.group.mediaUrl = "data:image/jpeg;base64," + imageData;
+          CameraFactory.changeGroupPicture($scope.group.mediaUrl, groupCode);
       }, function(err) {
           console.error('Camera Error', err);
       });
