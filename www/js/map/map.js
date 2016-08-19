@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('main').controller('MapCtrl', function ($scope, $state, $cordovaGeolocation, MapFactory, MediaService) {
-  console.log("in")
+  
   $scope.$on("$ionicView.enter", function () {
-    $scope.mediaObjects = MediaService.mediaObjects;
+    $scope.mediaObjects = MediaService.get();
     MapFactory.drawMap($scope.mediaObjects);
   });
 
