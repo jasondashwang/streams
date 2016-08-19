@@ -30,9 +30,10 @@
         </form>
 
       </li>
-      <a class="item item-icon-left" ng-click=showPassword()>
+      <a class="item item-icon-left item-icon-right" ng-click=showPassword()>
         <i class="icon ion-compose"></i>
         Change Password
+        <i class="icon" ng-class="{'ion-chevron-down': !passwordShown, 'ion-chevron-up': passwordShown}"></i>
       </a>
       <li ng-hide="!passwordShown" class="item item-icon-left item-icon-right">
         <i class="icon ion-compose"></i>
