@@ -14,17 +14,10 @@ angular.module('main').controller('CameraCtrl', function ($rootScope, $scope, $s
 			})
 		return location.promise;
 	}
-	$scope.getLocation();
-
-
-
-
- $scope.isInGroup = function() {
-	if ($rootScope.profile) 
-		return $rootScope.profile.activeCode;
-  };
+	$scope.getLocation();	
 
 // add error handlers for capture methods
+
 	$scope.captureImage = function() {
 
 	    var options = {
@@ -36,7 +29,6 @@ angular.module('main').controller('CameraCtrl', function ($rootScope, $scope, $s
 	    	})
 	    	.then(function(position){
 			    $cordovaCapture.captureImage(options).then(function(imageData) {
-				    console.log("Raw output", imageData[0]);
 					toDataUrl(imageData[0].fullPath, function(base64Img){
 						CameraFactory.uploadMedia(base64Img, "photo", position)
 					})
@@ -46,7 +38,7 @@ angular.module('main').controller('CameraCtrl', function ($rootScope, $scope, $s
 	    		console.error(err)
 	    	})
 
-
+	    
 	};
 
 

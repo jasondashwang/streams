@@ -1,0 +1,20 @@
+<ion-view title="Groups">
+  <ion-content has-header="true" padding="false" class="moments">
+<!-- 	<ul class="list">
+	    <li ng-repeat="group in groups" class="item">
+	    	{{ group.name }}
+	    </li>
+	</ul> -->
+	<ion-list>
+	  <ion-checkbox ng-repeat="group in groups" ng-click='toggleGroup(group.groupCode)' ng-model="groupFilter.group">{{ group.name }}</ion-checkbox>
+	</ion-list>
+	<button ng-click="sendToGroups()">Send</button>
+	<ion-footer-bar align-title='left' class='bar-assertive'>
+		<div class='buttons'>
+		    <button class='button' ng-click="sendToGroups()">
+		      <i class='icon ion-android-send'></i>
+		    </button>
+		</div>
+	</ion-footer-bar>
+  </ion-content>
+</ion-view>
