@@ -1,15 +1,30 @@
 angular.module('main')
-.factory('CameraFactory', function($rootScope, Upload, $cordovaGeolocation, $q) {
+.factory('CameraFactory', function($rootScope, Upload, $cordovaGeolocation, $q, $state, CameraService) {
 
   var CameraFactory = {};
 
   var ref = firebase.database().ref();
 
-  CameraFactory.uploadMedia = function(mediaData, type, location) {
-    if (!$rootScope.profile) return;
+  CameraFactory.storeMedia = function(mediaData, type, location) {
+    var mediaObj = {
+        mediaUrl: mediaData,
+        mediaType: type,
+        memberId: "test",
+        location: location,
+        timeStamp: Date.now(),
+        upvotes: 0
+    }
+    CameraService.media = mediaObj;
 
-    var file = Upload.dataUrltoBlob(mediaData, Date.now());
-    var uploadPic = storageRef.child('pictures/' + file.name).put(file);
+    $state.go('tab.send-media')
+
+
+  };
+  
+  CameraFactory.sendMedia = function(groupCodes, media){
+    
+    var file = Upload.dataUrltoBlob(media.mediaUrl, Date.now());
+    var uploadPic = storageRef.child('media/' + file.name).put(file);
 
     uploadPic.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
       function(snapshot) {
@@ -22,18 +37,19 @@ angular.module('main')
       }, function(err) {
         console.error(err);
       }, function() { 
+        
         var downloadURL = uploadPic.snapshot.downloadURL;
-        var mediaObj = {
-          mediaUrl: downloadURL,
-          mediaType: type,
-          memberId: $rootScope.profile.uid,
-          location: location
-        }
-        //stores a reference to the download URL in the group's db
-        ref.child('groups/' + $rootScope.profile.activeCode + '/media/' + Date.now()).set(mediaObj);
-    });
-  };
-  
+        media.mediaUrl = downloadURL;
+        groupCodes.forEach(function(code){
+          console.log(code)
+          ref.child('groupCollages/' + code + '/' + media.timeStamp).set(media);
+        })
+        
+      });
+
+
+  }
+
   // consider moving to new factory 
   CameraFactory.getLocation = function () {
     var options = {timeout: 10000, enableHighAccuracy: true};
