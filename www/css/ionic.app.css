@@ -9861,7 +9861,12 @@ a.button {
   height: 100%; }
 
 .profile-div {
-  text-align: center; }
+  text-align: left; }
+  .profile-div input {
+    text-align: left;
+    width: 100%; }
+  .profile-div input:focus {
+    text-decoration: underline; }
   .profile-div img {
     display: block;
     margin: 0 auto;
