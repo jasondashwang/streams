@@ -20,11 +20,6 @@ angular.module('main')
 		}
 		$scope.toggleGroup = function (groupCode) {
 			var ind = $scope.sendGroups.indexOf(groupCode);
-			if (ind !== -1) {
-				$scope.sendGroups.splice(ind, 1);
-			}
-			else {
-				$scope.sendGroups.push(groupCode)
-			}
+			(ind !== -1) ? $scope.sendGroups.splice(ind, 1) : $scope.sendGroups.push(groupCode);
 		}
 	})
