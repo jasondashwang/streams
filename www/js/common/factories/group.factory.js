@@ -61,7 +61,7 @@ angular.module('main').factory('GroupFactory', ['$q', '$rootScope', 'AuthService
   GroupFactory.fetchCurrentGroups = function() {
     // two ajax calls (user + groups)
     // make sure user is 3-way binded
-    return AuthService.getLoggedInUser(true)
+    return AuthService.getLoggedInUser()
       .then(function(user) {
         var arr = [];
         for (var code in user.groups) {

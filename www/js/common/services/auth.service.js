@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('main').service('AuthService', function($q, Session, $rootScope, $firebaseAuth){
+angular.module('main').service('AuthService', function($q, Session, $rootScope, $firebaseAuth, $firebaseObject){
   var ref = firebase.database().ref();
   var firebaseAuth = $firebaseAuth();
   var self = this;
@@ -45,13 +45,19 @@ angular.module('main').service('AuthService', function($q, Session, $rootScope, 
 
     var user = $q.defer();
 
-    ref.child('users/' + Session.profile.uid).on('value', function(snapshot){
-      user.resolve(onSuccessfulLogin(Session.profile.uid, snapshot.val()));
-    }, function(err){
-      console.log(err);
-    });
 
-    return user.promise;
+    var firebaseProfile = $firebaseObject(ref.child('users/' + Session.profile.uid))
+    onSuccessfulLogin(Session.profile.uid, firebaseProfile);
+    return $q.when(firebaseProfile);
+
+
+    // ref.child('users/' + Session.profile.uid).on('value', function(snapshot){
+    //   user.resolve(onSuccessfulLogin(Session.profile.uid, snapshot.val()));
+    // }, function(err){
+    //   console.log(err);
+    // });
+
+    // return user.promise;
 
   };
 
@@ -63,7 +69,8 @@ angular.module('main').service('AuthService', function($q, Session, $rootScope, 
       return self.getUser(authUser.uid);
     })
     .then(function (dbUser){
-      return onSuccessfulLogin(uid, dbUser);
+      var firebaseProfile = $firebaseObject(ref.child('users/' + uid));
+      return onSuccessfulLogin(uid, firebaseProfile);
     });
   };
 
