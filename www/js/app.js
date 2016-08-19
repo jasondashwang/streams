@@ -95,11 +95,19 @@ angular.module('main', [
     views: {
       'tab-camera': {
         templateUrl: 'js/camera/camera.html',
-        controller: 'CameraCtrl'
+        controller: 'CameraCtrl',
       }
     }
   })
-
+  .state('tab.send-media', {
+    url: '/send-media',
+    views: {
+      'tab-group': {
+        templateUrl: 'js/group/sendMedia/sendMedia.html',
+        controller: 'SendMediaCtrl'
+      }
+    }
+  })
   .state('tab.groups', {
     url: '/groups',
     views: {

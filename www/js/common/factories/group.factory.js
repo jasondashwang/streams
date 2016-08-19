@@ -3,7 +3,7 @@ angular.module('main').factory('GroupFactory', ['$q', '$rootScope', 'AuthService
   var GroupFactory = {};
 
   var alphanumeric_unique = function () {
-      return Math.random().toString(36).split('').filter( function(value, index, self) {
+      return Math.random().toString(36).split('').filter(function(value, index, self) {
           return self.indexOf(value) === index;
       }).join('').substr(2,6);
   };
