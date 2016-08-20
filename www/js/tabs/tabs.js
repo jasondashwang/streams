@@ -8,4 +8,5 @@ angular.module("main").controller('TabsCtrl' , function ($scope, $state, $rootSc
         if($rootScope.profile.activeCode) $state.go('tab.group-logged-in');
         else $state.go('tab.group-logged-out');
       };
-    })
+    
+})

@@ -1,4 +1,4 @@
-angular.module('main').controller('GroupListCtrl', function($scope, GroupFactory){
+angular.module('main').controller('GroupListCtrl', function($scope, GroupFactory, $state){
 
   $scope.$on("$ionicView.enter", function () {
     GroupFactory.fetchCurrentGroups()
@@ -10,6 +10,10 @@ angular.module('main').controller('GroupListCtrl', function($scope, GroupFactory
       });
   });
 
+   	$scope.goRight = function() {
+		$state.go("tab.camera")
+		console.log('swiped right!')
+    }
 });
 
 

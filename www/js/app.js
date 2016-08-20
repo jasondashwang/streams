@@ -10,7 +10,8 @@ angular.module('main', [
   'ngCordova',
   'firebase',
   'ionic-timepicker',
-  'ngFileUpload'
+  'ngFileUpload',
+  'ngAnimate'
   ])
 
 .run(function($ionicPlatform, $rootScope) {
