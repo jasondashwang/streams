@@ -32,4 +32,6 @@ angular.module('main').controller("NavBarCtrl", function($scope, $rootScope, $io
 		$scope.closeModal();
 		$state.go('tab.join-group');
 	};
+
+	
 });
