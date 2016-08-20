@@ -1,4 +1,9 @@
 <ion-view title="{{group.name}}">
+  <ion-nav-buttons side='secondary'>
+    <button class='button' ui-sref="tab.single-group({groupCode: groupCode})">
+      <i class='ion-gear-a'></i>
+    </button>
+  </ion-nav-buttons>
   <ion-content has-header="true" padding="false" class="moments">
     <div ng-repeat="mediaObj in mediaObjects">
       <img src ="{{mediaObj.mediaUrl}}" width='153' height='204' ng-if="mediaObj.mediaType == 'photo'">
@@ -11,8 +16,6 @@
     <div class="buttons">
       <button class="button" ui-sref="tab.map">Map</button>
     </div>
-    <div class="buttons">
-      <button class="button" ui-sref="tab.single-group({groupCode: groupCode})">Group Details</button>
-    </div>
+
   </ion-footer-bar>
 </ion-view>
