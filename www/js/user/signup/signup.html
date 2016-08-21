@@ -17,14 +17,12 @@
           <input type="email" ng-model="userInfo.email" class="item item-input form-control" placeholder="Your Email" required>
         </label>
         <label class="item item-input item-floating-label">
-          <span class="input-label">Password</span>
+          <span class="input-label">Password must be minimum 6 characters</span>
           <input type="password" ng-model="userInfo.password" class="item item-input form-control" placeholder="Your Password" ng-minlength="6" required>
         </label>
       </div>
 
       <button ng-disabled="signupForm.$invalid" type="submit" class="button button-positive" id="submitbtn">Signup</button>
-
-      <p ng-if="error">Error: <strong>{{ error }}</strong></p>
 
     </form>
     <h5 ui-sref="tab.login" class="pointer">Already have an account? Login</h5>

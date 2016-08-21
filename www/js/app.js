@@ -9,7 +9,6 @@ angular.module('main', [
   'ionic',
   'ngCordova',
   'firebase',
-  'ionic-timepicker',
   'ngFileUpload'
   ])
 
@@ -28,17 +27,7 @@ angular.module('main', [
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider, ionicTimePickerProvider) {
-
-  var timePickerObj = {
-      inputTime: (((new Date()).getHours() * 60 * 60) + ((new Date()).getMinutes() * 60)),
-      format: 12,
-      step: 15,
-      setLabel: 'Set',
-      closeLabel: 'Close'
-    };
-  ionicTimePickerProvider.configTimePicker(timePickerObj);
-
+.config(function($stateProvider, $urlRouterProvider) {
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
   // Set up the various states which the app can be in.

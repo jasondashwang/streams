@@ -14,8 +14,7 @@ angular.module('main')
       $state.go('tab.profile');
     })
     .catch(function(err){
-      $scope.error = err;
-      console.log(err);
+      $.growl.error({location: 'br', message: err.message});
     });
   };
 }]);
