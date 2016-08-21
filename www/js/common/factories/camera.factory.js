@@ -27,9 +27,9 @@ angular.module('main')
 
 
   };
-  
+
   CameraFactory.sendMedia = function(groupCodes, media){
-    
+
     var file = Upload.dataUrltoBlob(media.mediaUrl, Date.now());
     var uploadPic = storageRef.child('media/' + file.name).put(file);
 
@@ -58,7 +58,7 @@ angular.module('main')
             timeStamp: media.timeStamp
           }
         } 
-        
+      
         var downloadURL = uploadPic.snapshot.downloadURL;
         media.mediaUrl = downloadURL;
         groupCodes.forEach(function(code){
@@ -68,28 +68,44 @@ angular.module('main')
           // store the reference
           ref.child('groupCollages/' + code + '/' + media.timeStamp).set(media);
         })
-        
+
       });
 
 
   }
 
-  // consider moving to new factory 
+  // consider moving to new factory
   CameraFactory.getLocation = function () {
     var options = {timeout: 10000, enableHighAccuracy: true};
     // var positionObj = $q.defer()
     return $cordovaGeolocation.getCurrentPosition(options)
-      .then(function(position){   
+      .then(function(position){
         return position;
         // positionObj.resolve(position)
       })
 
-  }
+  };
 
-  CameraFactory.changeProfilePicture = function(imageData) {
-    if (!$rootScope.profile) return;
+  CameraFactory.changeGroupPicture = function(imageData, groupCode) {
 
-    var file = Upload.dataUrltoBlob(imageData, $rootScope.profile.uid);
+    var file = Upload.dataUrltoBlob(imageData, groupCode);
+    var uploadPic = storageRef.child('groupProfilePictures/' + file.name).put(file);
+
+    uploadPic.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
+      function(snapshot) {
+      }, function(err) {
+        console.error(err);
+      }, function() {
+        // Upload completed successfully, now we can get the download URL
+        var downloadURL = uploadPic.snapshot.downloadURL;
+        //stores a reference to the download URL in the group's db
+        ref.child('groups/' + groupCode + '/mediaUrl').set(downloadURL);
+    });
+  };
+
+  CameraFactory.changeProfilePicture = function(imageData, userId) {
+
+    var file = Upload.dataUrltoBlob(imageData, userId);
     var uploadPic = storageRef.child('profilePictures/' + file.name).put(file);
 
     uploadPic.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
@@ -100,9 +116,8 @@ angular.module('main')
         // Upload completed successfully, now we can get the download URL
         var downloadURL = uploadPic.snapshot.downloadURL;
         //stores a reference to the download URL in the group's db
-        ref.child('users/' + $rootScope.profile.uid + '/photoUrl').set(downloadURL);
+        ref.child('users/' + userId + '/photoUrl').set(downloadURL);
     });
-
 
   };
 

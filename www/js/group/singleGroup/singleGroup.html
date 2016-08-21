@@ -1,31 +1,32 @@
-<ion-view title="{{ group.name }}">
-  <ion-content has-header="true" padding="false" class="single-group">
-    <img src="{{ profile.photoUrl }}">
+<ion-view title="{{group.name}}">
+  <ion-content has-header="true" padding="false" class="profile-div">
+    <img src="{{ group.mediaUrl }}">
     <ul class="list">
-      <li class="item item-icon-left">
-        <i class="icon ion-person"></i>
-        {{ group }}
-      </li>
-      <li class="item item-icon-left">
-        <i class="icon ion-email"></i>
-        {{ group.members }}
-      </li>
-      <li class="item item-icon-left">
-        <i class="icon ion-ios-telephone"></i>
-        {{ profile.phone }}
-      </li>
-      <a ng-show="$rootScope.profile.activeCode" class="item item-icon-left item-icon-right" ui-sref="tab.group-logged-in">
-        <i class="icon ion-android-contacts"></i>
-        {{ profile.group.name }}
-        <i class="icon ion-arrow-right-c"></i>
+      <a class="item item-icon-left" ng-click="takeImage(group.groupCode)">
+        <i class="icon ion-camera"></i>
+        Change Group Photo
       </a>
-      <a class="item item-icon-left" ui-sref="tab.settings">
-        <i class="icon ion-gear-b"></i>
-        Edit Account Settings
-      </a>
+      <div ui-sref="tab.group-members({groupCode: group.groupCode})">
+        <li class="item item-icon-left">
+          <i class="icon ion-ios-people"></i>
+          <div>{{getMembersCount(group.members)}}</div>
+        </li>
+      </div>
+      <li class="item item-icon-left item-icon-right">
+        <i class="icon ion-happy"></i>
+        <form name="groupNameForm" >
+          <input type="text" name="group-name" value="{{group.name}}" align="right" ng-model="newGroup.name" ng-blur="submit.groupName(groupNameForm)">
+          </input>
+        </form>
+      </li>
+      <div>
+        <li class="item item-icon-left">
+          <i class="icon ion-lock-combination"></i>
+          <div>{{group.groupCode}}</div>
+        </li>
+      </div>
     </ul>
-
-    <button ng-click="leaveGroup()" class="button button-full button-assertive">Leave Group</button>
-    <button ng-click="endGroup(group.members)" class="button button-full button-assertive">End Group</button>
+    <button ng-click="leaveGroup()" class="button button-full button-assertive" ng-show="!isAdmin">Leave Group</button>
+    <button ng-click="endGroup(group.members)" class="button button-full button-assertive" ng-show="isAdmin">End Group</button>
   </ion-content>
 </ion-view>

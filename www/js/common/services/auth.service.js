@@ -22,6 +22,13 @@ angular.module('main').service('AuthService', function($q, Session, $rootScope, 
     });
   }
 
+  this.checkPassword = function (email, password){
+    return firebaseAuth.$signInWithEmailAndPassword(email, password)
+    .then(function(res){
+      return 'Success!';
+    });
+  };
+
   this.getUser = function (id){
     var user = $q.defer();
 
@@ -42,20 +49,13 @@ angular.module('main').service('AuthService', function($q, Session, $rootScope, 
     return firebase.auth().currentUser.updateEmail(newEmail)
     .then(function(){
       return 'Success!';
-    })
-    .catch(function(err){
-      return err;
     });
-
   };
 
   this.changePassword = function(newPassword){
     return firebase.auth().currentUser.updatePassword(newPassword)
     .then(function(){
       return 'Success!';
-    })
-    .catch(function(err){
-      return err;
     });
   };
 
@@ -66,7 +66,7 @@ angular.module('main').service('AuthService', function($q, Session, $rootScope, 
     }
 
 
-    var firebaseProfile = $firebaseObject(ref.child('users/' + Session.profile.uid))
+    var firebaseProfile = $firebaseObject(ref.child('users/' + Session.profile.uid));
     onSuccessfulLogin(firebaseProfile);
     return $q.when(firebaseProfile);
 

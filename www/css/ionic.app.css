@@ -9880,5 +9880,9 @@ a.button {
     margin-top: 1.2em;
     margin-bottom: 1.2em; }
 
+
 #groupList span {
   float: right; }
+
+.groupPhotoThumbnail {
+  text-align: center; }
