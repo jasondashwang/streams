@@ -41,7 +41,24 @@ angular.module('main').controller('GroupListCtrl', function($ionicModal, $scope,
       	$scope.groups.sort(function(a,b){
       		return b.lastMessage.timeStamp - a.lastMessage.timeStamp;
       	});
+      	var now = new Date().toDateString();
+      	var stamp;
+      	$scope.groups.forEach(function(group){
+			stamp = new Date(group.lastMessage.timeStamp)	
+			if (now == stamp.toDateString()) {
+				var hours = stamp.getHours();
+				var minutes = stamp.getMinutes();
+				var period = 'pm';
+				if (hours > 12) {
+					period = 'pm';
+					hours -= 12;
+				}
+				group.lastMessage.timeStamp = hours + ":" + minutes + " " + period;
+			} else {
+				group.lastMessage.timeStamp = stamp.toDateString();
+			}   		
 
+      	})
       })
       .catch(function(err){
       	console.error(err);
