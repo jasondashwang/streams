@@ -1,4 +1,4 @@
-angular.module('main').controller('GroupListCtrl', function($ionicModal, $scope, GroupFactory, $state, $ionicNavBarDelegate){
+angular.module('main').controller('GroupListCtrl', function($ionicModal, $scope, GroupFactory, $state){
 
 	$ionicModal.fromTemplateUrl('js/group/groupList/groupModal.html', {
 	scope: $scope,
@@ -35,7 +35,6 @@ angular.module('main').controller('GroupListCtrl', function($ionicModal, $scope,
 	};
 
   $scope.$on("$ionicView.enter", function () {
-    $ionicNavBarDelegate.showBackButton(false);
     GroupFactory.fetchCurrentGroups()
       .then(function(groups) {
       	$scope.groups = groups;
