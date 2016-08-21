@@ -2,7 +2,6 @@
 
 angular.module('main').controller('GroupFeedCtrl',['$scope', '$stateParams', 'GroupFactory', 'MediaService', function ($scope, $stateParams, GroupFactory, MediaService) {
 
- 
   var unbind;
   $scope.$on("$ionicView.enter", function () {
 	 $scope.groupCode = $stateParams.groupCode;
@@ -12,8 +11,7 @@ angular.module('main').controller('GroupFeedCtrl',['$scope', '$stateParams', 'Gr
 	  		unbind = ub;
 		    $scope.mediaObjects = GroupFactory.fetchMedia($stateParams.groupCode);
 		    MediaService.set($scope.mediaObjects);
-	  	})
-
+	  	});
   });
 
 }]);

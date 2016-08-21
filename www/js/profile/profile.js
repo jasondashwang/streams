@@ -29,7 +29,6 @@ angular.module('main').controller('ProfileCtrl', ['$scope', '$state', '$rootScop
       return myPopup;
     };
 
-
     $scope.passwordShown = false;
     $scope.showPassword = function(){
       $scope.passwordShown = !$scope.passwordShown;
@@ -97,7 +96,6 @@ angular.module('main').controller('ProfileCtrl', ['$scope', '$state', '$rootScop
       }
     };
 
-
     var unbind, fireBaseObj;
 
     $scope.takeImage = function() {
@@ -115,7 +113,7 @@ angular.module('main').controller('ProfileCtrl', ['$scope', '$state', '$rootScop
 
         $cordovaCamera.getPicture(options).then(function(imageData) {
             $scope.profile.photoUrl = "data:image/jpeg;base64," + imageData;
-            CameraFactory.changeProfilePicture($scope.profile.photoUrl);
+            CameraFactory.changeProfilePicture($scope.profile.photoUrl, $scope.newProfile.uid);
         }, function(err) {
             console.error('Camera Error', err);
         });

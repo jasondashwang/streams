@@ -119,7 +119,12 @@ angular.module('main', [
     views: {
       'tab-group': {
         templateUrl: 'js/group/singleGroup/singleGroup.html',
-        controller: 'SingleGroupCtrl'
+        controller: 'SingleGroupCtrl',
+        resolve: {
+          loggedInUser: function(AuthService) {
+            return AuthService.getLoggedInUser();
+          }
+        }
       }
     }
   })
@@ -134,7 +139,7 @@ angular.module('main', [
 
   // })
   .state('tab.group-members', {
-    url: '/group-members',
+    url: '/group-members/:groupCode',
     views: {
       'tab-group': {
         templateUrl: 'js/group/members/group.members.html',
