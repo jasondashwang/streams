@@ -1,12 +1,15 @@
 'use strict';
 
-angular.module('main').controller('SingleGroupCtrl',['$scope', '$state', 'GroupFactory', '$stateParams', '$log', '$ionicNavBarDelegate', 'CameraFactory', '$cordovaCamera', function ($scope, $state, GroupFactory, $stateParams, $log, $ionicNavBarDelegate, CameraFactory, $cordovaCamera) {
+angular.module('main').controller('SingleGroupCtrl',['$scope', '$state', '$stateParams', '$log', '$ionicNavBarDelegate', 'CameraFactory', '$cordovaCamera', 'loggedInUser', 'GroupFactory', function ($scope, $state, $stateParams, $log, $ionicNavBarDelegate, CameraFactory, $cordovaCamera, loggedInUser, GroupFactory) {
 
   $scope.$on("$ionicView.enter", function () {
-    GroupFactory.fireBase($stateParams.groupCode).$bindTo($scope, 'group');
-    $scope.newGroup = {
-      name: $scope.group.name
-    };
+    GroupFactory.fireBase($stateParams.groupCode).$bindTo($scope, 'group')
+      .then(function() {
+        $scope.isAdmin = $scope.group.members[loggedInUser.uid];
+        $scope.newGroup = {
+          name: $scope.group.name
+        };
+      });
   });
 
   function cleanForm(form){
@@ -15,6 +18,7 @@ angular.module('main').controller('SingleGroupCtrl',['$scope', '$state', 'GroupF
   }
 
   $scope.getMembersCount = function(members) {
+    if (!members) return;
     var membersCount = Object.keys(members).length;
     if (membersCount === 1) return membersCount + ' Member';
     return membersCount + ' Members';

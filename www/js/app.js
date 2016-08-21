@@ -130,7 +130,12 @@ angular.module('main', [
     views: {
       'tab-group': {
         templateUrl: 'js/group/singleGroup/singleGroup.html',
-        controller: 'SingleGroupCtrl'
+        controller: 'SingleGroupCtrl',
+        resolve: {
+          loggedInUser: function(AuthService) {
+            return AuthService.getLoggedInUser();
+          }
+        }
       }
     }
   })

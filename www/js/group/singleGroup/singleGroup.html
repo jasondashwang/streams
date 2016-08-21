@@ -26,7 +26,7 @@
         </li>
       </div>
     </ul>
-    <button ng-click="leaveGroup()" class="button button-full button-assertive">Leave Group</button>
-    <button ng-click="endGroup(group.members)" class="button button-full button-assertive">End Group</button>
+    <button ng-click="leaveGroup()" class="button button-full button-assertive" ng-show="!isAdmin">Leave Group</button>
+    <button ng-click="endGroup(group.members)" class="button button-full button-assertive" ng-show="isAdmin">End Group</button>
   </ion-content>
 </ion-view>
