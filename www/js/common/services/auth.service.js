@@ -39,31 +39,24 @@ angular.module('main').service('AuthService', function($q, Session, $rootScope, 
   };
 
   this.changeEmail = function(newEmail){
-    var result = $q.defer();
-
-    firebase.auth().currentUser.updateEmail(newEmail)
+    return firebase.auth().currentUser.updateEmail(newEmail)
     .then(function(){
-      result.resolve('Success!');
+      return 'Success!';
     })
     .catch(function(err){
-      result.reject(err);
+      return err;
     });
 
-    return result.promise;
   };
 
   this.changePassword = function(newPassword){
-    var result = $q.defer();
-
-    firebase.auth().currentUser.updatePassword(newPassword)
+    return firebase.auth().currentUser.updatePassword(newPassword)
     .then(function(){
-      result.resolve('Success!');
+      return 'Success!';
     })
     .catch(function(err){
-      result.reject(err);
+      return err;
     });
-
-    return result.promise;
   };
 
   this.getLoggedInUser = function(fromServer){
