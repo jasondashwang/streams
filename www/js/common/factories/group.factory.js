@@ -39,8 +39,10 @@ angular.module('main').factory('GroupFactory', ['$q', '$rootScope', 'AuthService
   };
 
   GroupFactory.joinGroup = function (groupCode) {
+    var user;
     return AuthService.getLoggedInUser()
-      .then(function(user) {
+      .then(function(authUser) {
+        user = authUser;
         var groupCheck = $q.defer();
         ref.child('groups/' + groupCode).on('value', function(snapshot){
           if(snapshot.val()){

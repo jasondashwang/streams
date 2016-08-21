@@ -1,5 +1,11 @@
 <ion-view title="My Groups">
   <ion-content has-header="true" padding="false" class="group-list">
+
+  <ion-nav-buttons side='secondary'>
+  <button class='button' ng-click='modal.show()'>
+    <i class='icon ion-ios-plus-outline'></i>
+  </button>
+  </ion-nav-buttons>
   <div class="list" ng-hide="groups.length > 0">
     <li class="item">
       <p>You are currently not in any group!</p>
