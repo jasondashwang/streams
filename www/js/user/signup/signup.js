@@ -9,8 +9,7 @@ angular.module('main').controller('SignupCtrl', ['$scope', '$state', '$log', 'Au
       $state.go('tab.profile');
     })
     .catch(function(err){
-      $scope.error = err;
-      console.log('Error: ', err);
+      $.growl.error({location: 'br', message: err.message});
     });
   };
 }]);

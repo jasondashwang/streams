@@ -9,14 +9,14 @@
       </a>
       <li class="item item-icon-left">
         <i class="icon ion-person"></i>
-        <form name="nameForm" >
+        <form name="nameForm" ng-submit="submit.name(nameForm)">
           <input type="text" name="profile-name" value="{{ profile.name }}" align="right" ng-model="newProfile.name" ng-blur="submit.name(nameForm)">
           </input>
         </form>
       </li>
       <li class="item item-icon-left item-icon-right">
         <i class="icon ion-email"></i>
-        <form name="emailForm" >
+        <form name="emailForm" ng-submit="submit.email(emailForm)">
           <input type="text" name="profile-email" value="{{ profile.email }}" align="right" ng-model="newProfile.email" ng-blur="submit.email(emailForm)">
           </input>
 
@@ -25,7 +25,7 @@
       </li>
       <li class="item item-icon-left">
         <i class="icon ion-ios-telephone"></i>
-        <form name="phoneForm" >
+        <form name="phoneForm" ng-submit="submit.phone(phoneForm)">
           <input type="text" name="profile-phone" value="{{ profile.phone }}" align="right" ng-model="newProfile.phone" ng-blur="submit.phone(phoneForm)">
           </input>
         </form>
@@ -36,9 +36,9 @@
         Change Password
         <i class="icon" ng-class="{'ion-chevron-down': !passwordShown, 'ion-chevron-up': passwordShown}"></i>
       </a>
-      <li ng-hide="!passwordShown" class="item item-icon-left item-icon-right">
+      <li ng-hide='!passwordShown' class="item item-icon-left item-icon-right">
         <i class="icon ion-compose"></i>
-        <form name="passwordForm">
+        <form name="passwordForm" ng-submit="submit.password(passwordForm)">
           <input type="password" name="profile-password" placeholder="New Password" align="right" ng-model="newProfile.newPassword">
           </input>
           <i class="icon ion-checkmark" ng-click="submit.password(passwordForm)"></i>
