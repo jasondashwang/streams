@@ -145,7 +145,7 @@ angular.module('main', [
 
   // })
   .state('tab.group-members', {
-    url: '/group-members',
+    url: '/group-members/:groupCode',
     views: {
       'tab-group': {
         templateUrl: 'js/group/members/group.members.html',

@@ -6,7 +6,7 @@
         <i class="icon ion-camera"></i>
         Change Group Photo
       </a>
-      <div>
+      <div ui-sref="tab.group-members({groupCode: group.groupCode})">
         <li class="item item-icon-left">
           <i class="icon ion-ios-people"></i>
           <div>{{getMembersCount(group.members)}}</div>
