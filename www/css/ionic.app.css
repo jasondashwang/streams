@@ -9880,5 +9880,5 @@ a.button {
     margin-top: 1.2em;
     margin-bottom: 1.2em; }
 
-.group-list p {
-  text-align: center; }
+#groupList span {
+  float: right; }

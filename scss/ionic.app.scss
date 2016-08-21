@@ -109,8 +109,10 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
   }
 }
 
-.group-list {
-  p {
-    text-align: center;
+#groupList {
+  span {
+    float: right;
   }
 }
+
+

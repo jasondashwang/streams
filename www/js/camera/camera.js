@@ -28,7 +28,8 @@ angular.module('main').controller('CameraCtrl', function ($rootScope, $scope, $s
 	    		return position;
 	    	})
 	    	.then(function(position){
-			    $cordovaCapture.captureImage(options).then(function(imageData) {
+			    $cordovaCapture.captureImage(options)
+			    .then(function(imageData) {
 					toDataUrl(imageData[0].fullPath, function(base64Img){
 						CameraFactory.storeMedia(base64Img, "photo", position)
 					})
@@ -38,7 +39,6 @@ angular.module('main').controller('CameraCtrl', function ($rootScope, $scope, $s
 	    		console.error(err)
 	    	})
 
-	    
 	};
 
 
@@ -51,7 +51,8 @@ angular.module('main').controller('CameraCtrl', function ($rootScope, $scope, $s
 	    		return position;
 	    	})
 	    	.then(function(position){
-			    $cordovaCapture.captureVideo(options).then(function(videoData) {
+			    $cordovaCapture.captureVideo(options)
+			    .then(function(videoData) {
 					toDataUrl(videoData[0].fullPath, function(base64Img){
 						CameraFactory.storeMedia(base64Img, "video", position)
 					})

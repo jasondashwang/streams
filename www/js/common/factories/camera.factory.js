@@ -1,22 +1,29 @@
 angular.module('main')
-.factory('CameraFactory', function($rootScope, Upload, $cordovaGeolocation, $q, $state, CameraService) {
+.factory('CameraFactory', function($rootScope, Upload, $cordovaGeolocation, $q, $state, CameraService, AuthService) {
 
   var CameraFactory = {};
 
   var ref = firebase.database().ref();
 
   CameraFactory.storeMedia = function(mediaData, type, location) {
-    var mediaObj = {
-        mediaUrl: mediaData,
-        mediaType: type,
-        memberId: "test",
-        location: location,
-        timeStamp: Date.now(),
-        upvotes: 0
-    }
-    CameraService.media = mediaObj;
+    AuthService.getLoggedInUser()
+    .then(function(user){
+      var mediaObj = {
+          mediaUrl: mediaData,
+          mediaType: type,
+          member: {
+            id: user.uid,
+            name: user.name
+          },
+          location: location,
+          timeStamp: Date.now(),
+          upvotes: 0
+      }
+      CameraService.media = mediaObj;
 
-    $state.go('tab.send-media')
+      $state.go('tab.send-media')
+    })
+
 
 
   };
@@ -38,10 +45,27 @@ angular.module('main')
         console.error(err);
       }, function() { 
         
+        var lastMessage;
+     
+        if (media.mediaType == "photo") {
+          lastMessage = {
+            message: media.member.name + " sent a photo",
+            timeStamp: media.timeStamp
+          }
+        } else {
+          lastMessage = {
+            message: media.member.name + " sent a video",
+            timeStamp: media.timeStamp
+          }
+        } 
+        
         var downloadURL = uploadPic.snapshot.downloadURL;
         media.mediaUrl = downloadURL;
         groupCodes.forEach(function(code){
-          console.log(code)
+          // set the last message for a group
+          ref.child('groups/' + code + '/lastMessage').set(lastMessage)
+
+          // store the reference
           ref.child('groupCollages/' + code + '/' + media.timeStamp).set(media);
         })
         

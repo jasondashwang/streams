@@ -11,11 +11,11 @@
       <p>You are currently not in any group!</p>
     </li>
   </div>
-	<div ng-repeat="group in groups" class="list">
+	<div ng-repeat="group in groups" class="list" id='groupList'>
 	    <a class="item item-thumbnail-left" ui-sref="tab.groupFeed({groupCode: group.groupCode})">
 	      <img ng-src="{{group.mediaUrl}}">
-	      <h2>{{group.name}}</h2>
-	      <p>9:18 pm - SJ Kim: Watsup</p>
+	      <h2>{{group.name}}<span>{{ group.lastMessage.timeStamp }}</span></h2>
+	      <p>{{ group.lastMessage.message }}</p>
 	    </a>
 	</div>
   </ion-content>

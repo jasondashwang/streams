@@ -92,7 +92,7 @@ angular.module('main').factory('GroupFactory', ['$q', '$rootScope', 'AuthService
   };
 
   GroupFactory.fetchMedia = function (groupId) {
-    return $firebaseArray(ref.child('groupCollages/' + groupId).orderByChild("timeStamp"));
+    return $firebaseArray(ref.child('groupCollages/' + groupId));
   };
 
   GroupFactory.leaveGroup = function(groupCode) {
