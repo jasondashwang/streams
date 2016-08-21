@@ -4,6 +4,7 @@ angular.module('main').controller('GroupListCtrl', function($scope, GroupFactory
     GroupFactory.fetchCurrentGroups()
       .then(function(groups) {
       	$scope.groups = groups;
+        console.log($scope.groups);
       })
       .catch(function(err){
       	console.error(err);
