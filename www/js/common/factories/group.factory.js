@@ -121,6 +121,10 @@ angular.module('main').factory('GroupFactory', ['$q', '$rootScope', 'AuthService
     return $firebaseArray(ref.child('groups/' + groupCode + '/members'));
   };
 
+  GroupFactory.changeName = function() {
+
+  };
+
   return GroupFactory;
 
 }]);

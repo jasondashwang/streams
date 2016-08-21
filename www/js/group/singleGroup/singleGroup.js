@@ -2,52 +2,32 @@
 
 angular.module('main').controller('SingleGroupCtrl',['$scope', '$state', 'GroupFactory', '$stateParams', '$log', '$ionicNavBarDelegate', 'CameraFactory', '$cordovaCamera', function ($scope, $state, GroupFactory, $stateParams, $log, $ionicNavBarDelegate, CameraFactory, $cordovaCamera) {
 
-  GroupFactory.fireBase($stateParams.groupCode).$bindTo($scope, 'group');
+  $scope.$on("$ionicView.enter", function () {
+    GroupFactory.fireBase($stateParams.groupCode).$bindTo($scope, 'group');
+    $scope.newGroup = {
+      name: $scope.group.name
+    };
+  });
 
   function cleanForm(form){
     form.$setPristine();
     form.$setUntouched();
   }
 
+  $scope.getMembersCount = function(members) {
+    var membersCount = Object.keys(members).length;
+    if (membersCount === 1) return membersCount + ' Member';
+    return membersCount + ' Members';
+  };
+
   $scope.submit = {
-    email: function(form){
-      if(form.$dirty){
-        AuthService.changeEmail($scope.newProfile.email)
-        .then(function(res){
-          $scope.profile.email = $scope.newProfile.email;
-          cleanForm(form);
-        })
-        .catch(function(err){
-          console.log(err);
-          cleanForm(form);
-        });
-
-      } else cleanForm(form);
-
-    },
-    password: function(form){
-      AuthService.changePassword($scope.newProfile.newPassword)
-      .then(function(res){
-        alert(res);
-        $scope.passwordShown = false;
-        $scope.newProfile.newPassword = null;
-        cleanForm(form);
-      })
-      .catch(function(err){
-        console.log(err);
-        cleanForm(form);
-      });
-    },
-    name: function(form){
-      $scope.profile.name = $scope.newProfile.name;
-      cleanForm(form);
-    },
-    phone: function(form){
-      $scope.profile.phone = $scope.newProfile.phone;
+    groupName: function(form){
+      $scope.group.name = $scope.newGroup.name;
       cleanForm(form);
     }
   };
 
+  // sets group photo
   $scope.takeImage = function(groupCode) {
       var options = {
           quality: 80,

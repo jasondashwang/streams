@@ -95,7 +95,6 @@ angular.module('main')
         ref.child('users/' + userId + '/photoUrl').set(downloadURL);
     });
 
-
   };
 
 
