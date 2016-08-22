@@ -5,7 +5,7 @@ angular.module('main').controller('GroupFeedCtrl',['$scope', '$stateParams', 'Gr
   var unbindGroup;
   var unbindMedia;
   $scope.$on("$ionicView.enter", function () {
-   $ionicNavBarDelegate.showBackButton(false);
+   // $ionicNavBarDelegate.showBackButton(false);
 	 $scope.groupCode = $stateParams.groupCode;
 
    if($scope.group){

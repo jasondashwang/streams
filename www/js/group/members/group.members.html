@@ -1,21 +1,12 @@
 <ion-view title="Members">
   <ion-content has-header="true" padding="true" class="group-members">
-    <div class="list">
-      <div class="row" ng-repeat="member in members" ng-if="$index % 2 === 0">
-        <div class="col col-50">
-          <ion-item class="item item-thumbnail groupPhotoThumbnail">
-            <img src="{{ members[$index].img }}">
-            <div>{{members[$index].name}}</div>
-          </ion-item>
-        </div>
-        <div class="col col-50" ng-if="members.length > ($index + 1)">
-          <ion-item class="item item-thumbnail groupPhotoThumbnail">
-            <img src="{{ members[$index+1].img }}">
-            <div>{{members[$index+1].name}}</div>
-          </ion-item>
-        </div>
-      </div>
-    </div>
+    <ion-list>
+      <ion-item ng-repeat="member in members" class="item-thumbnail-left">
+        <img ng-src="{{ member.photoUrl }}">
+        <h3>{{ member.name }}</h3>
+        <p>{{ member.phone }}</p>
+      </ion-item>
+    </ion-list>
   </ion-content>
 
 </ion-view>
