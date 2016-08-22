@@ -4,7 +4,9 @@ angular.module('main').controller('MapCtrl', function ($scope, $state, $cordovaG
   
   $scope.$on("$ionicView.loaded", function () {
     $scope.mediaObjects = MediaService.get();
+    	
     MapFactory.drawMap($scope.mediaObjects);
+
   });
 
 

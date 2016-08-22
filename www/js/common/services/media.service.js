@@ -1,16 +1,15 @@
 'use strict';
 
 angular.module('main').service('MediaService', function(){
-  var self = this;
   this.mediaObjects = null;
   this.get = function() {
-  	return self.mediaObjects;
+  	return this.mediaObjects;
   }
   this.set = function (mediaObjects) {
-  	self.mediaObjects = mediaObjects;
+  	this.mediaObjects = mediaObjects;
   }
   this.destroy = function () {
-  	self.mediaObjects = null;
+  	this.mediaObjects = null;
   }
   
 });

@@ -36,6 +36,7 @@ angular.module('main').controller('GroupFeedCtrl',['$scope', '$stateParams', 'Gr
       }
 
        MediaService.set(mediaArr);
+
     })
     .catch(function(err){
       console.error(err);

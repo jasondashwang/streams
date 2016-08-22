@@ -4,7 +4,6 @@ angular.module('main')
   var MapFactory = {};
   MapFactory.drawMap = function (mediaObjects) {
       var options = {timeout: 10000, enableHighAccuracy: true};
-      console.log(mediaObjects)
       $cordovaGeolocation.getCurrentPosition(options).then(function(position){
 
         var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
@@ -49,19 +48,26 @@ angular.module('main')
 
           var pos = new google.maps.LatLng(el.location.coords.latitude, el.location.coords.longitude);
           var mediaMarker = new google.maps.Marker({
-            position: pos,
-            map: map,
-            icon: mediaIcon
-          });
+              position: pos,
+              map: map,
+              icon: mediaIcon
+            });
           mediaMarker.addListener('click', function() {
             infowindow.open(pos, mediaMarker);
           });
+
         })
 
       }, function(error){
         console.log("Could not get location");
       });
   }
+
+
+
+    
+    
+
 
   return MapFactory;
 
