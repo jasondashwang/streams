@@ -12,11 +12,15 @@ angular.module('main').service('GroupService', function($q, GroupSession, $rootS
     return $firebaseObject(ref.child('groupCollages/' + groupCode));
   }
 
+  function getFirebaseUser(uid){
+    return $firebaseObject(ref.child('users/' + uid));
+  }
+
   this.getCurrentGroups = function(){
     return AuthService.getLoggedInUser()
     .then(function(user){
       for(var code in user.groups){
-        if(!(GroupSession[code])){
+        if(!(GroupSession.groups[code])){
           var firebaseGroup = getFirebaseGroup(code);
           GroupSession.addGroup(firebaseGroup, code);
         }
@@ -25,8 +29,10 @@ angular.module('main').service('GroupService', function($q, GroupSession, $rootS
     });
   };
 
-  this.getGroup = function(groupCode){
-    if(GroupSession.groups[groupCode]) return $q.when(GroupSession.groups[groupCode]);
+  this.getGroup = function(groupCode, fromServer){
+    if(fromServer){
+      return $q.when(getFirebaseGroup(groupCode));
+    } else if(GroupSession.groups[groupCode]) return $q.when(GroupSession.groups[groupCode]);
     else {
       return self.getCurrentGroups()
       .then(function(){
@@ -45,7 +51,16 @@ angular.module('main').service('GroupService', function($q, GroupSession, $rootS
   };
 
   this.getGroupMembers = function(groupCode){
+    if(!(GroupSession.groupMembers[groupCode])) GroupSession.groupMembers[groupCode] = {groupCode: groupCode, members: {}};
 
+    for(var uid in GroupSession.groups[groupCode].members){
+      if(!GroupSession.groupMembers[groupCode].members[uid]){
+        var firebaseUser = getFirebaseUser(uid);
+        GroupSession.addGroupMember(firebaseUser, uid, groupCode);
+      }
+    }
+
+    return $q.when(GroupSession.groupMembers[groupCode].members);
   };
 
 

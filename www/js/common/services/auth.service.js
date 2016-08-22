@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('main').service('AuthService', function($q, Session, $rootScope, $firebaseAuth, $firebaseObject){
+angular.module('main').service('AuthService', function($q, GroupSession, Session, $rootScope, $firebaseAuth, $firebaseObject){
   var ref = firebase.database().ref();
   var firebaseAuth = $firebaseAuth();
   var self = this;
@@ -98,6 +98,7 @@ angular.module('main').service('AuthService', function($q, Session, $rootScope, 
   this.logout = function () {
     $rootScope.isLoggedIn = false;
     Session.destroy();
+    GroupSession.destroy();
   };
 });
 
