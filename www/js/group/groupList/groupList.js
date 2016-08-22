@@ -33,7 +33,7 @@ angular.module('main').controller('GroupListCtrl', function($ionicModal, $scope,
 		$scope.closeModal();
 		$state.go('tab.join-group');
 	};
-	$scope.$on("$ionicView.loaded", function () {
+	$scope.$on("$ionicView.enter", function () {
 
 	    GroupService.getCurrentGroups()
 		  .then(function(groups) {
