@@ -1,4 +1,4 @@
-angular.module('main').controller('GroupListCtrl', function($ionicModal, $scope, GroupFactory, $state, GroupService){
+angular.module('main').controller('GroupListCtrl', function($ionicModal, $scope, GroupFactory, $state, GroupService, MediaService){
 
 	$ionicModal.fromTemplateUrl('js/group/groupList/groupModal.html', {
 	scope: $scope,
@@ -41,25 +41,9 @@ angular.module('main').controller('GroupListCtrl', function($ionicModal, $scope,
 		  	for (var group in groups) {
 		  		$scope.groups.push(groups[group]);
 		  	}
+		  	// console.log($scope.groups)
 
-		  // 	var now = new Date().toDateString();
-		  // 	var stamp;
-		  // 	$scope.groups.forEach(function(group){
-				// stamp = new Date(group.lastMessage.timeStamp)
-				// if (now == stamp.toDateString()) {
-				// 	var hours = stamp.getHours();
-				// 	var minutes = stamp.getMinutes();
-				// 	var period = 'pm';
-				// 	if (hours > 12) {
-				// 		period = 'pm';
-				// 		hours -= 12;
-				// 	}
-				// 	group.lastMessage.timeStamp = hours + ":" + minutes + " " + period;
-				// } else {
-				// 	group.lastMessage.timeStamp = stamp.toDateString();
-				// }
-
-		  // 	})
+		 
 		  })
 		  .catch(function(err){
 		    $.growl.error({location: 'tc', message: err.message});
@@ -73,8 +57,10 @@ angular.module('main').filter('timeFormat', function(){
 	return function(groups){
 		var now = new Date().toDateString();
 		var stamp; 
+		if (!groups) return;
+		
 		groups.forEach(function(group){
-			console.log(group)
+			if (!group.lastMessage) return;
 			stamp = new Date(group.lastMessage.timeStamp)
 			if (now == stamp.toDateString()) {
 				var hours = stamp.getHours();
