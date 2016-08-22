@@ -25,6 +25,10 @@ angular.module('main').service('GroupService', function($q, GroupSession, $rootS
           GroupSession.addGroup(firebaseGroup, code);
         }
       }
+      for(var code in GroupSession.groups){
+        console.log(code);
+        if(!(user.groups) || !(user.groups[code])) GroupSession.removeGroup(code);
+      }
       return $q.when(GroupSession.groups);
     });
   };
@@ -48,6 +52,10 @@ angular.module('main').service('GroupService', function($q, GroupSession, $rootS
     } else {
       return $q.when(GroupSession.groupCollages[groupCode]);
     }
+  };
+
+  this.removeGroup = function(groupCode){
+    GroupSession.removeGroup(groupCode);
   };
 
   this.getGroupMembers = function(groupCode){

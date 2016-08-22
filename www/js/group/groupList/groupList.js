@@ -37,6 +37,7 @@ angular.module('main').controller('GroupListCtrl', function($ionicModal, $scope,
 
 	    GroupService.getCurrentGroups()
 		  .then(function(groups) {
+        console.log(groups);
 		  	$scope.groups = [];
 		  	for (var group in groups) {
 		  		$scope.groups.push(groups[group]);
@@ -53,9 +54,9 @@ angular.module('main').controller('GroupListCtrl', function($ionicModal, $scope,
 angular.module('main').filter('timeFormat', function(){
  	return function(groups){
  		var now = new Date().toDateString();
- 		var stamp; 
+ 		var stamp;
  		if (!groups) return;
- 		
+
  		groups.forEach(function(group){
  			if (!group.lastMessage) return;
  			stamp = new Date(group.lastMessage.timeStamp)
@@ -73,10 +74,10 @@ angular.module('main').filter('timeFormat', function(){
  				group.lastMessage.timeFormatted = stamp.toDateString();
  			}
  		})
- 
+
  		return groups;
  	}
- 
- 
+
+
  })
 

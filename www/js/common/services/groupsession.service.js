@@ -9,6 +9,8 @@ angular.module('main').service('GroupSession', function(){
 
   this.removeGroup = function(groupCode){
     delete this.groups[groupCode];
+    delete this.groupCollages[groupCode];
+    delete this.groupMembers[groupCode];
   };
 
   this.destroy = function(){
@@ -24,7 +26,7 @@ angular.module('main').service('GroupSession', function(){
   };
 
   this.removeGroupCollage = function(groupCode){
-    delete this.groupCollages[groupCode];
+
   };
 
   this.groupMembers = {};
@@ -33,8 +35,5 @@ angular.module('main').service('GroupSession', function(){
     this.groupMembers[groupCode].members[uid] = groupMember;
   };
 
-  this.removeGroupMembers = function(groupCode){
-    delete this.groupMembers[groupCode];
-  };
 
 });
