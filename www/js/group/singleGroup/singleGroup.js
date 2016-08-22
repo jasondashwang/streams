@@ -1,15 +1,26 @@
 'use strict';
 
-angular.module('main').controller('SingleGroupCtrl',['$scope', '$state', '$stateParams', '$log', '$ionicNavBarDelegate', 'CameraFactory', '$cordovaCamera', 'loggedInUser', 'GroupFactory', function ($scope, $state, $stateParams, $log, $ionicNavBarDelegate, CameraFactory, $cordovaCamera, loggedInUser, GroupFactory) {
-
-  $scope.$on("$ionicView.enter", function () {
-    GroupFactory.fireBase($stateParams.groupCode).$bindTo($scope, 'group')
-      .then(function() {
-        $scope.isAdmin = $scope.group.members[loggedInUser.uid];
-        $scope.newGroup = {
-          name: $scope.group.name
-        };
-      });
+angular.module('main').controller('SingleGroupCtrl',['$scope', '$state', '$stateParams', '$log', '$ionicNavBarDelegate', 'CameraFactory', '$cordovaCamera', 'loggedInUser', 'GroupFactory', 'GroupService',function ($scope, $state, $stateParams, $log, $ionicNavBarDelegate, CameraFactory, $cordovaCamera, loggedInUser, GroupFactory, GroupService) {
+  var unbind;
+  $scope.$on("$ionicView.loaded", function () {
+    if($scope.group){
+      if($scope.group.groupCode === $stateParams.groupCode) return;
+      else unbind();
+    }
+    GroupService.getGroup($stateParams.groupCode, true)
+    .then(function(group){
+      return group.$bindTo($scope, 'group');
+    })
+    .then(function(ub){
+      unbind = ub;
+      $scope.isAdmin = $scope.group.members[loggedInUser.uid];
+      $scope.newGroup = {
+        name: $scope.group.name
+      };
+    })
+    .catch(function(err){
+      console.log(err);
+    });
   });
 
   function cleanForm(form){
@@ -56,7 +67,7 @@ angular.module('main').controller('SingleGroupCtrl',['$scope', '$state', '$state
   $scope.leaveGroup = function() {
     GroupFactory.leaveGroup($stateParams.groupCode)
       .then(function() {
-        $ionicNavBarDelegate.showBackButton(false);
+        // $ionicNavBarDelegate.showBackButton(false);
         $state.go('tab.groups');
       })
       .catch($log.error);
@@ -64,7 +75,7 @@ angular.module('main').controller('SingleGroupCtrl',['$scope', '$state', '$state
 
   $scope.endGroup = function(groupMembers) {
     GroupFactory.endGroup(groupMembers, $stateParams.groupCode);
-    $ionicNavBarDelegate.showBackButton(false);
+    // $ionicNavBarDelegate.showBackButton(false);
     $state.go('tab.groups');
   };
 

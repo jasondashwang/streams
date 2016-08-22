@@ -13,6 +13,8 @@ angular.module('main').service('GroupSession', function(){
 
   this.destroy = function(){
     this.groups = {};
+    this.groupMembers = {};
+    this.groupCollages = {};
   };
 
   this.groupCollages = {};
@@ -23,6 +25,16 @@ angular.module('main').service('GroupSession', function(){
 
   this.removeGroupCollage = function(groupCode){
     delete this.groupCollages[groupCode];
+  };
+
+  this.groupMembers = {};
+
+  this.addGroupMember = function(groupMember, uid, groupCode){
+    this.groupMembers[groupCode].members[uid] = groupMember;
+  };
+
+  this.removeGroupMembers = function(groupCode){
+    delete this.groupMembers[groupCode];
   };
 
 });

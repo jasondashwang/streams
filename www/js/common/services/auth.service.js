@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('main').service('AuthService', function($q, Session, $rootScope, $firebaseAuth, $firebaseObject){
+angular.module('main').service('AuthService', function($q, GroupSession, localStorageService, Session, $rootScope, $firebaseAuth, $firebaseObject){
   var ref = firebase.database().ref();
   var firebaseAuth = $firebaseAuth();
   var self = this;
@@ -80,6 +80,8 @@ angular.module('main').service('AuthService', function($q, Session, $rootScope, 
       return self.getUser(authUser.uid);
     })
     .then(function (dbUser){
+      localStorageService.set('email', email);
+      localStorageService.set('password', password);
       var firebaseProfile = $firebaseObject(ref.child('users/' + uid));
       return onSuccessfulLogin(firebaseProfile);
     });
@@ -98,6 +100,18 @@ angular.module('main').service('AuthService', function($q, Session, $rootScope, 
   this.logout = function () {
     $rootScope.isLoggedIn = false;
     Session.destroy();
+    GroupSession.destroy();
+    localStorageService.clearAll();
   };
+})
+.run(function(localStorageService, AuthService, $state){
+  var email = localStorageService.get('email');
+  var password = localStorageService.get('password');
+  if(email && password){
+    AuthService.login(email, password)
+    .then(function(res){
+      $state.go('tab.profile')
+    });
+  }
 });
 
