@@ -74,7 +74,6 @@ angular.module('main').filter('timeFormat', function(){
 		var now = new Date().toDateString();
 		var stamp; 
 		groups.forEach(function(group){
-			console.log(group)
 			stamp = new Date(group.lastMessage.timeStamp)
 			if (now == stamp.toDateString()) {
 				var hours = stamp.getHours();
