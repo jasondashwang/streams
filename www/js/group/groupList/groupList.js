@@ -41,12 +41,6 @@ angular.module('main').controller('GroupListCtrl', function($ionicModal, $scope,
 		  	for (var group in groups) {
 		  		$scope.groups.push(groups[group]);
 		  	}
-		  	// $scope.groups.forEach(function(group){
-		  	// 	console.log(group)
-		  	// })
-		  	// $scope.groups.sort(function(a,b){
-		  	// 	return b.lastMessage.timeStamp - a.lastMessage.timeStamp;
-		  	// });
 		  // 	var now = new Date().toDateString();
 		  // 	var stamp;
 		  // 	$scope.groups.forEach(function(group){
@@ -59,12 +53,12 @@ angular.module('main').controller('GroupListCtrl', function($ionicModal, $scope,
 				// 		period = 'pm';
 				// 		hours -= 12;
 				// 	}
-				// 	group.lastMessage.timeStamp = hours + ":" + minutes + " " + period;
+				// 	group.lastMessage.timeStampFormat = hours + ":" + minutes + " " + period;
 				// } else {
-				// 	group.lastMessage.timeStamp = stamp.toDateString();
+				// 	group.lastMessage.timeStampFormat = stamp.toDateString();
 				// }
 
-		  // 	})
+		  // 	});
 		  })
 		  .catch(function(err){
 		    $.growl.error({location: 'tc', message: err.message});
