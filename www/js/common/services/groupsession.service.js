@@ -25,10 +25,6 @@ angular.module('main').service('GroupSession', function(){
     this.groupCollages[groupCode] = groupCollage;
   };
 
-  this.removeGroupCollage = function(groupCode){
-
-  };
-
   this.groupMembers = {};
 
   this.addGroupMember = function(groupMember, uid, groupCode){
