@@ -2,7 +2,6 @@
 
 angular.module('main').controller('ProfileCtrl', ['$scope', '$state', '$rootScope', 'AuthService', '$cordovaCamera', '$ionicPopup', '$timeout', function ($scope, $state, $rootScope, AuthService, $cordovaCamera, $ionicPopup, $timeout) {
 
-
     $scope.passwordConfirm = function(){
       $scope.security = {};
 
