@@ -67,7 +67,7 @@ angular.module('main').controller('SingleGroupCtrl',['$scope', '$state', '$state
   $scope.leaveGroup = function() {
     GroupFactory.leaveGroup($stateParams.groupCode)
       .then(function() {
-        // $ionicNavBarDelegate.showBackButton(false);
+        GroupService.removeGroup($stateParams.groupCode);
         $state.go('tab.groups');
       })
       .catch($log.error);
@@ -75,7 +75,7 @@ angular.module('main').controller('SingleGroupCtrl',['$scope', '$state', '$state
 
   $scope.endGroup = function(groupMembers) {
     GroupFactory.endGroup(groupMembers, $stateParams.groupCode);
-    // $ionicNavBarDelegate.showBackButton(false);
+    GroupService.removeGroup($stateParams.groupCode);
     $state.go('tab.groups');
   };
 
