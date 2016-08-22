@@ -10,11 +10,24 @@
       <video width="320" height="240" controls ng-if="mediaObj.mediaType == 'video'">
         <source ng-src="{{mediaObj.mediaUrl | trusted}}">
       </video>
+      <p ng-if="mediaObj.mediaType == 'message'">{{ mediaObj.body }}</p>
     </div>
+
+  
+  <!-- Chat Input Box -->
+  <div class="item item-input-inset" id="chatbox">
+    <label class="item-input-wrapper">
+      <input type="text" placeholder="Chat" ng-model='newMessage.body'>
+    </label>
+    <button class="button button-small" ng-click="createNewMessage()">
+      Send
+    </button>
+  </div>
+
   </ion-content>
-  <ion-footer-bar align-title="left" class="bar-assertive">
+<!--   <ion-footer-bar align-title="left" class="bar-assertive">
     <div class="buttons">
       <button class="button" ui-sref="tab.map">Map</button>
     </div>
-  </ion-footer-bar>
+  </ion-footer-bar> -->
 </ion-view>
