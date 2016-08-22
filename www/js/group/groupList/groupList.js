@@ -41,12 +41,7 @@ angular.module('main').controller('GroupListCtrl', function($ionicModal, $scope,
 		  	for (var group in groups) {
 		  		$scope.groups.push(groups[group]);
 		  	}
-		  	// $scope.groups.forEach(function(group){
-		  	// 	console.log(group)
-		  	// })
-		  	// $scope.groups.sort(function(a,b){
-		  	// 	return b.lastMessage.timeStamp - a.lastMessage.timeStamp;
-		  	// });
+
 		  // 	var now = new Date().toDateString();
 		  // 	var stamp;
 		  // 	$scope.groups.forEach(function(group){
@@ -73,6 +68,34 @@ angular.module('main').controller('GroupListCtrl', function($ionicModal, $scope,
 
 
 });
+
+angular.module('main').filter('timeFormat', function(){
+	return function(groups){
+		var now = new Date().toDateString();
+		var stamp; 
+		groups.forEach(function(group){
+			console.log(group)
+			stamp = new Date(group.lastMessage.timeStamp)
+			if (now == stamp.toDateString()) {
+				var hours = stamp.getHours();
+				var minutes = stamp.getMinutes();
+				var period = 'am';
+				if (hours > 12) {
+					period = 'pm';
+					hours -= 12;
+				}
+				group.lastMessage.timeFormatted = hours + ":" + minutes + " " + period;
+			} else {
+				group.lastMessage.timeFormatted = stamp.toDateString();
+			}
+		})
+
+		return groups;
+	}
+
+
+})
+
 
 
 
