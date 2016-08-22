@@ -25,6 +25,10 @@ angular.module('main')
           icon: im
         });
 
+        mediaObjects.filter(function(el){
+          return el.mediaType !== 'message'
+        })
+
         mediaObjects.forEach(function(el){
           var contentString, mediaIcon;
           if (el.mediaType == "video") {

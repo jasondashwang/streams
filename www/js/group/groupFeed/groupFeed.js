@@ -29,18 +29,18 @@ angular.module('main').controller('GroupFeedCtrl',['$scope', '$stateParams', 'Gr
     })
     .then(function(ub){
       unbindMedia = ub;
-      MediaService.set($scope.mediaObjects);
+      var mediaArr = [];
+      for (var media in $scope.mediaObjects) {
+         if ($scope.mediaObjects[media] && $scope.mediaObjects[media].mediaType)
+         mediaArr.push($scope.mediaObjects[media]);
+      }
+
+       MediaService.set(mediaArr);
     })
     .catch(function(err){
       console.error(err);
     });
-	  // GroupFactory.fireBase($scope.groupCode)
-	  // 	.$bindTo($scope, 'group')
-	  // 	.then(function(ub){
-	  // 		unbind = ub;
-		 //    $scope.mediaObjects = GroupFactory.fetchMedia($stateParams.groupCode);
-		 //    MediaService.set($scope.mediaObjects);
-	  // 	});
+
   });
 
 }]);
