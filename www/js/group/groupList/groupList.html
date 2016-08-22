@@ -11,10 +11,10 @@
       <p>You are currently not in any group!</p>
     </li>
   </div>
-	<div ng-repeat="group in groups | orderBy: '-lastMessage.timeStamp'" class="list" id='groupList'>
+	<div ng-repeat="group in groups | timeFormat | orderBy: '-lastMessage.timeStamp'" class="list" id='groupList'>
 	    <a class="item item-thumbnail-left" ui-sref="tab.groupFeed({groupCode: group.groupCode})">
 	      <img ng-src="{{group.mediaUrl}}">
-	      <h2>{{group.name}}<span>{{ group.lastMessage.timeStamp }}</span></h2>
+	      <h2>{{group.name}}<span>{{ group.lastMessage.timeFormatted }}</span></h2>
 	      <p>{{ group.lastMessage.message }}</p>
 	    </a>
 	</div>
