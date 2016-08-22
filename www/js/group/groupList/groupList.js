@@ -1,4 +1,4 @@
-angular.module('main').controller('GroupListCtrl', function($ionicModal, $scope, GroupFactory, $state){
+angular.module('main').controller('GroupListCtrl', function($ionicModal, $scope, GroupFactory, $state, GroupService){
 
 	$ionicModal.fromTemplateUrl('js/group/groupList/groupModal.html', {
 	scope: $scope,
@@ -35,17 +35,25 @@ angular.module('main').controller('GroupListCtrl', function($ionicModal, $scope,
 	};
 
   $scope.$on("$ionicView.enter", function () {
-    GroupFactory.fetchCurrentGroups()
-      .then(function(groups) {
-      	$scope.groups = groups;
-      	$scope.groups.sort(function(a,b){
-      		return b.lastMessage.timeStamp - a.lastMessage.timeStamp;
-      	});
+    GroupService.getCurrentGroups()
+    .then(function(groups){
+      $scope.groups = groups;
+    })
+    .catch(function(err){
+      $.growl.error({location: 'tc', message: err.message});
+    });
 
-      })
-      .catch(function(err){
-      	console.error(err);
-      });
+    // GroupFactory.fetchCurrentGroups()
+    //   .then(function(groups) {
+    //   	$scope.groups = groups;
+    //   	$scope.groups.sort(function(a,b){
+    //   		return b.lastMessage.timeStamp - a.lastMessage.timeStamp;
+    //   	});
+
+    //   })
+    //   .catch(function(err){
+    //   	console.error(err);
+    //   });
   });
 
 
