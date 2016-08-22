@@ -47,7 +47,6 @@ angular.module('main').controller('GroupListCtrl', function($ionicModal, $scope,
 		  });
   });
 
-
 });
 
 angular.module('main').filter('timeFormat', function(){

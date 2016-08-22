@@ -44,5 +44,17 @@ angular.module('main').controller('GroupFeedCtrl',['$scope', '$stateParams', 'Gr
 
   });
 
+  $scope.chat = true;
+  $scope.media = false;
+  $scope.toggleView = function(view){
+    if (view == "chat") {
+      $scope.chat = true;
+      $scope.media = false;
+    } else {
+      $scope.chat = false;
+      $scope.media = true;      
+    }
+  }
+
 }]);
 
