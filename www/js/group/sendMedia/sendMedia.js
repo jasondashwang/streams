@@ -13,12 +13,15 @@ angular.module('main')
 			  .catch(function(err){
 			    $.growl.error({location: 'tc', message: err.message});
 			  });
+			  $ionicHistory.nextViewOptions({
+			      disableBack: true
+			   });
 			});
 
 			var sendGroups = [];
 			function filterSendGroups() {
 				sendGroups = $scope.groups.forEach(function(group) {
-				delete group.sendGroup;
+					delete group.sendGroup;
 			});
 			}
 
@@ -32,9 +35,6 @@ angular.module('main')
 			CameraFactory.sendMedia(sendGroups, $scope.media);
 			filterSendGroups();
 			$ionicHistory.clearHistory();
-			$ionicHistory.nextViewOptions({
-			    disableBack: true
-			  });
 			$state.go("tab.groups");
 		};
 
