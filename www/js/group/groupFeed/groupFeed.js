@@ -19,6 +19,9 @@ angular.module('main').controller('GroupFeedCtrl',['$scope', '$stateParams', 'Gr
   var unbindMedia;
   $scope.$on("$ionicView.enter", function () {
    // potential bug
+   $(document).ready(function(){
+      $ionicScrollDelegate.scrollBottom();
+   })
    $scope.newMessage = {};
    $scope.view = 'chat';
    $scope.groupCode = $stateParams.groupCode;
@@ -66,7 +69,6 @@ angular.module('main').controller('GroupFeedCtrl',['$scope', '$stateParams', 'Gr
     if ($scope.newMessage.body.length < 1) {
       return;
     }
-    $ionicScrollDelegate.scrollBottom()
     $scope.newMessage.timeStamp = Date.now()
     MessageFactory.createNewMessage($scope.newMessage, $scope.groupCode);
     $timeout(function(){
@@ -74,9 +76,12 @@ angular.module('main').controller('GroupFeedCtrl',['$scope', '$stateParams', 'Gr
     })
   }
 
+  $scope.$watch('mediaObjects', function(){
+    $ionicScrollDelegate.scrollBottom()
+  })
+
   $scope.toggleView = function(view){
     $scope.view = view;
-
   }
 
 }]);
