@@ -30,6 +30,7 @@ angular.module('main').controller('GroupFeedCtrl',['$scope', '$stateParams', 'Gr
         })
       }
       MediaService.set(media);
+      MediaService.setPins(media)
     }
 
     GroupService.getGroup($stateParams.groupCode)

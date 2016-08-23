@@ -9926,11 +9926,13 @@ ion-tabs.tabs-color-active-positive .tab-item {
   margin: .1em; }
 
 .boxed {
-  border: 1px solid #d3d3d3;
+  border: 2px solid #d3d3d3;
   top: 70px;
   left: 10px;
   position: absolute;
   background-color: white;
   z-index: 10;
-  width: 20vw;
-  height: 40vh; }
+  width: 30vw;
+  height: 20vh; }
+  .boxed h3 {
+    padding-left: 10px; }
