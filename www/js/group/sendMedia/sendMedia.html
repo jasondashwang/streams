@@ -8,7 +8,7 @@
 	<ion-list>
 	  <ion-checkbox ng-repeat="group in groups" ng-click='toggleGroup(group.groupCode)' ng-model="groupFilter.group">{{ group.name }}</ion-checkbox>
 	</ion-list>
-	<button ng-click="cancel()">Cancel</button>
+	<button class="button button-assertive" ng-click="cancel()">Cancel</button>
 	<ion-footer-bar align-title='left' class='bar-assertive'>
 		<div class='buttons'>
 		    <button class='button' ng-click="sendToGroups()">

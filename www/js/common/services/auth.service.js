@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('main').service('AuthService', function($q, GroupSession, localStorageService, Session, $rootScope, $firebaseAuth, $firebaseObject){
+angular.module('main').service('AuthService', function($q, GroupSession, localStorageService, Session, $rootScope, $ionicHistory, $firebaseAuth, $firebaseObject){
   var ref = firebase.database().ref();
   var firebaseAuth = $firebaseAuth();
   var self = this;
@@ -80,6 +80,8 @@ angular.module('main').service('AuthService', function($q, GroupSession, localSt
       return self.getUser(authUser.uid);
     })
     .then(function (dbUser){
+      $ionicHistory.clearCache();
+      $ionicHistory.clearHistory();
       localStorageService.set('email', email);
       localStorageService.set('password', password);
       var firebaseProfile = $firebaseObject(ref.child('users/' + uid));
@@ -102,15 +104,18 @@ angular.module('main').service('AuthService', function($q, GroupSession, localSt
     Session.destroy();
     GroupSession.destroy();
     localStorageService.clearAll();
+    $ionicHistory.clearCache();
+    $ionicHistory.clearHistory();
   };
 })
-.run(function(localStorageService, AuthService, $state){
+.run(function(localStorageService, AuthService, $state, $ionicHistory){
   var email = localStorageService.get('email');
   var password = localStorageService.get('password');
   if(email && password){
     AuthService.login(email, password)
     .then(function(res){
-      $state.go('tab.profile')
+      $ionicHistory.clearHistory();
+      $state.go('tab.camera')
     });
   }
 });

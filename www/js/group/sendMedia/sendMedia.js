@@ -13,7 +13,7 @@ angular.module('main')
 	    $scope.cancel = function () {
 	    	CameraService.media = null;
 	    	$scope.sendGroups = [];
-	    	$state.go("tab.groups")
+	    	$state.go("tab.camera")
 	    }
 
 		$scope.sendToGroups = function () {

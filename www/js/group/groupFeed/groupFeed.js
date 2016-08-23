@@ -28,8 +28,6 @@ angular.module('main').controller('GroupFeedCtrl',['$scope', '$stateParams', 'Gr
     })
     .then(function(members){
       $scope.members = members;
-      console.log($scope.members)
-
       return GroupService.getGroupCollage($stateParams.groupCode);
     })
     .then(function(groupCollage){
@@ -58,7 +56,7 @@ angular.module('main').controller('GroupFeedCtrl',['$scope', '$stateParams', 'Gr
     }
     $ionicScrollDelegate.scrollBottom()
     $scope.newMessage.timeStamp = Date.now()
-    MessageFactory.createNewMessage($scope.newMessage, $scope.groupCode); 
+    MessageFactory.createNewMessage($scope.newMessage, $scope.groupCode);
     $timeout(function(){
       $scope.newMessage.body = "";
     })

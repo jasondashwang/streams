@@ -9893,7 +9893,7 @@ a.button {
 .bar.bar-stable {
   border-color: #1B4965; }
 
-.bar.bar-stable .title {
+.bar.bar-stable .title, .bar-stable .button.button-clear {
   color: #f8f8f8; }
 
 ion-tabs.tabs-color-active-positive .tab-item.tab-item-active, ion-tabs.tabs-color-active-positive .tab-item.active, ion-tabs.tabs-color-active-positive .tab-item.activated {
