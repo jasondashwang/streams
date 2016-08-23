@@ -18,21 +18,30 @@ angular.module('main')
 			  });
 			});
 
-			var sendGroups = [];
 			function filterSendGroups() {
-				sendGroups = $scope.groups.forEach(function(group) {
+				console.log('should have sendgroup prop', $scope.groups);
+				$scope.groups.forEach(function(group) {
 					delete group.sendGroup;
+				console.log('should have no sendgroup property', $scope.groups);
 			});
 			}
 
-	    $scope.cancel = function () {
-	    	CameraService.media = null;
-	    	filterSendGroups();
-	    	$state.go("tab.camera");
-	    };
+		var sendGroupCodes = [];
+    $scope.cancel = function () {
+    	CameraService.media = null;
+    	filterSendGroups();
+    	sendGroupsCodes = [];
+    	$state.go("tab.camera");
+    };
 
 		$scope.sendToGroups = function () {
-			CameraFactory.sendMedia(sendGroups, $scope.media);
+			$scope.groups.forEach(function(group) {
+				if (group.sendGroup) sendGroupCodes.push(group.groupCode);
+			});
+			console.log(sendGroupCodes);
+			console.log('groups that are sending', sendGroupCodes);
+			CameraFactory.sendMedia(sendGroupCodes, $scope.media);
+			sendGroupCodes = [];
 			filterSendGroups();
 			$ionicHistory.clearHistory();
 			$state.go("tab.groups");
