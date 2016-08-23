@@ -9910,7 +9910,8 @@ ion-tabs.tabs-color-active-positive .tab-item {
   position: absolute;
   width: 100vw;
   top: 43px;
-  margin-bottom: 47px; }
+  margin-bottom: 47px;
+  padding-bottom: 46px; }
 
 .bar {
   padding: 0px; }

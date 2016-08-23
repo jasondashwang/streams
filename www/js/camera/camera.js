@@ -59,14 +59,9 @@ angular.module('main').controller('CameraCtrl', function ($rootScope, $scope, $s
 	    	.then(function(position){
 			    $cordovaCapture.captureVideo(options)
 			    .then(function(videoData) {
-			    	PKVideoThumbnail.createThumbnail(videoData[0], 'thumb' + '.png', function(res){
-			    		console.log('Success ', res)
-			    	}, function(err){
-			    		console.log("Error: " + err.code);
-			    	})
-					// toDataUrl(videoData[0].fullPath, function(base64Img){
-					// 	CameraFactory.storeMedia(base64Img, "video", position)
-					// })
+					toDataUrl(videoData[0].fullPath, function(base64Img){
+						CameraFactory.storeMedia(base64Img, "video", position)
+					})
 			    });
 	    	})
 	    	.catch(function(err){
