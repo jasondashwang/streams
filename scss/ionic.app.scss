@@ -21,24 +21,6 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
-.moments {
-    h3, h4 {
-      color: white;
-    }
-    moment {
-      .moment-div {
-        border-bottom: 2px solid #c0c5ce; // Space Gray
-        height: 12em;
-        width: auto;
-        background:linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) ), url('http://feelgrafix.com/data/wallpapers/wallpapers-20.jpg');
-        background-size: cover;
-        border-radius: 3px;
-        padding: 15px;
-
-      }
-    }
-}
-
 .group-logged-out {
   padding: 3em;
   .button.button-large {
@@ -170,4 +152,14 @@ ion-tabs.tabs-color-active-positive .tab-item {
 
 .bar {
   padding: 0px;
+}
+
+.tab-active {
+  border-bottom: 5px solid #1B4965 !important; 
+}
+
+.chatMedia {
+  p {
+    font-style: italic;
+  }
 }

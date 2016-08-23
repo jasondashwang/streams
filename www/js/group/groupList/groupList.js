@@ -80,19 +80,17 @@ angular.module('main').filter('timeFormat', function(){
  })
 
 angular.module('main').filter('chatTimeFormat', function(){
-  return function(mediaObjects){
-	var messages = [];
-	for (var media in mediaObjects) {
-		if (mediaObjects[media] && mediaObjects[media].mediaType)
-  		messages.push(mediaObjects[media]);
-  	}
-  	console.log(messages)
-  	messages.filter(function(el){
-  		var bool = true;
+  return function(messages){
+	// var messages = [];
+	// for (var media in mediaObjects) {
+	// 	if (mediaObjects[media] && mediaObjects[media].mediaType)
+ //  		messages.push(mediaObjects[media]);
+ //  	}
+ //  	messages.filter(function(el){
+ //  		var bool = true;
 
-  		return el.mediaType == "message"
-  	})
-  	console.log(messages)
+ //  		return el.mediaType == "message"
+ //  	})
     var now = new Date().toDateString();
     var stamp;
     if (!messages) return;

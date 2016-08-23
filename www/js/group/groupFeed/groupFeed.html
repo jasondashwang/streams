@@ -6,9 +6,9 @@
   </ion-nav-buttons>
   <div class="bar bar-header bar-light navigator">
     <div class="button-bar">
-      <a class="button" ng-click='toggleView("chat")'>Chat</a>
-      <a class="button" ng-click='toggleView("media")'>Media</a>
-      <a class="button" ng-click='toggleView("map")'>Map</a>
+      <a class="button" ng-class="{'tab-active': view == 'chat'}" ng-click='toggleView("chat")'>Chat</a>
+      <a class="button" ng-class="{'tab-active': view == 'media'}" ng-click='toggleView("media")'>Media</a>
+      <a class="button" ng-class="{'tab-active': view == 'map'}" ng-click='toggleView("map")'>Map</a>
     </div>
   </div>
 

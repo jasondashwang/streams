@@ -18,6 +18,20 @@ angular.module('main').controller('GroupFeedCtrl',['$scope', '$stateParams', 'Gr
     }
    }
 
+
+    function filter () {
+      var media = MediaService.get();
+      if ($scope.view == 'chat') {
+        media = media.map(function(el){
+          if (el.mediaType !== 'message') {
+            el.body = 'Sent a ' + el.mediaType 
+          }
+          return el;
+        })
+      }
+      MediaService.set(media);
+    }
+
     GroupService.getGroup($stateParams.groupCode)
     .then(function(group){
       return group.$bindTo($scope, 'group');
@@ -37,12 +51,12 @@ angular.module('main').controller('GroupFeedCtrl',['$scope', '$stateParams', 'Gr
       unbindMedia = ub;
       var mediaArr = [];
       for (var media in $scope.mediaObjects) {
-         if ($scope.mediaObjects[media] && $scope.mediaObjects[media].mediaType)
+         if ($scope.mediaObjects[media] && $scope.mediaObjects[media].mediaType && media !== '$id' && media !== '$priority')
          mediaArr.push($scope.mediaObjects[media]);
       }
 
        MediaService.set(mediaArr);
-
+       filter();
     })
     .catch(function(err){
       console.error(err);
@@ -62,15 +76,10 @@ angular.module('main').controller('GroupFeedCtrl',['$scope', '$stateParams', 'Gr
     })
   }
 
-
   $scope.toggleView = function(view){
     $scope.view = view;
-  }
 
-// $scope.scrollBottom = function() {
-//      $ionicScrollDelegate.scrollBottom()
-//      console.log("scroll to bottom")
-// }
+  }
 
 }]);
 
