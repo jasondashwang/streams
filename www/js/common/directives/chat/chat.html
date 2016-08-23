@@ -1,7 +1,7 @@
-<div ng-repeat='media in mediaObjects'> 
+<div ng-repeat='media in mediaObjects | chatTimeFormat' id="chatList"> 
 	<a class="item item-avatar">
 	  <img ng-src="{{members[media.member.id].photoUrl}}">
-	  <h2>{{ media.member.name }}</h2>
+	  <h2>{{ media.member.name }}<span>{{ media.timeFormatted }}</span></h2>
 	  <p>{{ media.body }}</p>
 	</a>
 </div>

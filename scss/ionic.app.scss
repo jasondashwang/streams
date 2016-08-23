@@ -82,7 +82,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 #map {
     width: 100vw;
-    height: 75vh
+    height: 80vh
 }
 
 .profile-div {
@@ -109,9 +109,10 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
   }
 }
 
-#groupList {
+#groupList, #chatList {
   span {
     float: right;
+    font-size: 10pt;
   }
 }
 
@@ -162,6 +163,7 @@ ion-tabs.tabs-color-active-positive .tab-item {
   position: absolute;
   width: 100vw;
   top: 43px;
+  margin-bottom: 47px;
 }
 
 .bar {

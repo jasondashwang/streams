@@ -37,7 +37,6 @@ angular.module('main').controller('GroupListCtrl', function($ionicModal, $scope,
 
 	    GroupService.getCurrentGroups()
 		  .then(function(groups) {
-        console.log(groups);
 		  	$scope.groups = [];
 		  	for (var group in groups) {
 		  		$scope.groups.push(groups[group]);
@@ -80,3 +79,43 @@ angular.module('main').filter('timeFormat', function(){
 
  })
 
+angular.module('main').filter('chatTimeFormat', function(){
+  return function(mediaObjects){
+	var messages = [];
+	for (var media in mediaObjects) {
+		if (mediaObjects[media] && mediaObjects[media].mediaType)
+  		messages.push(mediaObjects[media]);
+  	}
+  	console.log(messages)
+  	messages.filter(function(el){
+  		var bool = true;
+
+  		return el.mediaType == "message"
+  	})
+  	console.log(messages)
+    var now = new Date().toDateString();
+    var stamp;
+    if (!messages) return;
+
+    messages.forEach(function(message){
+      stamp = new Date(message.timeStamp)
+      if (now == stamp.toDateString()) {
+        var hours = stamp.getHours();
+        var minutes = stamp.getMinutes();
+        if (minutes < 10) minutes = '0' + minutes;
+        var period = 'am';
+        if (hours > 12) {
+          period = 'pm';
+          hours -= 12;
+        }
+        message.timeFormatted = hours + ":" + minutes + " " + period;
+      } else {
+        message.timeFormatted = stamp.toDateString();
+      }
+    })
+
+    return messages;
+  }
+
+
+ })

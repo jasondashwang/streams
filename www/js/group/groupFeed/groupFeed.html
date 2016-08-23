@@ -14,12 +14,12 @@
 
   <ion-content>
   <div class="groupContent">
-    <chat ng-if ='chat' members="members" media-objects="mediaObjects"></chat>
-    <media ng-if ='media' members='members' media-objects="mediaObjects"></media>
-    <map ng-if='map'></map>
+    <chat ng-if ='view == "chat"' members="members" media-objects="mediaObjects"></chat>
+    <media ng-if ='view == "media"' members='members' media-objects="mediaObjects"></media>
+    <map ng-if='view == "map"'></map>
   </div>
   </ion-content>
-  <ion-footer-bar align-title="left" ng-if='chat'>
+  <ion-footer-bar align-title="left" ng-if='view == "chat"'>
     <div class="item item-input-inset" id="chatbox">
       <label class="item-input-wrapper">
         <input type="text" placeholder="Chat" ng-model='newMessage.body'>

@@ -9858,7 +9858,7 @@ a.button {
 
 #map {
   width: 100vw;
-  height: 75vh; }
+  height: 80vh; }
 
 .profile-div {
   text-align: left; }
@@ -9880,8 +9880,9 @@ a.button {
     margin-top: 1.2em;
     margin-bottom: 1.2em; }
 
-#groupList span {
-  float: right; }
+#groupList span, #chatList span {
+  float: right;
+  font-size: 10pt; }
 
 .groupPhotoThumbnail {
   text-align: center; }
@@ -9920,7 +9921,8 @@ ion-tabs.tabs-color-active-positive .tab-item {
 .groupContent {
   position: absolute;
   width: 100vw;
-  top: 43px; }
+  top: 43px;
+  margin-bottom: 47px; }
 
 .bar {
   padding: 0px; }

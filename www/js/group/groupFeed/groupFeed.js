@@ -1,15 +1,13 @@
 'use strict';
 
-angular.module('main').controller('GroupFeedCtrl',['$scope', '$stateParams', 'GroupFactory', 'MediaService', '$ionicNavBarDelegate', 'GroupService', "MessageFactory", '$ionicScrollDelegate', function ($scope, $stateParams, GroupFactory, MediaService, $ionicNavBarDelegate, GroupService, MessageFactory, $ionicScrollDelegate) {
+angular.module('main').controller('GroupFeedCtrl',['$scope', '$stateParams', 'GroupFactory', 'MediaService', '$ionicNavBarDelegate', 'GroupService', "MessageFactory", '$ionicScrollDelegate', '$timeout', function ($scope, $stateParams, GroupFactory, MediaService, $ionicNavBarDelegate, GroupService, MessageFactory, $ionicScrollDelegate, $timeout) {
 
   var unbindGroup;
   var unbindMedia;
   $scope.$on("$ionicView.enter", function () {
    // potential bug
    $scope.newMessage = {};
-   $scope.chat = true;
-   $scope.media = false;
-   $scope.map = false;
+   $scope.view = 'chat';
    $scope.groupCode = $stateParams.groupCode;
 
    if($scope.group){
@@ -60,25 +58,15 @@ angular.module('main').controller('GroupFeedCtrl',['$scope', '$stateParams', 'Gr
     }
     $ionicScrollDelegate.scrollBottom()
     $scope.newMessage.timeStamp = Date.now()
-    MessageFactory.createNewMessage($scope.newMessage, $scope.groupCode);   
+    MessageFactory.createNewMessage($scope.newMessage, $scope.groupCode); 
+    $timeout(function(){
+      $scope.newMessage.body = "";
+    })
   }
 
 
   $scope.toggleView = function(view){
-    if (view == "chat") {
-      $ionicScrollDelegate.scrollBottom()
-      $scope.chat = true;
-      $scope.media = false;
-      $scope.map = false;
-    } else if (view == "media") {
-      $scope.chat = false;
-      $scope.media = true;
-      $scope.map = false;      
-    } else {
-      $scope.chat = false;
-      $scope.media = false;
-      $scope.map = true;       
-    }
+    $scope.view = view;
   }
 
 // $scope.scrollBottom = function() {
