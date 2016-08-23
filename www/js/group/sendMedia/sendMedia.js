@@ -1,38 +1,43 @@
 angular.module('main')
 	.controller("SendMediaCtrl", function($scope, $stateParams, CameraService, GroupService, CameraFactory, $state, $ionicHistory){
 
-	    $scope.$on("$ionicView.enter", function () {
-				$scope.media = CameraService.media;
-				$ionicHistory.nextViewOptions({
-				    disableBack: true
-				 });
-		    GroupService.getCurrentGroups()
-			  .then(function(groups) {
-			  	$scope.groups = [];
-			  	for (var group in groups) {
-			  		$scope.groups.push(groups[group]);
-			  	}
-			  })
-			  .catch(function(err){
-			    $.growl.error({location: 'tc', message: err.message});
-			  });
-			});
+    $scope.$on("$ionicView.enter", function () {
+			$scope.media = CameraService.media;
+			$ionicHistory.nextViewOptions({
+			    disableBack: true
+			 });
+	    GroupService.getCurrentGroups()
+		  .then(function(groups) {
+		  	$scope.groups = [];
+		  	for (var group in groups) {
+		  		$scope.groups.push(groups[group]);
+		  	}
+		  })
+		  .catch(function(err){
+		    $.growl.error({location: 'tc', message: err.message});
+		  });
+		});
 
-			var sendGroups = [];
-			function filterSendGroups() {
-				sendGroups = $scope.groups.forEach(function(group) {
-					delete group.sendGroup;
-			});
-			}
+		function filterSendGroups() {
+			$scope.groups.forEach(function(group) {
+				delete group.sendGroup;
+		});
+		}
 
-	    $scope.cancel = function () {
-	    	CameraService.media = null;
-	    	filterSendGroups();
-	    	$state.go("tab.camera");
-	    };
+		var sendGroupCodes = [];
+    $scope.cancel = function () {
+    	CameraService.media = null;
+    	filterSendGroups();
+    	sendGroupCodes = [];
+    	$state.go("tab.camera");
+    };
 
 		$scope.sendToGroups = function () {
-			CameraFactory.sendMedia(sendGroups, $scope.media);
+			$scope.groups.forEach(function(group) {
+				if (group.sendGroup) sendGroupCodes.push(group.groupCode);
+			});
+			CameraFactory.sendMedia(sendGroupCodes, $scope.media);
+			sendGroupCodes = [];
 			filterSendGroups();
 			$ionicHistory.clearHistory();
 			$state.go("tab.groups");
