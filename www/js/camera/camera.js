@@ -1,7 +1,13 @@
 'use strict';
 
 
-angular.module('main').controller('CameraCtrl', function ($rootScope, $scope, $state, CameraFactory, $cordovaCapture, $cordovaCamera, Upload, $q) {
+angular.module('main').controller('CameraCtrl', function ($rootScope, $scope, $state, CameraFactory, $cordovaCapture, $cordovaCamera, Upload, $q, $ionicHistory) {
+
+	$scope.$on("$ionicView.enter", function () {
+		$ionicHistory.nextViewOptions({
+		    disableBack: true
+		 });
+	});
 
 	$scope.getLocation = function() {
 		var location = $q.defer()
@@ -14,7 +20,7 @@ angular.module('main').controller('CameraCtrl', function ($rootScope, $scope, $s
 			})
 		return location.promise;
 	}
-	$scope.getLocation();	
+	$scope.getLocation();
 
 // add error handlers for capture methods
 

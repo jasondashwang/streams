@@ -68,37 +68,6 @@ angular.module('main').factory('GroupFactory', ['$q', '$rootScope', 'AuthService
       });
   };
 
-  function returnGroup(groupId) {
-    var group = $q.defer();
-    ref.child('groups/' + groupId).on('value', function(snapshot){
-      group.resolve(snapshot.val());
-    }, function(err){
-      group.reject(err);
-    });
-    return group.promise;
-  }
-
-  GroupFactory.fetchCurrentGroups = function() {
-    // two ajax calls (user + groups)
-    // make sure user is 3-way binded
-    return AuthService.getLoggedInUser()
-      .then(function(user) {
-        var arr = [];
-        for (var code in user.groups) {
-          var x = returnGroup(code);
-          arr.push(x);
-        }
-        return $q.all(arr);
-      })
-      .then(function(groups){
-        return groups;
-      });
-  };
-
-  GroupFactory.fetchMedia = function (groupId) {
-    return $firebaseArray(ref.child('groupCollages/' + groupId));
-  };
-
   GroupFactory.leaveGroup = function(groupCode) {
     return AuthService.getLoggedInUser()
       .then(function(user) {
@@ -119,10 +88,6 @@ angular.module('main').factory('GroupFactory', ['$q', '$rootScope', 'AuthService
 
     // delete the group
     ref.child('groups/' + groupCode).remove();
-  };
-
-  GroupFactory.fetchCurGroupMembers = function(groupCode) {
-    return $firebaseArray(ref.child('groups/' + groupCode + '/members'));
   };
 
   return GroupFactory;

@@ -1,4 +1,4 @@
-angular.module('main').controller('GroupListCtrl', function($ionicModal, $scope, GroupFactory, $state, GroupService, MediaService){
+angular.module('main').controller('GroupListCtrl', function($ionicModal, $scope, GroupFactory, $state, GroupService, MediaService, $ionicHistory){
 
 	$ionicModal.fromTemplateUrl('js/group/groupList/groupModal.html', {
 	scope: $scope,
@@ -34,7 +34,7 @@ angular.module('main').controller('GroupListCtrl', function($ionicModal, $scope,
 		$state.go('tab.join-group');
 	};
 	$scope.$on("$ionicView.enter", function () {
-
+      $ionicHistory.clearHistory();
 	    GroupService.getCurrentGroups()
 		  .then(function(groups) {
 		  	$scope.groups = [];

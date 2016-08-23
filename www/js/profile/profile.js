@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('main').controller('ProfileCtrl', ['$scope', '$state', '$rootScope', 'AuthService', '$cordovaCamera', '$ionicPopup', '$timeout', function ($scope, $state, $rootScope, AuthService, $cordovaCamera, $ionicPopup, $timeout) {
+angular.module('main').controller('ProfileCtrl', ['$scope', '$state', '$rootScope', 'AuthService', '$cordovaCamera', '$ionicPopup', '$timeout', 'CameraFactory', function ($scope, $state, $rootScope, AuthService, $cordovaCamera, $ionicPopup, $timeout, CameraFactory) {
 
     $scope.passwordConfirm = function(){
       $scope.security = {};

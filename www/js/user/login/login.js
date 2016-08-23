@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('main')
-.controller('LoginCtrl', ['$scope', '$state', '$log', 'AuthService', '$rootScope', function ($scope, $state, $log, AuthService, $rootScope) {
+.controller('LoginCtrl', ['$scope', '$state', '$log', 'AuthService', function ($scope, $state, $log, AuthService) {
 
 
   $scope.login = function(userInfo) {

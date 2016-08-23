@@ -61,6 +61,15 @@ angular.module('main', [
       }
     }
   })
+  .state('tab.reset-password', {
+    url: '/reset-password',
+    views: {
+      'tab-login': {
+        templateUrl: 'js/user/reset-password/reset-password.html',
+        controller: 'ResetPasswordCtrl'
+      }
+    }
+  })
   .state('tab.profile', {
     url: '/profile',
     views: {
@@ -92,7 +101,7 @@ angular.module('main', [
   .state('tab.send-media', {
     url: '/send-media',
     views: {
-      'tab-group': {
+      'tab-camera': {
         templateUrl: 'js/group/sendMedia/sendMedia.html',
         controller: 'SendMediaCtrl'
       }
