@@ -64,16 +64,6 @@ angular.module('main').factory('GroupFactory', ['$q', '$rootScope', 'AuthService
       });
   };
 
-  function returnGroup(groupId) {
-    var group = $q.defer();
-    ref.child('groups/' + groupId).on('value', function(snapshot){
-      group.resolve(snapshot.val());
-    }, function(err){
-      group.reject(err);
-    });
-    return group.promise;
-  }
-
   GroupFactory.leaveGroup = function(groupCode) {
     return AuthService.getLoggedInUser()
       .then(function(user) {
@@ -94,10 +84,6 @@ angular.module('main').factory('GroupFactory', ['$q', '$rootScope', 'AuthService
 
     // delete the group
     ref.child('groups/' + groupCode).remove();
-  };
-
-  GroupFactory.fetchCurGroupMembers = function(groupCode) {
-    return $firebaseArray(ref.child('groups/' + groupCode + '/members'));
   };
 
   return GroupFactory;
