@@ -3,9 +3,11 @@
 
 angular.module('main').controller('CameraCtrl', function ($rootScope, $scope, $state, CameraFactory, $cordovaCapture, $cordovaCamera, Upload, $q, $ionicHistory) {
 
-	$ionicHistory.nextViewOptions({
-	    disableBack: true
-	 });
+	$scope.$on("$ionicView.enter", function () {
+		$ionicHistory.nextViewOptions({
+		    disableBack: true
+		 });
+	});
 
 	$scope.getLocation = function() {
 		var location = $q.defer()

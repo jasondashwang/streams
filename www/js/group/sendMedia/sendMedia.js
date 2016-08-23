@@ -3,6 +3,9 @@ angular.module('main')
 
 	    $scope.$on("$ionicView.enter", function () {
 				$scope.media = CameraService.media;
+				$ionicHistory.nextViewOptions({
+				    disableBack: true
+				 });
 		    GroupService.getCurrentGroups()
 			  .then(function(groups) {
 			  	$scope.groups = [];
@@ -13,9 +16,6 @@ angular.module('main')
 			  .catch(function(err){
 			    $.growl.error({location: 'tc', message: err.message});
 			  });
-			  $ionicHistory.nextViewOptions({
-			      disableBack: true
-			   });
 			});
 
 			var sendGroups = [];
