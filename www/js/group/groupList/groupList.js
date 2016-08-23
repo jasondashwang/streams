@@ -81,16 +81,16 @@ angular.module('main').filter('timeFormat', function(){
 
 angular.module('main').filter('chatTimeFormat', function(){
   return function(messages){
-	// var messages = [];
-	// for (var media in mediaObjects) {
-	// 	if (mediaObjects[media] && mediaObjects[media].mediaType)
- //  		messages.push(mediaObjects[media]);
- //  	}
- //  	messages.filter(function(el){
- //  		var bool = true;
+	var messages = [];
+	for (var media in mediaObjects) {
+		if (mediaObjects[media] && mediaObjects[media].mediaType)
+  		messages.push(mediaObjects[media]);
+  	}
+  	messages.filter(function(el){
+  		var bool = true;
 
- //  		return el.mediaType == "message"
- //  	})
+  		return el.mediaType == "message"
+  	})
     var now = new Date().toDateString();
     var stamp;
     if (!messages) return;

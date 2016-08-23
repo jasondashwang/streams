@@ -25,7 +25,11 @@ angular.module('main').factory('GroupFactory', ['$q', '$rootScope', 'AuthService
           members: {},
           timeCreated: Date.now(),
           mediaUrl: 'http://www.digital-photography-school.com/wp-content/uploads/2011/11/square-format-03.jpg',
-          groupCode: newGroupKey
+          groupCode: newGroupKey,
+          lastMessage: {
+            message: "No posts to display",
+            timeStamp: Date.now()
+          }
         };
 
         groupPostData.members[user.uid] = true;

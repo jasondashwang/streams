@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('main').service('MediaService', function(){
+angular.module('main').service('MediaService', function($rootScope){
   this.mediaObjects = null;
   this.get = function() {
   	return this.mediaObjects;
@@ -11,5 +11,8 @@ angular.module('main').service('MediaService', function(){
   this.destroy = function () {
   	this.mediaObjects = null;
   }
-  
+  this.hideTabs = function () {
+    $rootScope.$broadcast('hideTabs')
+  }
+
 });

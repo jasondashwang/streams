@@ -16,7 +16,6 @@ angular.module('main').directive('chat', function () {
 				scope.chatArray.push(scope.mediaObjects[media]);
 			}
     	}
-    	console.log(scope.chatArray)
     },
     templateUrl: 'js/common/directives/chat/chat.html'
   };
