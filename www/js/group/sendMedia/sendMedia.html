@@ -6,7 +6,7 @@
 	     </li>
 	   </div>
 	<ion-list>
-	  <ion-checkbox class="item-checkbox-right" ng-repeat="group in groups" ng-click='toggleGroup(group.groupCode)' ng-model="groupFilter.group">{{ group.name }}</ion-checkbox>
+	  <ion-checkbox class="item-checkbox-right" ng-repeat="group in groups" ng-model="group.sendGroup">{{ group.name }}</ion-checkbox>
 	</ion-list>
 	<button class="button button-assertive" ng-click="cancel()">Cancel</button>
 	<ion-footer-bar align-title='left' class='bar-assertive'>

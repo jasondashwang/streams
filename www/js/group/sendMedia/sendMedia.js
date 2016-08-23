@@ -2,7 +2,6 @@ angular.module('main')
 	.controller("SendMediaCtrl", function($scope, $stateParams, CameraService, GroupService, CameraFactory, $state, $ionicHistory){
 
 	    $scope.$on("$ionicView.enter", function () {
-				$scope.sendGroups = [];
 				$scope.media = CameraService.media;
 		    GroupService.getCurrentGroups()
 			  .then(function(groups) {
@@ -16,16 +15,22 @@ angular.module('main')
 			  });
 			});
 
+			var sendGroups = [];
+			function filterSendGroups() {
+				sendGroups = $scope.groups.forEach(function(group) {
+				delete group.sendGroup;
+			});
+			}
+
 	    $scope.cancel = function () {
 	    	CameraService.media = null;
-	    	$scope.sendGroups = [];
-	    	$state.go("tab.camera")
-	    }
+	    	filterSendGroups();
+	    	$state.go("tab.camera");
+	    };
 
 		$scope.sendToGroups = function () {
-			CameraFactory.sendMedia($scope.sendGroups, $scope.media)
-			$scope.sendGroups = [];
-			// $scope.groups = [];
+			CameraFactory.sendMedia(sendGroups, $scope.media);
+			filterSendGroups();
 			$ionicHistory.clearHistory();
 			$ionicHistory.nextViewOptions({
 			    disableBack: true
@@ -33,8 +38,4 @@ angular.module('main')
 			$state.go("tab.groups");
 		};
 
-		$scope.toggleGroup = function (groupCode) {
-			var ind = $scope.sendGroups.indexOf(groupCode);
-			(ind !== -1) ? $scope.sendGroups.splice(ind, 1) : $scope.sendGroups.push(groupCode);
-		}
-	})
+	});
