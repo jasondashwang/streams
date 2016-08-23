@@ -9,7 +9,7 @@ angular.module('main')
     auth.sendPasswordResetEmail(userInfo.email)
       .then(function() {
         $.growl.notice({location: 'br', message: 'A reset link was sent to ' + userInfo.email});
-        $state.go('tab.profile');
+        $state.go('tab.login');
       })
       .catch(function(err) {
         $.growl.error({location: 'br', message: err.message});
