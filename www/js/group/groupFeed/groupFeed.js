@@ -18,13 +18,12 @@ angular.module('main').controller('GroupFeedCtrl',['$scope', '$stateParams', 'Gr
     }
    }
 
-
     function filter () {
       var media = MediaService.get();
       if ($scope.view == 'chat') {
         media = media.map(function(el){
           if (el.mediaType !== 'message') {
-            el.body = 'Sent a ' + el.mediaType 
+            el.body = 'Sent a ' + el.mediaType
           }
           return el;
         })

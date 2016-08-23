@@ -1,6 +1,6 @@
 angular.module('main').controller('GroupListCtrl', function($ionicModal, $scope, GroupFactory, $state, GroupService, MediaService, $ionicHistory){
 
-	$ionicModal.fromTemplateUrl('js/group/groupList/groupModal.html', {
+	$ionicModal.fromTemplateUrl('js/group/createOrJoinGroup/createOrJoinGroup.html', {
 	scope: $scope,
 	animation: 'slide-in-up'
 	}).then(function(modal) {
@@ -25,14 +25,29 @@ angular.module('main').controller('GroupListCtrl', function($ionicModal, $scope,
 		// Execute action
 	});
 
-	$scope.createGroup = function(){
-		$scope.closeModal();
-		$state.go('tab.create-group');
-	};
-	$scope.joinGroup = function(){
-		$scope.closeModal();
-		$state.go('tab.join-group');
-	};
+  $scope.createGroup = function(groupDetails) {
+    GroupFactory.createGroup(groupDetails)
+    .then(function(newGroupCode) {
+      $state.go('tab.groupFeed', {groupCode: newGroupCode});
+    })
+    .catch(function(err){
+      $.growl.error({location: 'tc', message: err.message});
+    });
+    $scope.closeModal();
+  };
+
+  $scope.joinGroup = function (groupCode) {
+    GroupFactory.joinGroup(groupCode)
+      .then(function() {
+        $state.go('tab.groupFeed', {groupCode: groupCode});
+      })
+      .catch(function() {
+        $.growl.error({location: 'tc', message: "Sorry this group doesn't exist yet :("});
+      });
+      $scope.closeModal();
+      $scope.joinGroupForm.$setPristine();
+  };
+
 	$scope.$on("$ionicView.enter", function () {
       $ionicHistory.clearHistory();
 	    GroupService.getCurrentGroups()
@@ -46,7 +61,6 @@ angular.module('main').controller('GroupListCtrl', function($ionicModal, $scope,
 		    $.growl.error({location: 'tc', message: err.message});
 		  });
   });
-
 });
 
 angular.module('main').filter('timeFormat', function(){

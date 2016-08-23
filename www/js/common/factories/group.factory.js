@@ -17,9 +17,10 @@ angular.module('main').factory('GroupFactory', ['$q', '$rootScope', 'AuthService
 
   GroupFactory.createGroup = function (groupDetails) {
 
+    var newGroupKey;
     return AuthService.getLoggedInUser()
       .then(function(user) {
-        var newGroupKey = alphanumeric_unique();
+        newGroupKey = alphanumeric_unique();
         var groupPostData = {
           name: groupDetails.name,
           members: {},
@@ -39,6 +40,9 @@ angular.module('main').factory('GroupFactory', ['$q', '$rootScope', 'AuthService
         updates['users/' + user.uid + '/groups/' + newGroupKey] = true;
 
         return ref.update(updates);
+      })
+      .then(function() {
+        return newGroupKey;
       });
   };
 

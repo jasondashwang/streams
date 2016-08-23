@@ -139,42 +139,12 @@ angular.module('main', [
       }
     }
   })
-    // .state('tab.group-logged-out', {
-  //   url: '/group-logged-out',
-  //   views: {
-  //     'tab-group': {
-  //       templateUrl: 'js/group/loggedOut/group.loggedOut.html',
-  //       controller: 'GroupLoggedOutCtrl'
-  //     }
-  //   }
-
-  // })
   .state('tab.group-members', {
     url: '/group-members/:groupCode',
     views: {
       'tab-group': {
         templateUrl: 'js/group/members/group.members.html',
         controller: 'GroupMembersCtrl'
-      }
-    }
-
-  })
-  .state('tab.create-group', {
-    url: '/create-group',
-    views: {
-      'tab-group': {
-        templateUrl: 'js/group/createGroup/createGroup.html',
-        controller: 'CreateGroupCtrl'
-      }
-    }
-
-  })
-  .state('tab.join-group', {
-    url: '/join-group',
-    views: {
-      'tab-group': {
-        templateUrl: 'js/group/joinGroup/joinGroup.html',
-        controller: 'JoinGroupCtrl'
       }
     }
   })
@@ -186,7 +156,6 @@ angular.module('main', [
         controller: 'MapCtrl'
       }
     }
-
   });
 
   // if none of the above states are matched, use this as the fallback

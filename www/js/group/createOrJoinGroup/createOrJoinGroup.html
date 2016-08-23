@@ -1,0 +1,28 @@
+<ion-modal-view>
+  <ion-header-bar class="bar bar-header bar-positive">
+    <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+  </ion-header-bar>
+  <ion-content>
+
+    <!-- Create Group Form -->
+    <form name="groupForm" ng-submit="createGroup(group)">
+      <div class="list">
+        <label class="item item-input item-floating-label">
+          <span class="input-label">Group Name</span>
+          <input type="text" ng-model="group.name" class="item item-input form-control" id="groupName" placeholder="Group Name" required>
+        </label>
+      </div>
+      <button ng-disabled="groupForm.$invalid" type="submit" class="button button-positive" id="submitbtn">Create Group</button>
+    </form>
+
+    <!-- Join Group Form -->
+    <form name="joinGroupForm" ng-submit="joinGroup(groupCode)">
+      <label class="item item-input">
+        <span class="input-label">Enter Group Code:</span>
+        <input type="text" ng-model="groupCode">
+      </label>
+      <button type="submit" class="button button-positive">Join Group</button>
+    </form>
+
+  </ion-content>
+</ion-modal-view>
