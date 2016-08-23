@@ -9921,3 +9921,6 @@ ion-tabs.tabs-color-active-positive .tab-item {
 
 .chatMedia p {
   font-style: italic; }
+
+.chatMedia img {
+  margin: .1em; }
