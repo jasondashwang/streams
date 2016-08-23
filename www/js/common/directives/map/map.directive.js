@@ -9,7 +9,6 @@ angular.module('main').directive('map', function (MapFactory, MediaService) {
     },
     link: function(scope, elem, attrs) {
 		  MapFactory.drawMap();
-      MapFactory.drawPins();
       scope.toggle = {
         photo: true,
         video: true,

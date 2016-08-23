@@ -3,7 +3,16 @@ angular.module('main')
 
   var MapFactory = {};
   var map;
-  
+  var markers = [];
+  function clearMarkers () {
+    if (markers.length) {
+      for (var i = 0; i < markers.length; i++) {
+        console.log(markers[i])
+        markers[i].setMap(null);
+      }
+    }
+  }
+
   MapFactory.drawMap = function () {
       var options = {timeout: 10000, enableHighAccuracy: true};
       $cordovaGeolocation.getCurrentPosition(options).then(function(position){
@@ -30,46 +39,48 @@ angular.module('main')
           icon: im
         });
 
+        MapFactory.drawPins();
       }, function(error){
         console.log("Could not get location");
       });
   }
 
   MapFactory.drawPins = function () {
-    var mediaObjects = MediaService.getPins()
-    mediaObjects = mediaObjects.filter(function(el){
-      return el.mediaType !== 'message'
-    })
-      markers = mediaObjects;
+      clearMarkers();
+      var mediaObjects = MediaService.getPins()
+      mediaObjects = mediaObjects.filter(function(el){
+        return el.mediaType !== 'message'
+      })      
       mediaObjects.forEach(function(el){
-      var contentString, mediaIcon;
-      if (el.mediaType == "video") {
-        contentString = 
-        `<video width="320" height="240" controls ng-if="mediaObj.mediaType == 'video'">
-          <source src="` + el.mediaUrl + `">
-        </video>`
-        mediaIcon = 'https://upload.wikimedia.org/wikipedia/commons/4/4f/Map_marker_icon_%E2%80%93_Nicolas_Mollet_%E2%80%93_Video_%E2%80%93_Media_%E2%80%93_Dark.png'
-      } else {
-        contentString = 
-        `<img src ="` + el.mediaUrl + `" width='153' height='204'>`;
-        mediaIcon = `https://helpx.adobe.com/content/dam/help/icons/lr_mobile_capture_widget_icon_20x20.png`
-      }
+        var contentString, mediaIcon;
+        if (el.mediaType == "video") {
+          contentString = 
+          `<video width="320" height="240" controls ng-if="mediaObj.mediaType == 'video'">
+            <source src="` + el.mediaUrl + `">
+          </video>`
+          mediaIcon = 'https://upload.wikimedia.org/wikipedia/commons/4/4f/Map_marker_icon_%E2%80%93_Nicolas_Mollet_%E2%80%93_Video_%E2%80%93_Media_%E2%80%93_Dark.png'
+        } else {
+          contentString = 
+          `<img src ="` + el.mediaUrl + `" width='153' height='204'>`;
+          mediaIcon = `https://helpx.adobe.com/content/dam/help/icons/lr_mobile_capture_widget_icon_20x20.png`
+        }
 
-      var infowindow = new google.maps.InfoWindow({
-        content: contentString
-      });
+        var infowindow = new google.maps.InfoWindow({
+          content: contentString
+        });
 
-      var pos = new google.maps.LatLng(el.location.coords.latitude, el.location.coords.longitude);
-      var mediaMarker = new google.maps.Marker({
-          position: pos,
-          map: map,
-          icon: mediaIcon
-        });
-      mediaMarker.addListener('click', function() {
-        infowindow.open(pos, mediaMarker);
-      });
+        var pos = new google.maps.LatLng(el.location.coords.latitude, el.location.coords.longitude);
+        var mediaMarker = new google.maps.Marker({
+            position: pos,
+            map: map,
+            icon: mediaIcon
+          });
+        markers.push(mediaMarker)
+        mediaMarker.addListener('click', function() {
+          infowindow.open(pos, mediaMarker);
+        });
 
-    })
+      })
   }
 
   return MapFactory;
