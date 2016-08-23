@@ -119,6 +119,22 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
   text-align: center;
 }
 
+.bar, [nav-bar-transition="ios"] [nav-bar="active"] .bar, [nav-bar-transition="ios"] [nav-bar="entering"] .bar {
+  background-color: #1B4965;
+}
+
+.bar.bar-stable {
+  border-color: #1B4965;
+}
+.bar.bar-stable .title {
+  color: #f8f8f8;
+}
+ion-tabs.tabs-color-active-positive .tab-item.tab-item-active, ion-tabs.tabs-color-active-positive .tab-item.active, ion-tabs.tabs-color-active-positive .tab-item.activated {
+  color: #1B4965;
+}
+ion-tabs.tabs-color-active-positive .tab-item {
+  color: #1B4965;
+
 .navigator {
   position: fixed;
   top: 43px;
@@ -135,7 +151,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
     text-align: left;
   }
   img {
-    height: 50vh;  
+    height: 50vh;
     width: auto;
   }
 }
