@@ -4,17 +4,29 @@
       <i class='ion-gear-a'></i>
     </button>
   </ion-nav-buttons>
-  <ion-content has-header="true" padding="false" class="moments">
-    <div ng-repeat="mediaObj in mediaObjects">
-      <img ng-src ="{{mediaObj.mediaUrl}}" width='153' height='204' ng-if="mediaObj.mediaType == 'photo'">
-      <video width="320" height="240" controls ng-if="mediaObj.mediaType == 'video'">
-        <source ng-src="{{mediaObj.mediaUrl | trusted}}">
-      </video>
+  <div class="bar bar-header bar-light navigator">
+    <div class="button-bar">
+      <a class="button" ng-click='toggleView("chat")'>Chat</a>
+      <a class="button" ng-click='toggleView("media")'>Media</a>
+      <a class="button" ng-click='toggleView("map")'>Map</a>
     </div>
+  </div>
+
+  <ion-content>
+  <div class="groupContent">
+    <chat ng-if ='chat' members="members" media-objects="mediaObjects"></chat>
+    <media ng-if ='media' members='members' media-objects="mediaObjects"></media>
+    <map ng-if='map'></map>
+  </div>
   </ion-content>
-  <ion-footer-bar align-title="left" class="bar-assertive">
-    <div class="buttons">
-      <button class="button" ui-sref="tab.map">Map</button>
+  <ion-footer-bar align-title="left" ng-if='chat'>
+    <div class="item item-input-inset" id="chatbox">
+      <label class="item-input-wrapper">
+        <input type="text" placeholder="Chat" ng-model='newMessage.body'>
+      </label>
+      <button class="button button-small" ng-click="createNewMessage()">
+        Send
+      </button>
     </div>
   </ion-footer-bar>
 </ion-view>

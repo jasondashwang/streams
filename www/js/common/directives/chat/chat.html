@@ -1,0 +1,7 @@
+<div ng-repeat='media in mediaObjects'> 
+	<a class="item item-avatar">
+	  <img ng-src="{{members[media.member.id].photoUrl}}">
+	  <h2>{{ media.member.name }}</h2>
+	  <p>{{ media.body }}</p>
+	</a>
+</div>
