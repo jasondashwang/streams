@@ -116,6 +116,15 @@ angular.module('main', [
       }
     }
   })
+  .state('tab.groupFeed.chat', {
+    url: '/chat',
+    template: '<ion-view><ion-content><h1>Chat</h1></ion-view></ion-content>'
+
+  })
+  .state('tab.groupFeed.media', {
+    url: '/media',
+    template: '<ion-view><ion-content><h1>Media</h1></ion-view></ion-content>'
+  })
   .state('tab.single-group', {
     url: '/single-group/:groupCode',
     views: {

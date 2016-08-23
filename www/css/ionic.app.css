@@ -9857,8 +9857,8 @@ a.button {
   height: 100%; }
 
 #map {
-  width: 100%;
-  height: 100%; }
+  width: 100vw;
+  height: 75vh; }
 
 .profile-div {
   text-align: left; }
@@ -9886,6 +9886,7 @@ a.button {
 .groupPhotoThumbnail {
   text-align: center; }
 
+<<<<<<< HEAD
 .bar, [nav-bar-transition="ios"] [nav-bar="active"] .bar, [nav-bar-transition="ios"] [nav-bar="entering"] .bar {
   background-color: #1B4965; }
 
@@ -9900,3 +9901,28 @@ ion-tabs.tabs-color-active-positive .tab-item.tab-item-active, ion-tabs.tabs-col
 
 ion-tabs.tabs-color-active-positive .tab-item {
   color: #1B4965; }
+=======
+.navigator {
+  position: fixed;
+  top: 43px;
+  z-index: 10; }
+
+#chatbox {
+  width: 100vw; }
+
+#mediaAsset {
+  text-align: center; }
+  #mediaAsset p, #mediaAsset h4 {
+    text-align: left; }
+  #mediaAsset img {
+    height: 50vh;
+    width: auto; }
+
+.groupContent {
+  position: absolute;
+  width: 100vw;
+  top: 43px; }
+
+.bar {
+  padding: 0px; }
+>>>>>>> master
