@@ -74,27 +74,6 @@ angular.module('main').factory('GroupFactory', ['$q', '$rootScope', 'AuthService
     return group.promise;
   }
 
-  GroupFactory.fetchCurrentGroups = function() {
-    // two ajax calls (user + groups)
-    // make sure user is 3-way binded
-    return AuthService.getLoggedInUser()
-      .then(function(user) {
-        var arr = [];
-        for (var code in user.groups) {
-          var x = returnGroup(code);
-          arr.push(x);
-        }
-        return $q.all(arr);
-      })
-      .then(function(groups){
-        return groups;
-      });
-  };
-
-  GroupFactory.fetchMedia = function (groupId) {
-    return $firebaseArray(ref.child('groupCollages/' + groupId));
-  };
-
   GroupFactory.leaveGroup = function(groupCode) {
     return AuthService.getLoggedInUser()
       .then(function(user) {

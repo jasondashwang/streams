@@ -8,11 +8,11 @@ angular.module('main')
   $scope.resetPass = function(userInfo) {
     auth.sendPasswordResetEmail(userInfo.email)
       .then(function() {
-        $.growl.notice({location: 'br', message: 'A reset link was sent to ' + userInfo.email});
+        $.growl.notice({location: 'tr', message: 'A reset link was sent to ' + userInfo.email});
         $state.go('tab.login');
       })
       .catch(function(err) {
-        $.growl.error({location: 'br', message: err.message});
+        $.growl.error({location: 'tr', message: err.message});
       });
   };
 }]);
