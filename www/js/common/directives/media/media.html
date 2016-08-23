@@ -1,6 +1,17 @@
-<div ng-repeat="mediaObj in mediaObjects">
-  <img ng-src ="{{mediaObj.mediaUrl}}" width='153' height='204' ng-if="mediaObj.mediaType == 'photo'">
-  <video width="320" height="240" controls ng-if="mediaObj.mediaType == 'video'">
-    <source ng-src="{{mediaObj.mediaUrl | trusted}}">
-  </video>
+<div ng-repeat="mediaObj in mediaObjects" class='row' ng-if="mediaObj.mediaType !== 'message'">
+<!-- 	<a class="item item-avatar">
+	  <img ng-src="{{members[mediaObj.member.id].photoUrl}}">
+	  <h2>{{ mediaObj.member.name }}</h2>
+	  <p>Location</p>
+	</a> -->
+  	 <div class='col' id="mediaAsset">
+		<h4>{{ mediaObj.member.name }}</h4>
+		<p>{{ mediaObj.timeStamp }} </p>
+		<img ng-src ="{{mediaObj.mediaUrl}}" ng-if="mediaObj.mediaType == 'photo'">
+		<video width="320" height="240" controls ng-if="mediaObj.mediaType == 'video'">
+			<source ng-src="{{mediaObj.mediaUrl | trusted}}">
+		</video>
+		<hr>
+  	</div>
+
 </div>

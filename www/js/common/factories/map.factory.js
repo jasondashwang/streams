@@ -1,11 +1,11 @@
 angular.module('main')
-.factory('MapFactory', function($rootScope, $cordovaGeolocation) {
+.factory('MapFactory', function($rootScope, $cordovaGeolocation, MediaService) {
 
   var MapFactory = {};
-  MapFactory.drawMap = function (mediaObjects) {
+  MapFactory.drawMap = function () {
+      var mediaObjects = MediaService.get()
       var options = {timeout: 10000, enableHighAccuracy: true};
       $cordovaGeolocation.getCurrentPosition(options).then(function(position){
-
         var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
         var mapOptions = {
@@ -24,7 +24,7 @@ angular.module('main')
           icon: im
         });
 
-        mediaObjects.filter(function(el){
+        mediaObjects = mediaObjects.filter(function(el){
           return el.mediaType !== 'message'
         })
 

@@ -4,11 +4,29 @@
       <i class='ion-gear-a'></i>
     </button>
   </ion-nav-buttons>
+  <div class="bar bar-header bar-light navigator">
+    <div class="button-bar">
+      <a class="button" ng-click='toggleView("chat")'>Chat</a>
+      <a class="button" ng-click='toggleView("media")'>Media</a>
+      <a class="button" ng-click='toggleView("map")'>Map</a>
+    </div>
+  </div>
 
   <ion-content>
-    <p class='navigator'><span ng-click='toggleView("chat")'>Chat</span> | <span ng-click='toggleView("media")'>Media</span></p>
-    <hr>
-    <chat ng-if ='chat' media-objects="mediaObjects"></chat>
-    <media ng-if ='media' media-objects="mediaObjects"></media>
+  <div class="groupContent">
+    <chat ng-if ='chat' members="members" media-objects="mediaObjects"></chat>
+    <media ng-if ='media' members='members' media-objects="mediaObjects"></media>
+    <map ng-if='map'></map>
+  </div>
   </ion-content>
+  <ion-footer-bar align-title="left" ng-if='chat'>
+    <div class="item item-input-inset" id="chatbox">
+      <label class="item-input-wrapper">
+        <input type="text" placeholder="Chat" ng-model='newMessage.body'>
+      </label>
+      <button class="button button-small" ng-click="createNewMessage()">
+        Send
+      </button>
+    </div>
+  </ion-footer-bar>
 </ion-view>

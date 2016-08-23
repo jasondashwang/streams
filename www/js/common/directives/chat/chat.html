@@ -1,7 +1,7 @@
-<div ng-repeat='media in mediaObjects' ng-if='media.mediaType == "chat"'>
+<div ng-repeat='media in mediaObjects'> 
 	<a class="item item-avatar">
-	  <img src="http://archive.eyebeam.org/sites/default/files/imagecache/node_size/people/images/blank_person_23.png">
-	  <h2>Venkman</h2>
-	  <p>Back off, man. I'm a scientist.</p>
+	  <img ng-src="{{members[media.member.id].photoUrl}}">
+	  <h2>{{ media.member.name }}</h2>
+	  <p>{{ media.body }}</p>
 	</a>
 </div>
