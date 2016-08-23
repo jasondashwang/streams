@@ -1,6 +1,6 @@
 angular.module('main').controller('GroupListCtrl', function($ionicModal, $scope, GroupFactory, $state, GroupService, MediaService, $ionicHistory){
 
-	$ionicModal.fromTemplateUrl('js/group/createOrJoinGroup/createOrJoinGroup.html', {
+	$ionicModal.fromTemplateUrl('js/group/groupList/createOrJoinGroup.html', {
 	scope: $scope,
 	animation: 'slide-in-up'
 	}).then(function(modal) {
@@ -44,8 +44,8 @@ angular.module('main').controller('GroupListCtrl', function($ionicModal, $scope,
       .catch(function() {
         $.growl.error({location: 'tc', message: "Sorry this group doesn't exist yet :("});
       });
-      $scope.closeModal();
       $scope.joinGroupForm.$setPristine();
+      $scope.closeModal();
   };
 
 	$scope.$on("$ionicView.enter", function () {
@@ -105,7 +105,6 @@ angular.module('main').filter('chatTimeFormat', function(){
 
   		return el.mediaType == "message"
   	})
- 	console.log(messages)
     var now = new Date().toDateString();
     var stamp;
     if (!messages) return;
