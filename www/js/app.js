@@ -61,6 +61,15 @@ angular.module('main', [
       }
     }
   })
+  .state('tab.reset-password', {
+    url: '/reset-password',
+    views: {
+      'tab-login': {
+        templateUrl: 'js/user/reset-password/reset-password.html',
+        controller: 'ResetPasswordCtrl'
+      }
+    }
+  })
   .state('tab.profile', {
     url: '/profile',
     views: {
