@@ -40,12 +40,11 @@ angular.module('main').controller('GroupListCtrl', function($ionicModal, $scope,
     GroupFactory.joinGroup(groupCode)
       .then(function() {
         $state.go('tab.groupFeed', {groupCode: groupCode});
+        $scope.closeModal();
       })
       .catch(function() {
         $.growl.error({location: 'tc', message: "Sorry this group doesn't exist yet :("});
       });
-      $scope.joinGroupForm.$setPristine();
-      $scope.closeModal();
   };
 
 	$scope.$on("$ionicView.enter", function () {

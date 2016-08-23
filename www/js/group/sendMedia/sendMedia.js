@@ -8,6 +8,7 @@ angular.module('main')
 			 });
 	    GroupService.getCurrentGroups()
 		  .then(function(groups) {
+		  	console.log('goups here', groups);
 		  	$scope.groups = [];
 		  	for (var group in groups) {
 		  		$scope.groups.push(groups[group]);

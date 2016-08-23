@@ -9,7 +9,7 @@
       <div class="list">
         <label class="item item-input item-floating-label">
           <span class="input-label">Group Name</span>
-          <input type="text" ng-model="groupDetails.name" class="item item-input form-control" id="groupName" placeholder="Group Name" required>
+          <input type="text" ng-model="groupDetails.name" class="item item-input form-control" id="groupName" placeholder="Group Name" ng-required>
         </label>
       </div>
       <button ng-disabled="groupForm.$invalid" type="submit" class="button button-positive" id="submitbtn">Create Group</button>
@@ -19,7 +19,7 @@
     <form name="joinGroupForm" ng-submit="joinGroup(groupCode)">
       <label class="item item-input">
         <span class="input-label">Enter Group Code:</span>
-        <input type="text" ng-model="groupCode" required>
+        <input type="text" ng-model="groupCode" ng-required>
       </label>
       <button type="submit" class="button button-positive" ng-disabled="joinGroupForm.$invalid">Join Group</button>
     </form>
