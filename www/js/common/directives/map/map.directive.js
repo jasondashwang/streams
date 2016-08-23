@@ -8,8 +8,7 @@ angular.module('main').directive('map', function (MapFactory) {
 
     },
     link: function(scope, elem, attrs) {
-    	console.log('hi')
-		MapFactory.drawMap();
+		  MapFactory.drawMap();
     }
   };
 });

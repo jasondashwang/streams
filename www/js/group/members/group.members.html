@@ -1,7 +1,7 @@
 <ion-view title="Members">
   <ion-content has-header="true" padding="true" class="group-members">
     <ion-list>
-      <ion-item ng-repeat="member in members | orderBy: 'member.name'" class="item-thumbnail-left">
+      <ion-item ng-repeat="member in members" class="item-thumbnail-left">
         <img ng-src="{{ member.photoUrl }}">
         <h3>{{ member.name }}</h3>
         <p>{{ member.phone }}</p>

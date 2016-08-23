@@ -4,6 +4,10 @@ angular.module('main')
   var MapFactory = {};
   MapFactory.drawMap = function () {
       var mediaObjects = MediaService.get()
+      mediaObjects = mediaObjects.filter(function(el){
+        return el.mediaType !== 'message'
+      })
+      console.log(mediaObjects)
       var options = {timeout: 10000, enableHighAccuracy: true};
       $cordovaGeolocation.getCurrentPosition(options).then(function(position){
         var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);

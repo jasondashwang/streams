@@ -11,8 +11,5 @@ angular.module('main').service('MediaService', function($rootScope){
   this.destroy = function () {
   	this.mediaObjects = null;
   }
-  this.hideTabs = function () {
-    $rootScope.$broadcast('hideTabs')
-  }
 
 });
