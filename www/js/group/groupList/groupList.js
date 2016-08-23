@@ -80,7 +80,7 @@ angular.module('main').filter('timeFormat', function(){
  })
 
 angular.module('main').filter('chatTimeFormat', function(){
-  return function(messages){
+  return function(mediaObjects){
 	var messages = [];
 	for (var media in mediaObjects) {
 		if (mediaObjects[media] && mediaObjects[media].mediaType)
@@ -91,6 +91,7 @@ angular.module('main').filter('chatTimeFormat', function(){
 
   		return el.mediaType == "message"
   	})
+ 	console.log(messages)
     var now = new Date().toDateString();
     var stamp;
     if (!messages) return;
