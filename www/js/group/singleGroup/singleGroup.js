@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('main').controller('SingleGroupCtrl',['$scope', '$state', '$stateParams', '$log', '$ionicNavBarDelegate', 'CameraFactory', '$cordovaCamera', 'loggedInUser', 'GroupFactory', 'GroupService', '$ionicHistory', function ($scope, $state, $stateParams, $log, $ionicNavBarDelegate, CameraFactory, $cordovaCamera, loggedInUser, GroupFactory, GroupService, $ionicHistory) {
+angular.module('main').controller('SingleGroupCtrl',['$scope', '$state', '$stateParams', '$log', '$ionicNavBarDelegate', 'CameraFactory', '$cordovaCamera', 'loggedInUser', 'GroupFactory', 'GroupService', '$ionicHistory', '$ionicPopup', function ($scope, $state, $stateParams, $log, $ionicNavBarDelegate, CameraFactory, $cordovaCamera, loggedInUser, GroupFactory, GroupService, $ionicHistory, $ionicPopup) {
   var unbind;
   $scope.$on("$ionicView.loaded", function () {
     if($scope.group){
@@ -77,12 +77,19 @@ angular.module('main').controller('SingleGroupCtrl',['$scope', '$state', '$state
   };
 
   $scope.endGroup = function(groupMembers) {
-    GroupFactory.endGroup(groupMembers, $stateParams.groupCode);
-    GroupService.removeGroup($stateParams.groupCode);
-    $ionicHistory.nextViewOptions({
-        disableBack: true
-     });
-    $state.go('tab.groups');
+    var confirmPopup = $ionicPopup.confirm({
+      title: 'End Group',
+      template: 'Are you sure? All your group info will be removed :(.'
+    });
+    confirmPopup.then(function(res) {
+      if (res) {
+        GroupFactory.endGroup(groupMembers, $stateParams.groupCode);
+        GroupService.removeGroup($stateParams.groupCode);
+        $ionicHistory.nextViewOptions({
+            disableBack: true
+         });
+        $state.go('tab.groups');
+      }
+    });
   };
-
 }]);
