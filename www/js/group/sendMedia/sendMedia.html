@@ -1,12 +1,12 @@
 <ion-view title="Groups">
   <ion-content has-header="true" padding="false" class="moments">
-<!-- 	<ul class="list">
-	    <li ng-repeat="group in groups" class="item">
-	    	{{ group.name }}
-	    </li>
-	</ul> -->
+	   <div class="list" ng-show="groups.length === 0">
+	     <li class="item">
+	      <p>You are currently not in any groups!</p>
+	     </li>
+	   </div>
 	<ion-list>
-	  <ion-checkbox ng-repeat="group in groups" ng-click='toggleGroup(group.groupCode)' ng-model="groupFilter.group">{{ group.name }}</ion-checkbox>
+	  <ion-checkbox class="item-checkbox-right" ng-repeat="group in groups" ng-click='toggleGroup(group.groupCode)' ng-model="groupFilter.group">{{ group.name }}</ion-checkbox>
 	</ion-list>
 	<button class="button button-assertive" ng-click="cancel()">Cancel</button>
 	<ion-footer-bar align-title='left' class='bar-assertive'>

@@ -1,14 +1,19 @@
 angular.module('main')
-	.controller("SendMediaCtrl", function($scope, $stateParams, CameraService, GroupFactory, CameraFactory, $state, $ionicHistory){
+	.controller("SendMediaCtrl", function($scope, $stateParams, CameraService, GroupService, CameraFactory, $state, $ionicHistory){
 
 	    $scope.$on("$ionicView.enter", function () {
 			$scope.sendGroups = [];
 			$scope.media = CameraService.media;
-			GroupFactory.fetchCurrentGroups()
-              .then(function(groups){
-				$scope.groups = groups;
-              })
-	    })
+	    GroupService.getCurrentGroups()
+		  .then(function(groups) {
+		  	$scope.groups = [];
+		  	for (var group in groups) {
+		  		$scope.groups.push(groups[group]);
+		  	}
+		  })
+		  .catch(function(err){
+		    $.growl.error({location: 'tc', message: err.message});
+		  });
 
 	    $scope.cancel = function () {
 	    	CameraService.media = null;

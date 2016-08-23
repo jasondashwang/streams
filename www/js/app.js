@@ -92,7 +92,7 @@ angular.module('main', [
   .state('tab.send-media', {
     url: '/send-media',
     views: {
-      'tab-group': {
+      'tab-camera': {
         templateUrl: 'js/group/sendMedia/sendMedia.html',
         controller: 'SendMediaCtrl'
       }
