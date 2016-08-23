@@ -13,7 +13,7 @@
   </div>
 
 	<div ng-repeat="group in groups | timeFormat | orderBy: '-lastMessage.timeStamp'" class="list" id='groupList'>
-	    <a class="item item-thumbnail-left" ui-sref="tab.groupFeed({groupCode: group.groupCode})">
+	    <a ng-hide="!group.groupCode" class="item item-thumbnail-left" ui-sref="tab.groupFeed({groupCode: group.groupCode})">
 	      <img ng-src="{{group.mediaUrl}}">
 	      <h2>{{group.name}}<span>{{ group.lastMessage.timeFormatted }}</span></h2>
 	      <p>{{ group.lastMessage.message }}</p>
