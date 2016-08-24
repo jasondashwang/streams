@@ -9912,17 +9912,21 @@ ion-tabs.tabs-color-active-positive .tab-item {
   width: 100vw; }
 
 .mediaAsset {
+  padding: 0px 5px 0px 5px;
   width: 85%;
   height: auto;
   text-align: center;
-  border: 1px solid #1B4965;
+  border: 0.5px solid #1B4965;
   margin-bottom: 10px; }
   .mediaAsset p, .mediaAsset h4 {
     text-align: left; }
   .mediaAsset .mediaHeader {
     padding: .3em;
-    border-bottom: 1px solid #1B4965;
-    margin: 0 auto; }
+    background-color: #CAE9FF;
+    margin: 0 auto;
+    -webkit-box-shadow: 3px 2px 32px -12px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 3px 2px 32px -12px rgba(0, 0, 0, 0.75);
+    box-shadow: 3px 2px 32px -12px rgba(0, 0, 0, 0.75); }
     .mediaAsset .mediaHeader .profilePic {
       width: 40px;
       margin-right: 8px;
@@ -9995,3 +9999,12 @@ ion-tabs.tabs-color-active-positive .tab-item {
     border-bottom: 1px solid #1B4965; }
     .group-modal .create-group-div label, .group-modal .join-group-div label {
       margin: 1.5em; }
+
+#navButton {
+  background-color: #1B4965;
+  border: none; }
+  #navButton i {
+    color: white; }
+
+#likeButton {
+  float: left; }

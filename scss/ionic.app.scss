@@ -147,18 +147,23 @@ ion-tabs.tabs-color-active-positive .tab-item {
 }
 
 .mediaAsset {
+
+  padding: 0px 5px 0px 5px;
   width: 85%;
   height: auto;
   text-align: center;
-  border: 1px solid #1B4965;
+  border: 0.5px solid #1B4965;
   margin-bottom: 10px;
   p, h4 {
     text-align: left;
   }
   .mediaHeader {
     padding: .3em;
-    border-bottom: 1px solid #1B4965;
+    background-color: #CAE9FF;
     margin: 0 auto;
+    -webkit-box-shadow: 3px 2px 32px -12px rgba(0,0,0,0.75);
+    -moz-box-shadow: 3px 2px 32px -12px rgba(0,0,0,0.75);
+    box-shadow: 3px 2px 32px -12px rgba(0,0,0,0.75);
     .profilePic {
       width: 40px;
       margin-right: 8px;
@@ -252,5 +257,17 @@ ion-tabs.tabs-color-active-positive .tab-item {
     width: auto;
     border-bottom: 1px solid #1B4965;
   }
+}
+
+#navButton {
+  background-color: #1B4965;
+  border: none;
+  i {
+    color: white;
+  }
+}
+
+#likeButton {
+  float: left;
 }
 

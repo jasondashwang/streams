@@ -5,17 +5,16 @@ navigation history that also transitions its views in and out.
 -->
 <ion-tabs class="tabs-icon-top tabs-color-active-positive">
 
-<!-- Group Tab -->
+<!-- Login Tab -->
   <ion-tab hidden="{{ isLoggedIn() }}" title="Login" icon-off="ion-ios-personadd-outline" icon-on="ion-ios-personadd" ui-sref="tab.login">
     <ion-nav-view name="tab-login">
 
     </ion-nav-view>
   </ion-tab>
 
-  <ion-tab hidden="{{!( isLoggedIn() )}}" title="My Profile" icon-off="ion-ios-person-outline" icon-on="ion-ios-person" ui-sref="tab.profile">
-    <ion-nav-view name="tab-profile">
-
-    </ion-nav-view>
+    <!-- Groups Tab -->
+  <ion-tab hidden="{{!( isLoggedIn() )}}" title="Groups" icon-off="ion-ios-heart-outline" icon-on="ion-ios-heart" ui-sref="tab.groups">
+    <ion-nav-view name="tab-group"></ion-nav-view>
   </ion-tab>
 
   <!-- Camera Tab -->
@@ -23,9 +22,10 @@ navigation history that also transitions its views in and out.
     <ion-nav-view name="tab-camera"></ion-nav-view>
   </ion-tab>
 
-  <!-- Groups Tab -->
-  <ion-tab hidden="{{!( isLoggedIn() )}}" title="Groups" icon-off="ion-ios-heart-outline" icon-on="ion-ios-heart" ui-sref="tab.groups">
-    <ion-nav-view name="tab-group"></ion-nav-view>
+  <ion-tab hidden="{{!( isLoggedIn() )}}" title="My Profile" icon-off="ion-ios-person-outline" icon-on="ion-ios-person" ui-sref="tab.profile">
+    <ion-nav-view name="tab-profile">
+
+    </ion-nav-view>
   </ion-tab>
 
 

@@ -8,12 +8,12 @@ angular.module('main')
     .then(function(user){
       message.mediaType = 'message';
       message.upvotes = 0;
+      message.likes = {};
       message.member = {
         id: user.uid,
         name: user.name
       }
       message.location = null;
-      console.log(message)
       ref.child('groupCollages/' + code + '/' + message.timeStamp).set(message)
       var lastMessage = {
         message: user.name + ": " + message.body,
@@ -27,7 +27,7 @@ angular.module('main')
   }
 
   MessageFactory.likePost = function(postID, groupCode, userID, curr) {
-    
+    console.log(postID, groupCode, userID, curr)
     AuthService.getLoggedInUser()
     .then(function(user){
         ref.child('groupCollages/' + groupCode + "/" + postID + '/likes/' + userID).set(!curr);

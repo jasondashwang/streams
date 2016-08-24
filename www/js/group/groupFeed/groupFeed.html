@@ -1,6 +1,6 @@
 <ion-view title="{{group.name}}">
   <ion-nav-buttons side='secondary'>
-    <button class='button' ui-sref="tab.single-group({groupCode: groupCode})">
+    <button id="navButton" class='button' ui-sref="tab.single-group({groupCode: groupCode})">
       <i class='ion-gear-a'></i>
     </button>
   </ion-nav-buttons>
@@ -15,7 +15,7 @@
   <ion-content>
   <div class="groupContent">
     <chat ng-if ='view == "chat"' members="members" media-objects="mediaObjects" group-code="groupCode"></chat>
-    <media ng-if ='view == "media"' members='members' media-objects="mediaObjects"></media>
+    <media ng-if ='view == "media"' members='members' media-objects="mediaObjects" group-code="groupCode"></media>
     <map ng-if='view == "map"'></map>
   </div>
   </ion-content>
