@@ -30,17 +30,6 @@ angular.module('main').controller('GroupMembersCtrl', ['$scope', 'GroupService',
     $state.go($state.current, {}, {reload: true});
   };
 
-  $scope.makeAdmin = function(memberCode) {
-    GroupFactory.makeAdmin(memberCode, $stateParams.groupCode)
-      .then(function() {
-        adminPopup.close();
-        $state.go($state.current, {}, {reload: true});
-      })
-      .catch(function(err) {
-        $.growl.error({location: 'tc', message: err.message});
-      });
-  };
-
   var adminPopup;
   $scope.updateMemberInfo = function(memberName, memberCode) {
     $scope.data = {};
@@ -49,7 +38,7 @@ angular.module('main').controller('GroupMembersCtrl', ['$scope', 'GroupService',
     // An elaborate, custom popup
     adminPopup = $ionicPopup.show({
       title: '' + memberName,
-      template: '<button class="button button-positive" ng-click="removeFromGroup(memberCode)">Remove From Group</button>' + '<button class="button button-positive" ng-click="makeAdmin(memberCode)">Make Admin</button>',
+      template: '<button class="button button-positive" ng-click="removeFromGroup(memberCode)">Remove From Group</button>',
       scope: $scope,
       buttons: [
           { text: 'Cancel' }

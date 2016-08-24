@@ -42,6 +42,11 @@ angular.module('main').controller('SingleGroupCtrl',['$scope', '$state', '$state
     }
   };
 
+  $scope.membersLength= function(members) {
+    if (!members) return;
+    if (Object.keys(members).length > 1) return true;
+  };
+
   // sets group photo
   $scope.takeImage = function(groupCode) {
       var options = {

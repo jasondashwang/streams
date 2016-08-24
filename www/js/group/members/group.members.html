@@ -5,7 +5,7 @@
         <img ng-src="{{ member.photoUrl }}">
         <h3>{{ member.name }}</h3>
         <p>{{ member.phone }}</p>
-        <i class="ion-gear-b" ng-show="isAdmin && notSelf(member.uid)" ng-click="updateMemberInfo(member.name, member.uid)"></i>
+        <i class="ion-gear-b" ng-show="notSelf(member.uid)" ng-click="updateMemberInfo(member.name, member.uid)"></i>
       </ion-item>
     </ion-list>
   </ion-content>
