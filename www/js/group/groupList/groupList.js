@@ -1,4 +1,4 @@
-angular.module('main').controller('GroupListCtrl', function($ionicModal, $log, $scope, GroupFactory, $state, GroupService, MediaService, $ionicHistory){
+angular.module('main').controller('GroupListCtrl', function($ionicModal, $log, $scope, GroupFactory, $state, GroupService, MediaService, $ionicHistory, $timeout){
   function refreshGroups(){
     GroupService.getCurrentGroups()
     .then(function(groups) {
@@ -45,6 +45,9 @@ angular.module('main').controller('GroupListCtrl', function($ionicModal, $log, $
     })
     .catch(function(err){
       $.growl.error({location: 'tc', message: err.message});
+    });
+    $timeout(function() {
+      scope.groupInfo.name = ''
     });
 	};
 

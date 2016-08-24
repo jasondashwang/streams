@@ -1,6 +1,6 @@
 <ion-view title="Login">
   <ion-content has-header="true" padding="true" class="login-div">
-    <h2>Welcome to Loop</h2>
+    <h2>Streams</h2>
     <form name="loginForm" ng-submit="login(userInfo)">
 
       <div class="list">
@@ -13,10 +13,11 @@
           <input type="password" ng-model="userInfo.password" class="item item-input form-control" placeholder="Your Password" required>
         </label>
       </div>
-
+      <br>
       <button ng-disabled="loginForm.$invalid" type="submit" class="button button-positive" id="submitbtn">Login</button>
 
     </form>
+    <br><br><br><br>
     <h5 ui-sref="tab.reset-password">Forgot your password?</h5>
     <h5 ui-sref="tab.signup">Don't have an account? <strong>Sign up</strong>.</h5>
 

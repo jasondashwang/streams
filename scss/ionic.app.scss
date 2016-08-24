@@ -49,19 +49,22 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 }
 
 .login-div {
-  background-image: url('http://wallpapersonthe.net/wallpapers/b/1242x2208/1242x2208-minimalistic_diamond-8667.png');
+  background-image: url('https://s-media-cache-ak0.pinimg.com/236x/05/df/51/05df512faaa405e5a8eebb0740a2d93e.jpg');
   background-size: cover;
   background-repeat: no-repeat;
-  color: white;
-  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-
+  span {
+    color: white;
+  }
   h2 {
+    font-family: 'Gill Sans';
+    font-style: italic;
     margin: 1em;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   }
 
   label {
-    margin-bottom: 1em;
-    border-radius: 1em;
+    border: none;
   }
 }
 
