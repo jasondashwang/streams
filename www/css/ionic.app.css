@@ -9839,11 +9839,21 @@ a.button {
   background-image: url("https://s-media-cache-ak0.pinimg.com/236x/05/df/51/05df512faaa405e5a8eebb0740a2d93e.jpg");
   background-size: cover;
   background-repeat: no-repeat; }
+  .login-div input::-webkit-input-placeholder {
+    color: white; }
+  .login-div input:-moz-placeholder {
+    /* Firefox 18- */
+    color: white; }
+  .login-div input::-moz-placeholder {
+    /* Firefox 19+ */
+    color: white; }
+  .login-div input:-ms-input-placeholder {
+    color: white; }
+  .login-div input, .login-div select, .login-div textarea {
+    color: white; }
   .login-div span {
     color: white; }
   .login-div h2 {
-    font-family: 'Gill Sans';
-    font-style: italic;
     margin: 1em;
     color: white;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black; }
