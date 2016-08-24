@@ -72,7 +72,7 @@ angular.module('main').controller('SingleGroupCtrl',['$scope', '$state', '$state
 
     if(!anotherAdmin) {
       $.growl.error({location:'tc', message: 'You are the last admin left! Please make someone else an admin or End the Group'});
-      break;
+      return;
     }
 
     GroupFactory.leaveGroup($stateParams.groupCode)
