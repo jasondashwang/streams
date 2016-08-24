@@ -2,10 +2,26 @@
 
 angular.module('main').controller('GroupFeedCtrl',['$scope', '$stateParams', 'GroupFactory', 'MediaService', '$ionicNavBarDelegate', 'GroupService', "MessageFactory", '$ionicScrollDelegate', '$timeout', function ($scope, $stateParams, GroupFactory, MediaService, $ionicNavBarDelegate, GroupService, MessageFactory, $ionicScrollDelegate, $timeout) {
 
+  function filter () {
+    var media = MediaService.get();
+    if ($scope.view == 'chat') {
+      media = media.map(function(el){
+        if (el.mediaType !== 'message') {
+          el.body = 'Sent a ' + el.mediaType
+        }
+        return el;
+      })
+    }
+    MediaService.set(media);
+  }
+
   var unbindGroup;
   var unbindMedia;
   $scope.$on("$ionicView.enter", function () {
    // potential bug
+   $(document).ready(function(){
+      $ionicScrollDelegate.scrollBottom();
+   })
    $scope.newMessage = {};
    $scope.view = 'chat';
    $scope.groupCode = $stateParams.groupCode;
@@ -17,19 +33,6 @@ angular.module('main').controller('GroupFeedCtrl',['$scope', '$stateParams', 'Gr
       unbindMedia();
     }
    }
-
-    function filter () {
-      var media = MediaService.get();
-      if ($scope.view == 'chat') {
-        media = media.map(function(el){
-          if (el.mediaType !== 'message') {
-            el.body = 'Sent a ' + el.mediaType
-          }
-          return el;
-        })
-      }
-      MediaService.set(media);
-    }
 
     GroupService.getGroup($stateParams.groupCode)
     .then(function(group){
@@ -67,7 +70,6 @@ angular.module('main').controller('GroupFeedCtrl',['$scope', '$stateParams', 'Gr
     if ($scope.newMessage.body.length < 1) {
       return;
     }
-    $ionicScrollDelegate.scrollBottom()
     $scope.newMessage.timeStamp = Date.now()
     MessageFactory.createNewMessage($scope.newMessage, $scope.groupCode);
     $timeout(function(){
@@ -75,9 +77,12 @@ angular.module('main').controller('GroupFeedCtrl',['$scope', '$stateParams', 'Gr
     })
   }
 
+  $scope.$watch('mediaObjects', function(){
+    $ionicScrollDelegate.scrollBottom()
+  })
+
   $scope.toggleView = function(view){
     $scope.view = view;
-
   }
 
 }]);

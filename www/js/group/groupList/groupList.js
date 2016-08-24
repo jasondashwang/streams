@@ -99,11 +99,6 @@ angular.module('main').filter('chatTimeFormat', function(){
 		if (mediaObjects[media] && mediaObjects[media].mediaType)
   		messages.push(mediaObjects[media]);
   	}
-  	messages.filter(function(el){
-  		var bool = true;
-
-  		return el.mediaType == "message"
-  	})
     var now = new Date().toDateString();
     var stamp;
     if (!messages) return;

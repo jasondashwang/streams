@@ -9921,3 +9921,18 @@ ion-tabs.tabs-color-active-positive .tab-item {
 
 .chatMedia p {
   font-style: italic; }
+
+.chatMedia img {
+  margin: .1em; }
+
+.boxed {
+  border: 2px solid #d3d3d3;
+  top: 70px;
+  left: 10px;
+  position: absolute;
+  background-color: white;
+  z-index: 10;
+  width: 30vw;
+  height: 20vh; }
+  .boxed h3 {
+    padding-left: 10px; }

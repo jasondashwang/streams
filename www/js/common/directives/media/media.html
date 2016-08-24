@@ -1,7 +1,7 @@
-<div ng-repeat="mediaObj in mediaArray | orderBy: '-timeStamp'" class='row' ng-if="mediaObj.mediaType !== 'message'">
+<div ng-repeat="mediaObj in mediaObjects | chatTimeFormat" class='row' ng-if="mediaObj.mediaType !== 'message'">
   	 <div class='col' id="mediaAsset">
 		<h4>{{ mediaObj.member.name }}</h4>
-		<p>{{ mediaObj.timeStamp }} </p>
+		<p>{{ mediaObj.timeFormatted }} </p>
 		<img ng-src ="{{mediaObj.mediaUrl}}" ng-if="mediaObj.mediaType == 'photo'">
 		<video width="320" height="240" poster="http://www.vidyard.com/wp-content/uploads/Screen-Shot-2014-08-08-at-8.48.40-AM.png" controls ng-if="mediaObj.mediaType == 'video'">
 			<source ng-src="{{mediaObj.mediaUrl | trusted}}">

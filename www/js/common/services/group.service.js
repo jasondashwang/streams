@@ -65,6 +65,9 @@ angular.module('main').service('GroupService', function($q, GroupSession, $rootS
         GroupSession.addGroupMember(firebaseUser, uid, groupCode);
       }
     }
+    for(var memberUid in GroupSession.groupMembers[groupCode].members){
+      if (!GroupSession.groups[groupCode].members[memberUid]) GroupSession.removeMemberFromGroup(memberUid, groupCode);
+    }
 
     return $q.when(GroupSession.groupMembers[groupCode].members);
 

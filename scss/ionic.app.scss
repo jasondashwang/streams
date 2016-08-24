@@ -164,4 +164,21 @@ ion-tabs.tabs-color-active-positive .tab-item {
   p {
     font-style: italic;
   }
+  img {
+    margin: .1em;
+  }
+}
+
+.boxed {
+  h3 {
+    padding-left: 10px;
+  }
+  border: 2px solid #d3d3d3;
+  top: 70px;
+  left: 10px;
+  position: absolute;
+  background-color: white;
+  z-index: 10;
+  width: 30vw;
+  height: 20vh;
 }
