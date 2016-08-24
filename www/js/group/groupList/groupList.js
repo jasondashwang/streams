@@ -12,7 +12,7 @@ angular.module('main').controller('GroupListCtrl', function($ionicModal, $log, $
     });
   }
 
-	$ionicModal.fromTemplateUrl('js/group/groupList/createOrJoinGroup.html', {
+	$ionicModal.fromTemplateUrl('js/group/groupList/groupModal.html', {
 	scope: $scope,
 	animation: 'slide-in-up'
 	}).then(function(modal) {
