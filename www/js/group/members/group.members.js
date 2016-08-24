@@ -24,24 +24,27 @@ angular.module('main').controller('GroupMembersCtrl', ['$scope', 'GroupService',
       });
   });
 
-  $scope.removeFromGroup = function(memberCode) {
+  function removeFromGroup(memberCode) {
     GroupFactory.removeMember(memberCode, $stateParams.groupCode);
-    adminPopup.close();
     $state.go($state.current, {}, {reload: true});
-  };
+  }
 
-  var adminPopup;
   $scope.updateMemberInfo = function(memberName, memberCode) {
     $scope.data = {};
     $scope.memberCode = memberCode;
 
     // An elaborate, custom popup
-    adminPopup = $ionicPopup.show({
+    $ionicPopup.show({
       title: '' + memberName,
-      template: '<button class="button button-positive" ng-click="removeFromGroup(memberCode)">Remove From Group</button>',
       scope: $scope,
       buttons: [
-          { text: 'Cancel' }
+          { text: 'Cancel' },
+          { text: 'Remove',
+            type: 'button-positive',
+            onTap: function() {
+              removeFromGroup(memberCode);
+            }
+          }
         ]
     });
    };
