@@ -26,7 +26,6 @@ angular.module('main').service('GroupService', function($q, GroupSession, $rootS
         }
       }
       for(var code in GroupSession.groups){
-        console.log(code);
         if(!(user.groups) || !(user.groups[code])) GroupSession.removeGroup(code);
       }
       return $q.when(GroupSession.groups);

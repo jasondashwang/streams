@@ -1,13 +1,13 @@
-<div ng-repeat='media in mediaObjects| chatTimeFormat' id="chatList"> 
-	<a class="item item-avatar" ng-hide="media.mediaType !== 'message'">
+<div ng-repeat='media in mediaObjects| chatTimeFormat' id="chatList">
+	<li class="item item-avatar" ng-hide="media.mediaType !== 'message'">
 	  <img ng-src="{{members[media.member.id].photoUrl}}">
 	  <h2>{{ media.member.name }}<span>{{ media.timeFormatted }}</span></h2>
 	  <p>{{ media.body }}</p>
-	</a>
-	<a class="item item-avatar" ng-class="{'chatMedia': media.mediaType !== 'message'}" ng-hide="media.mediaType == 'message'">
+	</li>
+	<li class="item item-avatar" ng-class="{'chatMedia': media.mediaType !== 'message'}" ng-hide="media.mediaType == 'message'">
 	  <img ng-src="{{ media.mediaType == 'photo' ? 'http://www.obrienwebdesign.com/wp-content/uploads/2012/03/business-branding.png' : 'http://static.tumblr.com/zzd0mln/nSJn47561/video-icon.png' }}">
 	  <h2>{{ media.member.name }}<span>{{ media.timeFormatted }}</span></h2>
 	  <p>{{ media.body }}</p>
-	</a>
+	</li>
 
 </div>

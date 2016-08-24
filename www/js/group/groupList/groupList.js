@@ -1,4 +1,16 @@
-angular.module('main').controller('GroupListCtrl', function($ionicModal, $scope, GroupFactory, $state, GroupService, MediaService, $ionicHistory){
+angular.module('main').controller('GroupListCtrl', function($ionicModal, $log, $scope, GroupFactory, $state, GroupService, MediaService, $ionicHistory){
+  function refreshGroups(){
+    GroupService.getCurrentGroups()
+    .then(function(groups) {
+      $scope.groups = [];
+      for (var group in groups) {
+        $scope.groups.push(groups[group]);
+      }
+    })
+    .catch(function(err){
+      $.growl.error({location: 'tc', message: err.message});
+    });
+  }
 
 	$ionicModal.fromTemplateUrl('js/group/groupList/groupModal.html', {
 	scope: $scope,
@@ -25,26 +37,29 @@ angular.module('main').controller('GroupListCtrl', function($ionicModal, $scope,
 		// Execute action
 	});
 
-	$scope.createGroup = function(){
-		$scope.closeModal();
-		$state.go('tab.create-group');
+	$scope.createGroup = function(groupDetails){
+    GroupFactory.createGroup(groupDetails)
+    .then(function(){
+      $scope.closeModal();
+      refreshGroups();
+    })
+    .catch(function(err){
+      $.growl.error({location: 'tc', message: err.message});
+    });
 	};
-	$scope.joinGroup = function(){
-		$scope.closeModal();
-		$state.go('tab.join-group');
+	$scope.joinGroup = function(groupCode){
+    GroupFactory.joinGroup(groupCode)
+      .then(function() {
+        $scope.closeModal();
+        refreshGroups();
+      })
+      .catch(function(err){
+        $.growl.error({location: 'tc', message: err});
+      });
 	};
 	$scope.$on("$ionicView.enter", function () {
       $ionicHistory.clearHistory();
-	    GroupService.getCurrentGroups()
-		  .then(function(groups) {
-		  	$scope.groups = [];
-		  	for (var group in groups) {
-		  		$scope.groups.push(groups[group]);
-		  	}
-		  })
-		  .catch(function(err){
-		    $.growl.error({location: 'tc', message: err.message});
-		  });
+	    refreshGroups();
   });
 
 });

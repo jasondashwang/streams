@@ -1,10 +1,18 @@
 <ion-view view-title="Camera">
-  <ion-content has-header="true" padding="true">
+  <ion-content has-header="true" padding="true" class="camera-div">
+  <div class="button-wrapper">
+    <button class="button button-positive" ng-click="captureImage()">
+      <i class="icon ion-ios-camera"></i>
+      <p>Take Picture</p>
+    </button>
+  </div>
 
-	<button class="button button-full button-positive" ng-click="captureImage()">Take Image</button><br/>
-
-	<button class="button button-full button-positive" ng-click="captureVideo()">Take Video</button><br/>
-
+  <div class="button-wrapper">
+  	<button class="button button-positive" ng-click="captureVideo()">
+      <i class="icon ion-android-film"></i>
+      <p>Take Video</p>
+    </button>
+  </div>
   </ion-content>
 
 </ion-view>

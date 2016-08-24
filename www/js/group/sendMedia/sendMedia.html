@@ -14,12 +14,9 @@
 	<ion-list>
 	  <ion-checkbox class="item-checkbox-right" ng-repeat="group in groups" ng-model="group.sendGroup">{{ group.name }}</ion-checkbox>
 	</ion-list>
-	<ion-footer-bar align-title='left' class='bar-assertive'>
-		<div class='buttons'>
-		    <button class='button' ng-click="sendToGroups()">
-		      <i class='icon ion-android-send'></i>
+	<ion-footer-bar align-title='right' class='bar-assertive'>
+		    <button class='button icon ion-android-send pull-right' ng-click="sendToGroups()">
 		    </button>
-		</div>
 	</ion-footer-bar>
   </ion-content>
 </ion-view>

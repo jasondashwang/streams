@@ -69,6 +69,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 .profile-div {
   text-align: left;
+  overflow-y: hidden;
   input {
     text-align: left;
     width: 100%;
@@ -76,6 +77,14 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
   }
   input:focus {
     text-decoration: underline;
+  }
+  li, a {
+    width: 90%;
+    display: block;
+    margin: 0 auto;
+    border-style: none;
+    border-bottom: 1px solid #1B4965;
+    max-height: 60px;
   }
   img {
     display: block;
@@ -132,15 +141,42 @@ ion-tabs.tabs-color-active-positive .tab-item {
   width: 100vw;
 }
 
-#mediaAsset {
+.mediaAsset {
+  width: 85%;
+  height: auto;
   text-align: center;
+  border: 1px solid #1B4965;
+  margin-bottom: 10px;
   p, h4 {
     text-align: left;
   }
-  img {
+  .mediaHeader {
+    padding: .3em;
+    border-bottom: 1px solid #1B4965;
+    margin: 0 auto;
+    .profilePic {
+      width: 40px;
+      margin-right: 8px;
+      height: auto;
+      border-radius: 5em;
+      float: left;
+    }
+    .timeStamp {
+      font-size: .7em;
+      float: right;
+    }
+  }
+  .mediaAssetInner {
+    padding: .4em;
+  }
+  img, video {
     height: 50vh;
     width: auto;
+    max-width: 100%;
+    display: block;
+    margin: 0 auto;
   }
+
 }
 
 .groupContent{
@@ -157,7 +193,7 @@ ion-tabs.tabs-color-active-positive .tab-item {
 }
 
 .tab-active {
-  border-bottom: 5px solid #1B4965 !important; 
+  border-bottom: 5px solid #1B4965 !important;
 }
 
 .chatMedia {
@@ -182,3 +218,34 @@ ion-tabs.tabs-color-active-positive .tab-item {
   width: 30vw;
   height: 20vh;
 }
+
+.camera-div {
+  .button.button-positive {
+    display: block;
+    margin: 0 auto;
+    width: 85%;
+    height: 200px;
+    margin-top: 1em;
+    border-radius: 2em;
+    background-color: #1B4965;
+    font-size: 2em;
+  }
+  i:before{
+    font-size: 70px !important;
+    margin-bottom: .3em;
+  }
+}
+
+.group-modal {
+  text-align: center;
+  .create-group-div, .join-group-div {
+    label {
+      margin: 1.5em;
+    }
+    height: 45vh;
+    padding: 1em;
+    width: auto;
+    border-bottom: 1px solid #1B4965;
+  }
+}
+
