@@ -9995,3 +9995,9 @@ ion-tabs.tabs-color-active-positive .tab-item {
     border-bottom: 1px solid #1B4965; }
     .group-modal .create-group-div label, .group-modal .join-group-div label {
       margin: 1.5em; }
+
+#navButton {
+  background-color: #1B4965;
+  border: none; }
+  #navButton i {
+    color: white; }
