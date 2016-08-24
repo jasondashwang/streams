@@ -9906,13 +9906,35 @@ ion-tabs.tabs-color-active-positive .tab-item {
 #chatbox {
   width: 100vw; }
 
-#mediaAsset {
-  text-align: center; }
-  #mediaAsset p, #mediaAsset h4 {
+.mediaAsset {
+  width: 85%;
+  height: auto;
+  text-align: center;
+  border: 1px solid #1B4965;
+  margin-bottom: 10px; }
+  .mediaAsset p, .mediaAsset h4 {
     text-align: left; }
-  #mediaAsset img {
+  .mediaAsset .mediaHeader {
+    padding: .3em;
+    border-bottom: 1px solid #1B4965;
+    margin: 0 auto; }
+    .mediaAsset .mediaHeader .profilePic {
+      width: 40px;
+      margin-right: 8px;
+      height: auto;
+      border-radius: 5em;
+      float: left; }
+    .mediaAsset .mediaHeader .timeStamp {
+      font-size: .7em;
+      float: right; }
+  .mediaAsset .mediaAssetInner {
+    padding: .4em; }
+  .mediaAsset img, .mediaAsset video {
     height: 50vh;
-    width: auto; }
+    width: auto;
+    max-width: 100%;
+    display: block;
+    margin: 0 auto; }
 
 .groupContent {
   position: absolute;
