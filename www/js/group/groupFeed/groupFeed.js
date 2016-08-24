@@ -9,7 +9,6 @@ angular.module('main').controller('GroupFeedCtrl',['$scope', '$stateParams', 'Gr
         if (el.mediaType !== 'message') {
           el.body = 'Sent a ' + el.mediaType
         }
-        console.log(el.likes)
         return el;
       })
     }
