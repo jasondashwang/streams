@@ -99,12 +99,6 @@ angular.module('main').factory('GroupFactory', ['$q', '$rootScope', 'AuthService
     ref.child('/groups/' + groupCode + '/members/' + memberCode).remove();
   };
 
-  GroupFactory.makeAdmin = function(memberCode, groupCode) {
-    var updates = {};
-    updates['groups/' + groupCode + '/members/' + memberCode] = true;
-    return ref.update(updates);
-  };
-
   return GroupFactory;
 
 }]);
