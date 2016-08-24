@@ -9835,8 +9835,17 @@ a.button {
     margin: 0 auto;
     margin-top: 1em; }
 
-.login-div h2 {
-  margin: 1em; }
+.login-div {
+  background-image: url("http://wallpapersonthe.net/wallpapers/b/1242x2208/1242x2208-minimalistic_diamond-8667.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black; }
+  .login-div h2 {
+    margin: 1em; }
+  .login-div label {
+    margin-bottom: 1em;
+    border-radius: 1em; }
 
 .group-logged-in, .login-div, .signup-div {
   text-align: center; }
@@ -9912,12 +9921,12 @@ ion-tabs.tabs-color-active-positive .tab-item {
   width: 100vw; }
 
 .mediaAsset {
-  padding: 0px 5px 0px 5px;
+  padding: 0px 0px 0px 0px;
   width: 85%;
   height: auto;
   text-align: center;
   border: 0.5px solid #1B4965;
-  margin-bottom: 10px; }
+  margin-bottom: 0px; }
   .mediaAsset p, .mediaAsset h4 {
     text-align: left; }
   .mediaAsset .mediaHeader {

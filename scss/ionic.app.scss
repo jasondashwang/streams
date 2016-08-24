@@ -49,8 +49,19 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 }
 
 .login-div {
+  background-image: url('http://wallpapersonthe.net/wallpapers/b/1242x2208/1242x2208-minimalistic_diamond-8667.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+
   h2 {
     margin: 1em;
+  }
+
+  label {
+    margin-bottom: 1em;
+    border-radius: 1em;
   }
 }
 
