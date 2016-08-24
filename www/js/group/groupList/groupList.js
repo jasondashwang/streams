@@ -117,6 +117,12 @@ angular.module('main').filter('chatTimeFormat', function(){
           hours -= 12;
         }
         message.timeFormatted = hours + ":" + minutes + " " + period;
+        message.upvotes = 0;
+        for (var user in message.likes){
+        	if (message.likes[user])
+        		message.upvotes++
+        }
+        if(message.upvotes == 0) message.upvotes = '';
       } else {
         message.timeFormatted = stamp.toDateString();
       }

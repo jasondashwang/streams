@@ -2,9 +2,10 @@
 	<li class="item item-avatar" ng-hide="media.mediaType !== 'message'">
 	  <img ng-src="{{members[media.member.id].photoUrl}}">
 	  <h2>{{ media.member.name }}<span>{{ media.timeFormatted }}</span></h2>
-	  <p>{{ media.body }}</p>
+	  <p>{{ media.body }}<span><i ng-click="likePost(media.timeStamp, media.likes[user.uid])" ng-class="media.likes[user.uid] ? 'ion-ios-flame' : 'ion-ios-flame-outline'"></i> {{ media.upvotes }}<span></p>
 	</li>
 	<li class="item item-avatar" ng-class="{'chatMedia': media.mediaType !== 'message'}" ng-hide="media.mediaType == 'message'">
+
 	  <img ng-src="{{ media.mediaType == 'photo' ? 'http://www.obrienwebdesign.com/wp-content/uploads/2012/03/business-branding.png' : 'http://static.tumblr.com/zzd0mln/nSJn47561/video-icon.png' }}">
 	  <h2>{{ media.member.name }}<span>{{ media.timeFormatted }}</span></h2>
 	  <p>{{ media.body }}</p>

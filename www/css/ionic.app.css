@@ -9876,9 +9876,14 @@ a.button {
     margin-top: 1.2em;
     margin-bottom: 1.2em; }
 
-#groupList span, #chatList span {
-  float: right;
-  font-size: 10pt; }
+#groupList, #chatList {
+  margin-bottom: 0px; }
+  #groupList span, #chatList span {
+    float: right;
+    font-size: 10pt;
+    font-size: 8pt; }
+    #groupList span i, #chatList span i {
+      font-size: 16pt; }
 
 .groupPhotoThumbnail {
   text-align: center; }
