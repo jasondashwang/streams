@@ -9,6 +9,7 @@ angular.module('main').controller('GroupFeedCtrl',['$scope', '$stateParams', 'Gr
         if (el.mediaType !== 'message') {
           el.body = 'Sent a ' + el.mediaType 
         }
+        console.log(el.likes)
         return el;
       })
     }
@@ -18,7 +19,7 @@ angular.module('main').controller('GroupFeedCtrl',['$scope', '$stateParams', 'Gr
   var unbindGroup;
   var unbindMedia;
   $scope.$on("$ionicView.enter", function () {
-   // potential bug
+   
    $(document).ready(function(){
       $ionicScrollDelegate.scrollBottom();
    })

@@ -25,6 +25,15 @@ angular.module('main')
     })
 
   }
+
+  MessageFactory.likePost = function(postID, groupCode, userID, curr) {
+
+    AuthService.getLoggedInUser()
+    .then(function(user){
+        ref.child('groupCollages/' + groupCode + "/" + postID + '/likes/' + userID).set(!curr);
+    })
+
+  }
   return MessageFactory;
 
 });

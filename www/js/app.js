@@ -6,7 +6,7 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 angular.module('main', [
-  'ionic',
+  'ionic','ionic.service.core',
   'ngCordova',
   'firebase',
   'ngFileUpload',
@@ -24,7 +24,7 @@ angular.module('main', [
     if (window.StatusBar) {
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
-    }
+    }  
   });
 })
 
@@ -148,16 +148,6 @@ angular.module('main', [
       }
     }
   })
-    // .state('tab.group-logged-out', {
-  //   url: '/group-logged-out',
-  //   views: {
-  //     'tab-group': {
-  //       templateUrl: 'js/group/loggedOut/group.loggedOut.html',
-  //       controller: 'GroupLoggedOutCtrl'
-  //     }
-  //   }
-
-  // })
   .state('tab.group-members', {
     url: '/group-members/:groupCode',
     views: {

@@ -95,7 +95,11 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
   span {
     float: right;
     font-size: 10pt;
+    i {
+      font-size: 16pt;
+    }
   }
+  margin-bottom: 0px;
 }
 
 .groupPhotoThumbnail {
