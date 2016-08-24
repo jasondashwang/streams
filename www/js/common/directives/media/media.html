@@ -1,12 +1,16 @@
 <div ng-repeat="mediaObj in mediaObjects | chatTimeFormat" class='row' ng-if="mediaObj.mediaType !== 'message'">
-  	 <div class='col' id="mediaAsset">
-		<h4>{{ mediaObj.member.name }}</h4>
-		<p>{{ mediaObj.timeFormatted }} </p>
-		<img ng-src ="{{mediaObj.mediaUrl}}" ng-if="mediaObj.mediaType == 'photo'">
-		<video width="320" height="240" poster="http://www.vidyard.com/wp-content/uploads/Screen-Shot-2014-08-08-at-8.48.40-AM.png" controls ng-if="mediaObj.mediaType == 'video'">
-			<source ng-src="{{mediaObj.mediaUrl | trusted}}">
-		</video>
-		<hr>
+  	<div class='col mediaAsset'>
+      <div class="mediaHeader">
+          <img ng-src="{{members[mediaObj.member.id].photoUrl}}" class="profilePic">
+          <h4>{{ mediaObj.member.name }} <span class="timeStamp">{{ mediaObj.timeFormatted }} </span></h4>
+      </div>
+      <div class="mediaAssetInner">
+        <img ng-src ="{{mediaObj.mediaUrl}}" ng-if="mediaObj.mediaType == 'photo'">
+        <video poster="http://www.vidyard.com/wp-content/uploads/Screen-Shot-2014-08-08-at-8.48.40-AM.png" controls ng-if="mediaObj.mediaType == 'video'">
+          <source ng-src="{{mediaObj.mediaUrl | trusted}}">
+        </video>
+      </div>
+
   	</div>
 
 </div>

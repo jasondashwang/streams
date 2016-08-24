@@ -1,4 +1,16 @@
-angular.module('main').controller('GroupListCtrl', function($ionicModal, $scope, GroupFactory, $state, GroupService, MediaService, $ionicHistory){
+angular.module('main').controller('GroupListCtrl', function($ionicModal, $log, $scope, GroupFactory, $state, GroupService, MediaService, $ionicHistory){
+  function refreshGroups(){
+    GroupService.getCurrentGroups()
+    .then(function(groups) {
+      $scope.groups = [];
+      for (var group in groups) {
+        $scope.groups.push(groups[group]);
+      }
+    })
+    .catch(function(err){
+      $.growl.error({location: 'tc', message: err.message});
+    });
+  }
 
 	$ionicModal.fromTemplateUrl('js/group/groupList/createOrJoinGroup.html', {
 	scope: $scope,
@@ -25,40 +37,31 @@ angular.module('main').controller('GroupListCtrl', function($ionicModal, $scope,
 		// Execute action
 	});
 
-  $scope.createGroup = function(groupDetails) {
+	$scope.createGroup = function(groupDetails){
     GroupFactory.createGroup(groupDetails)
-    .then(function(newGroupCode) {
-      $state.go('tab.groupFeed', {groupCode: newGroupCode});
+    .then(function(){
+      $scope.closeModal();
+      refreshGroups();
     })
     .catch(function(err){
       $.growl.error({location: 'tc', message: err.message});
     });
-    $scope.closeModal();
-  };
+	};
 
-  $scope.joinGroup = function (groupCode) {
+	$scope.joinGroup = function(groupCode){
     GroupFactory.joinGroup(groupCode)
       .then(function() {
-        $state.go('tab.groupFeed', {groupCode: groupCode});
         $scope.closeModal();
+        refreshGroups();
       })
-      .catch(function() {
-        $.growl.error({location: 'tc', message: "Sorry this group doesn't exist yet :("});
+      .catch(function(err){
+        $.growl.error({location: 'tc', message: err});
       });
-  };
+	};
 
 	$scope.$on("$ionicView.enter", function () {
       $ionicHistory.clearHistory();
-	    GroupService.getCurrentGroups()
-		  .then(function(groups) {
-		  	$scope.groups = [];
-		  	for (var group in groups) {
-		  		$scope.groups.push(groups[group]);
-		  	}
-		  })
-		  .catch(function(err){
-		    $.growl.error({location: 'tc', message: err.message});
-		  });
+	    refreshGroups();
   });
 });
 
@@ -115,6 +118,12 @@ angular.module('main').filter('chatTimeFormat', function(){
           hours -= 12;
         }
         message.timeFormatted = hours + ":" + minutes + " " + period;
+        message.upvotes = 0;
+        for (var user in message.likes){
+        	if (message.likes[user])
+        		message.upvotes++
+        }
+        if(message.upvotes == 0) message.upvotes = '';
       } else {
         message.timeFormatted = stamp.toDateString();
       }

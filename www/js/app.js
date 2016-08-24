@@ -6,7 +6,7 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 angular.module('main', [
-  'ionic',
+  'ionic','ionic.service.core',
   'ngCordova',
   'firebase',
   'ngFileUpload',
@@ -24,7 +24,7 @@ angular.module('main', [
     if (window.StatusBar) {
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
-    }
+    }  
   });
 })
 
