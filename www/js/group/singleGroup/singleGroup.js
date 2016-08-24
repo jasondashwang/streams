@@ -65,6 +65,16 @@ angular.module('main').controller('SingleGroupCtrl',['$scope', '$state', '$state
   };
 
   $scope.leaveGroup = function() {
+    var anotherAdmin = false;
+    for (var uid in $scope.group.members) {
+      anotherAdmin = $scope.group.members[uid];
+    }
+
+    if(!anotherAdmin) {
+      $.growl.error({location:'tc', message: 'You are the last admin left! Please make someone else an admin or End the Group'});
+      break;
+    }
+
     GroupFactory.leaveGroup($stateParams.groupCode)
       .then(function() {
         GroupService.removeGroup($stateParams.groupCode);
