@@ -66,7 +66,7 @@ angular.module('main').service('GroupService', function($q, GroupSession, $rootS
       }
     }
     for(var memberUid in GroupSession.groupMembers[groupCode].members){
-      if (!GroupSession.groups[groupCode].members[memberUid]) GroupSession.removeMemberFromGroup(memberUid, groupCode);
+      if (GroupSession.groups[groupCode].members[memberUid] === undefined || GroupSession.groups[groupCode].members[memberUid] === null) GroupSession.removeMemberFromGroup(memberUid, groupCode);
     }
 
     return $q.when(GroupSession.groupMembers[groupCode].members);
