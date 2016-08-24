@@ -10001,3 +10001,6 @@ ion-tabs.tabs-color-active-positive .tab-item {
   border: none; }
   #navButton i {
     color: white; }
+
+#likeButton {
+  float: left; }

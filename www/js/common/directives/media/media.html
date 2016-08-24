@@ -10,7 +10,9 @@
           <source ng-src="{{mediaObj.mediaUrl | trusted}}">
         </video>
       </div>
-
+      <button ng-click="likePost(mediaObj.timeStamp, mediaObj.likes[user.uid])" id="likeButton" class="button button-stable">
+        Like <i ng-class="mediaObj.likes[user.uid] ? 'ion-ios-heart' : 'ion-ios-heart-outline'"></i>
+      </button>  
   	</div>
 
 </div>
