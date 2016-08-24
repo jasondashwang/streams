@@ -42,7 +42,7 @@ angular.module('main').service('GroupService', function($q, GroupSession, $rootS
         return $q.when(GroupSession.groups[groupCode]);
       });
     }
-  }
+  };
 
   this.getGroupCollage = function(groupCode){
     if(!GroupSession.groupCollages[groupCode]) {
@@ -59,7 +59,6 @@ angular.module('main').service('GroupService', function($q, GroupSession, $rootS
 
   this.getGroupMembers = function(groupCode){
     if(!(GroupSession.groupMembers[groupCode])) GroupSession.groupMembers[groupCode] = {groupCode: groupCode, members: {}};
-
     for(var uid in GroupSession.groups[groupCode].members){
       if(!GroupSession.groupMembers[groupCode].members[uid]){
         var firebaseUser = getFirebaseUser(uid);
@@ -68,6 +67,7 @@ angular.module('main').service('GroupService', function($q, GroupSession, $rootS
     }
 
     return $q.when(GroupSession.groupMembers[groupCode].members);
+
   };
 
 

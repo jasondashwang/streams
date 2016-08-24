@@ -11,7 +11,7 @@ angular.module('main').controller('SingleGroupCtrl',['$scope', '$state', '$state
     .then(function(group){
       return group.$bindTo($scope, 'group');
     })
-    .then(function(ub){
+    .then(function(ub) {
       unbind = ub;
       $scope.isAdmin = $scope.group.members[loggedInUser.uid];
       $scope.newGroup = {
