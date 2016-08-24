@@ -9849,13 +9849,21 @@ a.button {
   height: 80vh; }
 
 .profile-div {
-  text-align: left; }
+  text-align: left;
+  overflow-y: hidden; }
   .profile-div input {
     text-align: left;
     width: 100%;
     font-size: 16px; }
   .profile-div input:focus {
     text-decoration: underline; }
+  .profile-div li, .profile-div a {
+    width: 90%;
+    display: block;
+    margin: 0 auto;
+    border-style: none;
+    border-bottom: 1px solid #1B4965;
+    max-height: 60px; }
   .profile-div img {
     display: block;
     margin: 0 auto;
@@ -9936,3 +9944,27 @@ ion-tabs.tabs-color-active-positive .tab-item {
   height: 20vh; }
   .boxed h3 {
     padding-left: 10px; }
+
+.camera-div .button.button-positive {
+  display: block;
+  margin: 0 auto;
+  width: 85%;
+  height: 200px;
+  margin-top: 1em;
+  border-radius: 2em;
+  background-color: #1B4965;
+  font-size: 2em; }
+
+.camera-div i:before {
+  font-size: 70px !important;
+  margin-bottom: .3em; }
+
+.group-modal {
+  text-align: center; }
+  .group-modal .create-group-div, .group-modal .join-group-div {
+    height: 45vh;
+    padding: 1em;
+    width: auto;
+    border-bottom: 1px solid #1B4965; }
+    .group-modal .create-group-div label, .group-modal .join-group-div label {
+      margin: 1.5em; }
