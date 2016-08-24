@@ -31,5 +31,8 @@ angular.module('main').service('GroupSession', function(){
     this.groupMembers[groupCode].members[uid] = groupMember;
   };
 
+  this.removeMemberFromGroup = function(uid, groupCode) {
+    delete this.groupMembers[groupCode].members[uid];
+  };
 
 });

@@ -1,4 +1,4 @@
-angular.module('main').factory('GroupFactory', ['$q', '$rootScope', 'AuthService', '$firebaseObject', '$firebaseArray', function ($q, $rootScope, AuthService, $firebaseObject, $firebaseArray) {
+angular.module('main').factory('GroupFactory', ['$q', '$rootScope', 'AuthService', '$firebaseObject', function ($q, $rootScope, AuthService, $firebaseObject) {
 
   var GroupFactory = {};
 
@@ -17,9 +17,10 @@ angular.module('main').factory('GroupFactory', ['$q', '$rootScope', 'AuthService
 
   GroupFactory.createGroup = function (groupDetails) {
 
+    var newGroupKey;
     return AuthService.getLoggedInUser()
       .then(function(user) {
-        var newGroupKey = alphanumeric_unique();
+        newGroupKey = alphanumeric_unique();
         var groupPostData = {
           name: groupDetails.name,
           members: {},
@@ -39,6 +40,9 @@ angular.module('main').factory('GroupFactory', ['$q', '$rootScope', 'AuthService
         updates['users/' + user.uid + '/groups/' + newGroupKey] = true;
 
         return ref.update(updates);
+      })
+      .then(function() {
+        return newGroupKey;
       });
   };
 
@@ -88,6 +92,17 @@ angular.module('main').factory('GroupFactory', ['$q', '$rootScope', 'AuthService
 
     // delete the group
     ref.child('groups/' + groupCode).remove();
+  };
+
+  GroupFactory.removeMember = function(memberCode, groupCode) {
+    ref.child('/users/' + memberCode + '/groups/' + groupCode).remove();
+    ref.child('/groups/' + groupCode + '/members/' + memberCode).remove();
+  };
+
+  GroupFactory.makeAdmin = function(memberCode, groupCode) {
+    var updates = {};
+    updates['groups/' + groupCode + '/members/' + memberCode] = true;
+    return ref.update(updates);
   };
 
   return GroupFactory;

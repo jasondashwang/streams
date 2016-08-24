@@ -42,11 +42,11 @@ angular.module('main')
         console.log('Upload is ' + progress + '% done');
 
       }, function(err) {
-        console.error(err);
-      }, function() { 
-        
+        $.growl.error({location: 'tc', message: err.message});
+      }, function() {
+
         var lastMessage;
-     
+
         if (media.mediaType == "photo") {
           lastMessage = {
             message: media.member.name + " sent a photo",
@@ -57,13 +57,13 @@ angular.module('main')
             message: media.member.name + " sent a video",
             timeStamp: media.timeStamp
           }
-        } 
-      
+        }
+
         var downloadURL = uploadPic.snapshot.downloadURL;
         media.mediaUrl = downloadURL;
         groupCodes.forEach(function(code){
           // set the last message for a group
-          ref.child('groups/' + code + '/lastMessage').set(lastMessage)
+          ref.child('groups/' + code + '/lastMessage').set(lastMessage);
 
           // store the reference
           ref.child('groupCollages/' + code + '/' + media.timeStamp).set(media);

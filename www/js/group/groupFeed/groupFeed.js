@@ -1,13 +1,13 @@
 'use strict';
 
 angular.module('main').controller('GroupFeedCtrl',['$scope', '$stateParams', 'GroupFactory', 'MediaService', '$ionicNavBarDelegate', 'GroupService', "MessageFactory", '$ionicScrollDelegate', '$timeout', function ($scope, $stateParams, GroupFactory, MediaService, $ionicNavBarDelegate, GroupService, MessageFactory, $ionicScrollDelegate, $timeout) {
-  
+
   function filter () {
     var media = MediaService.get();
     if ($scope.view == 'chat') {
       media = media.map(function(el){
         if (el.mediaType !== 'message') {
-          el.body = 'Sent a ' + el.mediaType 
+          el.body = 'Sent a ' + el.mediaType
         }
         console.log(el.likes)
         return el;
@@ -34,6 +34,7 @@ angular.module('main').controller('GroupFeedCtrl',['$scope', '$stateParams', 'Gr
       unbindMedia();
     }
    }
+
     GroupService.getGroup($stateParams.groupCode)
     .then(function(group){
       return group.$bindTo($scope, 'group');

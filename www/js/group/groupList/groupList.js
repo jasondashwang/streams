@@ -12,7 +12,7 @@ angular.module('main').controller('GroupListCtrl', function($ionicModal, $log, $
     });
   }
 
-	$ionicModal.fromTemplateUrl('js/group/groupList/groupModal.html', {
+	$ionicModal.fromTemplateUrl('js/group/groupList/createOrJoinGroup.html', {
 	scope: $scope,
 	animation: 'slide-in-up'
 	}).then(function(modal) {
@@ -47,6 +47,7 @@ angular.module('main').controller('GroupListCtrl', function($ionicModal, $log, $
       $.growl.error({location: 'tc', message: err.message});
     });
 	};
+
 	$scope.joinGroup = function(groupCode){
     GroupFactory.joinGroup(groupCode)
       .then(function() {
@@ -57,11 +58,11 @@ angular.module('main').controller('GroupListCtrl', function($ionicModal, $log, $
         $.growl.error({location: 'tc', message: err});
       });
 	};
+
 	$scope.$on("$ionicView.enter", function () {
       $ionicHistory.clearHistory();
 	    refreshGroups();
   });
-
 });
 
 angular.module('main').filter('timeFormat', function(){

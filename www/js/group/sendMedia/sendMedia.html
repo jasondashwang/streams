@@ -12,7 +12,7 @@
 	     </li>
 	   </div>
 	<ion-list>
-	  <ion-checkbox class="item-checkbox-right" ng-repeat="group in groups" ng-model="group.sendGroup">{{ group.name }}</ion-checkbox>
+	  <ion-checkbox class="item-checkbox-right" ng-repeat="group in groups | orderBy: '-lastMessage.timeStamp'" ng-model="group.sendGroup">{{ group.name }}</ion-checkbox>
 	</ion-list>
 	<ion-footer-bar align-title='right' class='bar-assertive'>
 		    <button class='button icon ion-android-send pull-right' ng-click="sendToGroups()">

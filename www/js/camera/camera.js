@@ -47,7 +47,6 @@ angular.module('main').controller('CameraCtrl', function ($rootScope, $scope, $s
 
 	};
 
-
     $scope.captureVideo = function() {
 	    var options = {
 	      limit: 1

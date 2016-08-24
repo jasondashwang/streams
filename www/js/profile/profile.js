@@ -55,7 +55,7 @@ angular.module('main').controller('ProfileCtrl', ['$scope', '$state', '$rootScop
             cleanForm(form);
           })
           .catch(function(err){
-            if(err.message !== 'canceled') $.growl.error({locaiton: 'tc', message: err.message});
+            if(err.message !== 'canceled') $.growl.error({location: 'tc', message: err.message});
             $scope.newProfile.email = $scope.profile.email;
             cleanForm(form);
           });

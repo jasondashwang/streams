@@ -79,15 +79,6 @@ angular.module('main', [
       }
     }
   })
-  .state('tab.settings', {
-    url: '/settings',
-    views: {
-      'tab-profile': {
-        templateUrl: 'js/profile/settings/settings.html',
-        controller: 'SettingsCtrl'
-      }
-    }
-  })
   // Each tab has its own nav history stack:
   .state('tab.camera', {
     url: '/camera',
@@ -156,26 +147,6 @@ angular.module('main', [
         controller: 'GroupMembersCtrl'
       }
     }
-
-  })
-  .state('tab.create-group', {
-    url: '/create-group',
-    views: {
-      'tab-group': {
-        templateUrl: 'js/group/createGroup/createGroup.html',
-        controller: 'CreateGroupCtrl'
-      }
-    }
-
-  })
-  .state('tab.join-group', {
-    url: '/join-group',
-    views: {
-      'tab-group': {
-        templateUrl: 'js/group/joinGroup/joinGroup.html',
-        controller: 'JoinGroupCtrl'
-      }
-    }
   })
   .state('tab.map', {
     url: '/map',
@@ -185,7 +156,6 @@ angular.module('main', [
         controller: 'MapCtrl'
       }
     }
-
   });
 
   // if none of the above states are matched, use this as the fallback
