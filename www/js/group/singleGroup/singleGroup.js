@@ -42,7 +42,7 @@ angular.module('main').controller('SingleGroupCtrl',['$scope', '$state', '$state
     }
   };
 
-  $scope.membersLength= function(members) {
+  $scope.membersLength = function(members) {
     if (!members) return;
     if (Object.keys(members).length > 1) return true;
   };

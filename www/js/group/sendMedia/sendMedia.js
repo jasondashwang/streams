@@ -6,6 +6,7 @@ angular.module('main')
 			$ionicHistory.nextViewOptions({
 			    disableBack: true
 			 });
+			
 	    GroupService.getCurrentGroups()
 		  .then(function(groups) {
 		  	console.log('goups here', groups);
@@ -22,16 +23,17 @@ angular.module('main')
 		function filterSendGroups() {
 			$scope.groups.forEach(function(group) {
 				delete group.sendGroup;
-		});
+			});
 		}
 
 		var sendGroupCodes = [];
-    $scope.cancel = function () {
-    	CameraService.media = null;
-    	filterSendGroups();
-    	sendGroupCodes = [];
-    	$state.go("tab.camera");
-    };
+
+	    $scope.cancel = function () {
+	    	CameraService.media = null;
+	    	filterSendGroups();
+	    	sendGroupCodes = [];
+	    	$state.go("tab.camera");
+	    };
 
 		$scope.sendToGroups = function () {
 			$scope.groups.forEach(function(group) {
