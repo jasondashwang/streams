@@ -1,9 +1,49 @@
 angular.module('main')
-.factory('CameraFactory', function($rootScope, Upload, $cordovaGeolocation, $q, $state, CameraService, AuthService) {
+.factory('CameraFactory', function($rootScope, Upload, $cordovaGeolocation, $q, $state, CameraService, AuthService, $cordovaCapture) {
+  function capitalize (string) {
+     return string.charAt(0).toUpperCase() + string.slice(1);
+  }
 
   var CameraFactory = {};
 
   var ref = firebase.database().ref();
+
+  function toDataUrl(url, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.responseType = 'blob';
+    xhr.onload = function() {
+      var reader = new FileReader();
+      reader.onloadend = function() {
+        callback(reader.result);
+      }
+      reader.readAsDataURL(xhr.response);
+    };
+    xhr.open('GET', url);
+    xhr.send();
+  }
+
+  CameraFactory.captureMedia = function(type) {
+    var options = {
+        limit: 1
+    };
+    var position;
+    console.log(capitalize(type));
+    var capFunc = "capture" + capitalize(type)
+    CameraFactory.getLocation()
+      .then(function(pos){
+        position = pos;
+        return $cordovaCapture[capFunc](options)
+      })        
+      .then(function(videoData) {
+        if (type === 'image') type = 'photo'
+          toDataUrl(videoData[0].fullPath, function(base64Img){
+            CameraFactory.storeMedia(base64Img, type, position)
+          })
+      })
+      .catch(function(err){
+        console.error(err)
+      })
+  }
 
   CameraFactory.storeMedia = function(mediaData, type, location) {
     AuthService.getLoggedInUser()
@@ -19,15 +59,13 @@ angular.module('main')
           timeStamp: Date.now(),
           upvotes: 0
       }
-      if (mediaObj.type !== 'message') {
-        mediaObj.body = "Sent a " + mediaObj.type;
+      if (type !== 'message') {
+        mediaObj.body = "Sent a " + type;
       }
       CameraService.media = mediaObj;
 
       $state.go('tab.send-media')
     })
-
-
 
   };
 
@@ -47,9 +85,7 @@ angular.module('main')
       }, function(err) {
         $.growl.error({location: 'tc', message: err.message});
       }, function() {
-
         var lastMessage;
-
         if (media.mediaType == "photo") {
           lastMessage = {
             message: media.member.name + " sent a photo",
@@ -61,7 +97,6 @@ angular.module('main')
             timeStamp: media.timeStamp
           }
         }
-
         var downloadURL = uploadPic.snapshot.downloadURL;
         media.mediaUrl = downloadURL;
         groupCodes.forEach(function(code){
@@ -74,7 +109,6 @@ angular.module('main')
 
       });
 
-
   }
 
   // consider moving to new factory
@@ -84,7 +118,6 @@ angular.module('main')
     return $cordovaGeolocation.getCurrentPosition(options)
       .then(function(position){
         return position;
-        // positionObj.resolve(position)
       })
 
   };

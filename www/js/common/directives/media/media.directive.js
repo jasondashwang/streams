@@ -14,8 +14,6 @@ angular.module('main').directive('media', function (MessageFactory, AuthService)
           scope.user = user;
         })	
       scope.likePost = function(id, curr) {
-        console.log('hi')
-        scope.liked = !scope.liked;
         MessageFactory.likePost(id, scope.groupCode, scope.user.uid, curr)
       }
     },

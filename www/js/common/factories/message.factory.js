@@ -4,6 +4,10 @@ angular.module('main')
   var MessageFactory = {};
   var ref = firebase.database().ref();
   MessageFactory.createNewMessage = function (message, code) {
+    if (message.body.length < 1) {
+      return;
+    }
+    message.timeStamp = Date.now()
     AuthService.getLoggedInUser()
     .then(function(user){
       message.mediaType = 'message';
