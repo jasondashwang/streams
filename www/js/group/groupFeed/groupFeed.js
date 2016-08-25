@@ -2,18 +2,18 @@
 
 angular.module('main').controller('GroupFeedCtrl',['$scope', '$stateParams', 'GroupFactory', 'MediaService', '$ionicNavBarDelegate', 'GroupService', "MessageFactory", '$ionicScrollDelegate', '$timeout', function ($scope, $stateParams, GroupFactory, MediaService, $ionicNavBarDelegate, GroupService, MessageFactory, $ionicScrollDelegate, $timeout) {
 
-  function filter () {
-    var media = MediaService.get();
-    if ($scope.view == 'chat') {
-      media = media.map(function(el){
-        if (el.mediaType !== 'message') {
-          el.body = 'Sent a ' + el.mediaType
-        }
-        return el;
-      })
-    }
-    MediaService.set(media);
-  }
+  // function filter () {
+  //   var media = MediaService.get();
+  //   if ($scope.view == 'chat') {
+  //     media = media.map(function(el){
+  //       if (el.mediaType !== 'message') {
+  //         el.body = 'Sent a ' + el.mediaType
+  //       }
+  //       return el;
+  //     })
+  //   }
+  //   MediaService.set(media);
+  // }
 
   var unbindGroup;
   var unbindMedia;
@@ -58,7 +58,6 @@ angular.module('main').controller('GroupFeedCtrl',['$scope', '$stateParams', 'Gr
       }
 
        MediaService.set(mediaArr);
-       filter();
     })
     .catch(function(err){
       console.error(err);

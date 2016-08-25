@@ -19,6 +19,9 @@ angular.module('main')
           timeStamp: Date.now(),
           upvotes: 0
       }
+      if (mediaObj.type !== 'message') {
+        mediaObj.body = "Sent a " + mediaObj.type;
+      }
       CameraService.media = mediaObj;
 
       $state.go('tab.send-media')

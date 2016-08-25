@@ -16,13 +16,10 @@ angular.module('main').directive('chat', function (MessageFactory, AuthService) 
         })
     	for (var media in scope.mediaObjects) {
   			if (scope.mediaObjects[media] && scope.mediaObjects[media].mediaType && media !== '$id' && media !== '$priority') {
-  				if (scope.mediaObjects[media].mediaType !== 'message') 
-  					scope.mediaObjects[media].body = "Sent a " + scope.mediaObjects[media].mediaType;
   				scope.mediaObjects[media].votes = Object.keys(scope.mediaObjects[media].likes).length;
-          scope.chatArray.push(scope.mediaObjects[media]);
   			}
     	}
-      scope.liked = false;
+
       scope.likePost = function(id, curr) {
         scope.liked = !scope.liked;
         MessageFactory.likePost(id, scope.groupCode, scope.user.uid, curr)
