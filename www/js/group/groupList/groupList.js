@@ -47,7 +47,7 @@ angular.module('main').controller('GroupListCtrl', function($ionicModal, $log, $
       $.growl.error({location: 'tc', message: err.message});
     });
     $timeout(function() {
-      scope.groupInfo.name = ''
+      $scope.groupInfo.name = '';
     });
 	};
 
